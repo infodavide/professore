@@ -1,0 +1,1010 @@
+<!DOCTYPE html PUBLIC "-//W3C//DTD HTML 4.01//EN">
+<html data-lt-installed="true"><head>
+<meta http-equiv="Content-Type" content="text/html; charset=windows-1252">
+<meta http-equiv="Content-Language" content="fr">
+<link rel="stylesheet" href="Music%20data%20structures%20for%20music%20software%20development_files/sdk.css" type="text/css" media="">
+<script src="Music%20data%20structures%20for%20music%20software%20development_files/sdk.js"></script>
+<meta name="DESCRIPTION" content="There are several ways to create music data structures for programming, according to what your software must do.">
+<meta name="KEYWORDS" content="music data structures,music software technology,music language,music programming">
+<title>Music data structures for music software development</title>
+<style>@media print {#ghostery-tracker-tally {display:none !important}}</style></head>
+<body>
+<a name="TopOfPage"></a>
+
+
+    <div id="conteneur-level-0">
+      <div id="bar3d"> </div>
+      <div id="area-header"></div>
+      <div id="bar3d"> </div>
+      <div id="area-menu" bgcolor="#FFFFFF">
+<div align="center"><a href="http://www.music-software-development.com/index.html"><img src="Music%20data%20structures%20for%20music%20software%20development_files/but1n.jpg" alt="Home page" name="BTN1" onmouseout="document['BTN1'].src='images/but1n.jpg';status='';return true;" onmouseover="document['BTN1'].src='images/but1s.jpg';status='Home page';return true;" title="Home page" border="0"></a><a href="http://www.music-software-development.com/music-sdk.html"><img src="Music%20data%20structures%20for%20music%20software%20development_files/but2n.jpg" alt="Music Notation SDK" name="BTN2" onmouseout="document['BTN2'].src='images/but2n.jpg';status='';return true;" onmouseover="document['BTN2'].src='images/but2s.jpg';status='Music Notation SDK';return true;" title="Music Notation SDK" border="0"></a><a href="http://www.music-software-development.com/midi-tutorial.html"><img src="Music%20data%20structures%20for%20music%20software%20development_files/but3n.jpg" alt="MIDI Tutorial" name="BTN3" onmouseout="document['BTN3'].src='images/but3n.jpg';status='';return true;" onmouseover="document['BTN3'].src='images/but3s.jpg';status='Learn how MIDI works';return true;" title="Learn how MIDI works" border="0"></a><img src="Music%20data%20structures%20for%20music%20software%20development_files/but4e.jpg" alt="Music Data Structures" name="BTN4" onmouseout="status=''; return true;" onmouseover="status='Vous êtes ici.';return true;" title="Vous êtes ici." border="0"></div>
+</div>
+      <div id="bar3d"> </div> 
+      <div id="area-main">
+        <div id="area-column-66">
+          <div id="area-column-content" bgcolor="#FFFFFF">
+    <div style="margin-left: 120px;">
+      <h1 style="font-size: 26.0160007476807px; margin: 8px 0px 14px; color: rgb(0, 0, 0); font-family: Verdana, Geneva, sans-serif; font-style: normal; font-variant: normal; letter-spacing: normal; orphans: auto; text-align: start; text-indent: 0px; text-transform: none; white-space: normal; widows: auto; word-spacing: 0px; -webkit-text-stroke-width: 0px; background-color: rgb(255, 255, 255);"><span style="color: rgb(7, 48, 171);">Music Data Structures</span></h1>
+      <p style="color: rgb(0, 0, 0); font-family: Verdana, Geneva, sans-serif; font-size: 13.0080003738403px; font-style: normal; font-variant: normal; font-weight: normal; letter-spacing: normal; line-height: 16.910400390625px; orphans: auto; text-align: start; text-indent: 0px; text-transform: none; white-space: normal; widows: auto; word-spacing: 0px; -webkit-text-stroke-width: 0px; background-color: rgb(255, 255, 255);">How
+        do you create and organize music data structures for a music software?</p>
+      <p style="color: rgb(0, 0, 0); font-family: Verdana, Geneva, sans-serif; font-size: 13.0080003738403px; font-style: normal; font-variant: normal; font-weight: normal; letter-spacing: normal; line-height: 16.910400390625px; orphans: auto; text-align: start; text-indent: 0px; text-transform: none; white-space: normal; widows: auto; word-spacing: 0px; -webkit-text-stroke-width: 0px; background-color: rgb(255, 255, 255);">Music
+        can be represented in several ways, according to what your music
+        software must accomplish.</p>
+      <p style="color: rgb(0, 0, 0); font-family: Verdana, Geneva, sans-serif; font-size: 13.0080003738403px; font-style: normal; font-variant: normal; font-weight: normal; letter-spacing: normal; line-height: 16.910400390625px; orphans: auto; text-align: start; text-indent: 0px; text-transform: none; white-space: normal; widows: auto; word-spacing: 0px; -webkit-text-stroke-width: 0px; background-color: rgb(255, 255, 255);">This
+        article presents various possible approaches that can orient the way
+        music data structures are organized efficiently in a music software.</p>
+      <hr style="border-style: solid; width: 500px; clear: both; color: rgb(0, 0, 0); font-family: Verdana, Geneva, sans-serif; font-size: 13.0080003738403px; font-style: normal; font-variant: normal; font-weight: normal; letter-spacing: normal; line-height: 16.910400390625px; orphans: auto; text-align: start; text-indent: 0px; text-transform: none; white-space: normal; widows: auto; word-spacing: 0px; -webkit-text-stroke-width: 0px; height: 1px; margin-left: 0px; background-color: rgb(255, 255, 255);">
+      <h3 style="font-size: 18.2112007141113px; margin: 8px 0px 14px; color: rgb(0, 0, 0); font-family: Verdana, Geneva, sans-serif; font-style: normal; font-variant: normal; letter-spacing: normal; orphans: auto; text-align: start; text-indent: 0px; text-transform: none; white-space: normal; widows: auto; word-spacing: 0px; -webkit-text-stroke-width: 0px; background-color: rgb(255, 255, 255);"><span style="color: rgb(7, 48, 171);"><b>The Four Layers Of Music
+            Information</b></span></h3>
+      <p style="color: rgb(0, 0, 0); font-family: Verdana, Geneva, sans-serif; font-size: 13.0080003738403px; font-style: normal; font-variant: normal; font-weight: normal; letter-spacing: normal; line-height: 16.910400390625px; orphans: auto; text-align: start; text-indent: 0px; text-transform: none; white-space: normal; widows: auto; word-spacing: 0px; -webkit-text-stroke-width: 0px; background-color: rgb(255, 255, 255);">There
+        are mainly four levels at which you can describe the content of a piece
+        of music. They are:</p>
+      <ol style="list-style-type: decimal; margin: 0px 0px 8px 10px; color: rgb(0, 0, 0); font-family: Verdana, Geneva, sans-serif; font-size: 13.0080003738403px; font-style: normal; font-variant: normal; font-weight: normal; letter-spacing: normal; line-height: 16.910400390625px; orphans: auto; text-align: start; text-indent: 0px; text-transform: none; white-space: normal; widows: auto; word-spacing: 0px; -webkit-text-stroke-width: 0px; background-color: rgb(255, 255, 255);">
+        <li style="margin: 0px 0px 8px 5px;"><b>Audio</b></li>
+        <li style="margin: 0px 0px 8px 5px;"><b>MIDI<span class="Apple-converted-space">&nbsp;</span></b>(or
+          similar)</li>
+        <li style="margin: 0px 0px 8px 5px;"><b>Music notation</b></li>
+        <li style="margin: 0px 0px 8px 5px;"><b>Abstract music composition model</b></li>
+      </ol>
+      <p style="color: rgb(0, 0, 0); font-family: Verdana, Geneva, sans-serif; font-size: 13.0080003738403px; font-style: normal; font-variant: normal; font-weight: normal; letter-spacing: normal; line-height: 16.910400390625px; orphans: auto; text-align: start; text-indent: 0px; text-transform: none; white-space: normal; widows: auto; word-spacing: 0px; -webkit-text-stroke-width: 0px; background-color: rgb(255, 255, 255);">Each
+        level can be considered to be a layer that can contain information about
+        the piece of music. Each layer has its own information. A part of the
+        information found in each layer is common, but some information is
+        specific to a layer, so they are not merely duplicates of each others.</p>
+      <p style="color: rgb(0, 0, 0); font-family: Verdana, Geneva, sans-serif; font-size: 13.0080003738403px; font-style: normal; font-variant: normal; font-weight: normal; letter-spacing: normal; line-height: 16.910400390625px; orphans: auto; text-align: start; text-indent: 0px; text-transform: none; white-space: normal; widows: auto; word-spacing: 0px; -webkit-text-stroke-width: 0px; background-color: rgb(255, 255, 255);">It
+        is very important to determine precisely what your software must be able
+        to do with the music, as it will help you to design the best suitable
+        music data structures that will fit your need.</p>
+      <p style="color: rgb(0, 0, 0); font-family: Verdana, Geneva, sans-serif; font-size: 13.0080003738403px; font-style: normal; font-variant: normal; font-weight: normal; letter-spacing: normal; line-height: 16.910400390625px; orphans: auto; text-align: start; text-indent: 0px; text-transform: none; white-space: normal; widows: auto; word-spacing: 0px; -webkit-text-stroke-width: 0px; background-color: rgb(255, 255, 255);">Using
+        the wrong type of data will introduce lots of troubles when you program
+        the processing of the music, so you should take some time to think about
+        it right at the beginning of your design cycle. Changing the data
+        structures when your program is already half finished is a lot of work,
+        so do not omit this step !</p>
+      <p style="color: rgb(0, 0, 0); font-family: Verdana, Geneva, sans-serif; font-size: 13.0080003738403px; font-style: normal; font-variant: normal; font-weight: normal; letter-spacing: normal; line-height: 16.910400390625px; orphans: auto; text-align: start; text-indent: 0px; text-transform: none; white-space: normal; widows: auto; word-spacing: 0px; -webkit-text-stroke-width: 0px; background-color: rgb(255, 255, 255);">Let
+        us examine each layer and see how they are related to the other layers
+        and what you can expect your program to process with them.</p>
+      <hr style="border-style: solid; width: 500px; clear: both; color: rgb(0, 0, 0); font-family: Verdana, Geneva, sans-serif; font-size: 13.0080003738403px; font-style: normal; font-variant: normal; font-weight: normal; letter-spacing: normal; line-height: 16.910400390625px; orphans: auto; text-align: start; text-indent: 0px; text-transform: none; white-space: normal; widows: auto; word-spacing: 0px; -webkit-text-stroke-width: 0px; height: 1px; margin-left: 0px; background-color: rgb(255, 255, 255);">
+      <h3 style="font-size: 18.2112007141113px; margin: 8px 0px 14px; color: rgb(0, 0, 0); font-family: Verdana, Geneva, sans-serif; font-style: normal; font-variant: normal; letter-spacing: normal; orphans: auto; text-align: start; text-indent: 0px; text-transform: none; white-space: normal; widows: auto; word-spacing: 0px; -webkit-text-stroke-width: 0px; background-color: rgb(255, 255, 255);"><span style="color: rgb(7, 48, 171);">1 - Audio as a Music Data Structure</span></h3>
+      <p style="color: rgb(0, 0, 0); font-family: Verdana, Geneva, sans-serif; font-size: 13.0080003738403px; font-style: normal; font-variant: normal; font-weight: normal; letter-spacing: normal; line-height: 16.910400390625px; orphans: auto; text-align: start; text-indent: 0px; text-transform: none; white-space: normal; widows: auto; word-spacing: 0px; -webkit-text-stroke-width: 0px; background-color: rgb(255, 255, 255);">Music
+        being an sound phenomena, the most obvious way to represent it is by
+        sampling the sound pressure variations and creating a data structure
+        that simply list all the samples.</p>
+      <p style="color: rgb(0, 0, 0); font-family: Verdana, Geneva, sans-serif; font-size: 13.0080003738403px; font-style: normal; font-variant: normal; font-weight: normal; letter-spacing: normal; line-height: 16.910400390625px; orphans: auto; text-align: start; text-indent: 0px; text-transform: none; white-space: normal; widows: auto; word-spacing: 0px; -webkit-text-stroke-width: 0px; background-color: rgb(255, 255, 255);">This
+        is the format found on a CD (44100 samples per second, 16 bits
+        definition, stereo) as well as in various audio files like WAVE, mp3,
+        aiff,...</p>
+      <p style="color: rgb(0, 0, 0); font-family: Verdana, Geneva, sans-serif; font-size: 13.0080003738403px; font-style: normal; font-variant: normal; font-weight: normal; letter-spacing: normal; line-height: 16.910400390625px; orphans: auto; text-align: start; text-indent: 0px; text-transform: none; white-space: normal; widows: auto; word-spacing: 0px; -webkit-text-stroke-width: 0px; background-color: rgb(255, 255, 255);">Each
+        file format has some specific features and some compress the data to be
+        more efficient for storing and/or transmitting the music, but basically
+        they all contain a list of audio samples.</p>
+      <p style="color: rgb(0, 0, 0); font-family: Verdana, Geneva, sans-serif; font-size: 13.0080003738403px; font-style: normal; font-variant: normal; font-weight: normal; letter-spacing: normal; line-height: 16.910400390625px; orphans: auto; text-align: start; text-indent: 0px; text-transform: none; white-space: normal; widows: auto; word-spacing: 0px; -webkit-text-stroke-width: 0px; background-color: rgb(255, 255, 255);"><b>What
+          is needed to play the music?</b></p>
+      <p style="color: rgb(0, 0, 0); font-family: Verdana, Geneva, sans-serif; font-size: 13.0080003738403px; font-style: normal; font-variant: normal; font-weight: normal; letter-spacing: normal; line-height: 16.910400390625px; orphans: auto; text-align: start; text-indent: 0px; text-transform: none; white-space: normal; widows: auto; word-spacing: 0px; -webkit-text-stroke-width: 0px; background-color: rgb(255, 255, 255);">To
+        reproduce the music, the software must simply take the samples and feed
+        them in due time to the sound card driver (through the audio API of
+        Windows and Mac for instance) and that's it.</p>
+      <p style="color: rgb(0, 0, 0); font-family: Verdana, Geneva, sans-serif; font-size: 13.0080003738403px; font-style: normal; font-variant: normal; font-weight: normal; letter-spacing: normal; line-height: 16.910400390625px; orphans: auto; text-align: start; text-indent: 0px; text-transform: none; white-space: normal; widows: auto; word-spacing: 0px; -webkit-text-stroke-width: 0px; background-color: rgb(255, 255, 255);">If
+        you do not need any other type of processing, the APIs often give you a
+        basic player tool to which you must simply supply the file name of the
+        music you want to play.</p>
+      <p style="color: rgb(0, 0, 0); font-family: Verdana, Geneva, sans-serif; font-size: 13.0080003738403px; font-style: normal; font-variant: normal; font-weight: normal; letter-spacing: normal; line-height: 16.910400390625px; orphans: auto; text-align: start; text-indent: 0px; text-transform: none; white-space: normal; widows: auto; word-spacing: 0px; -webkit-text-stroke-width: 0px; background-color: rgb(255, 255, 255);"><b>What
+          kind of processing can you do with it?</b></p>
+      <p style="color: rgb(0, 0, 0); font-family: Verdana, Geneva, sans-serif; font-size: 13.0080003738403px; font-style: normal; font-variant: normal; font-weight: normal; letter-spacing: normal; line-height: 16.910400390625px; orphans: auto; text-align: start; text-indent: 0px; text-transform: none; white-space: normal; widows: auto; word-spacing: 0px; -webkit-text-stroke-width: 0px; background-color: rgb(255, 255, 255);">The
+        audio format of the music is quite limited for processing, as it does
+        not include any information about the notes played, the tempo, which
+        instruments are playing, even less information about chords or melodic
+        lines and no information related to the structure of the composition.</p>
+      <p style="color: rgb(0, 0, 0); font-family: Verdana, Geneva, sans-serif; font-size: 13.0080003738403px; font-style: normal; font-variant: normal; font-weight: normal; letter-spacing: normal; line-height: 16.910400390625px; orphans: auto; text-align: start; text-indent: 0px; text-transform: none; white-space: normal; widows: auto; word-spacing: 0px; -webkit-text-stroke-width: 0px; background-color: rgb(255, 255, 255);">Whether
+        the audio file contains a Beethoven's Symphony or a herd of dogs barking
+        is not easily discernable by software processing.</p>
+      <p style="color: rgb(0, 0, 0); font-family: Verdana, Geneva, sans-serif; font-size: 13.0080003738403px; font-style: normal; font-variant: normal; font-weight: normal; letter-spacing: normal; line-height: 16.910400390625px; orphans: auto; text-align: start; text-indent: 0px; text-transform: none; white-space: normal; widows: auto; word-spacing: 0px; -webkit-text-stroke-width: 0px; background-color: rgb(255, 255, 255);">Generally,
+        if your software does not care about the real content of the audio data,
+        you can use this format. For instance, the audio format is appropriate
+        if your software must accomplish the following tasks:</p>
+      <ul style="list-style-type: disc; margin: 0px 0px 8px 10px; padding-left: 40px; color: rgb(0, 0, 0); font-family: Verdana, Geneva, sans-serif; font-size: 13.0080003738403px; font-style: normal; font-variant: normal; font-weight: normal; letter-spacing: normal; line-height: 16.910400390625px; orphans: auto; text-align: start; text-indent: 0px; text-transform: none; white-space: normal; widows: auto; word-spacing: 0px; -webkit-text-stroke-width: 0px; background-color: rgb(255, 255, 255);">
+        <li style="margin: 0px 0px 8px 5px;">Digital recording and playback of
+          audio, mixing and filtering.</li>
+        <li style="margin: 0px 0px 8px 5px;">Apply effects like reverb,
+          distortion, to an existing sound.</li>
+        <li style="margin: 0px 0px 8px 5px;">Assemble and sequence short sound
+          files together, for instance composition tools that use audio loops.</li>
+        <li style="margin: 0px 0px 8px 5px;">Any kind of playback functions up
+          to advanced jukebox applications.</li>
+        <li style="margin: 0px 0px 8px 5px;">Remixing existing audio files, like
+          DJs do or using the copy/paste/mix functions on existing audio files.</li>
+      </ul>
+      <p style="color: rgb(0, 0, 0); font-family: Verdana, Geneva, sans-serif; font-size: 13.0080003738403px; font-style: normal; font-variant: normal; font-weight: normal; letter-spacing: normal; line-height: 16.910400390625px; orphans: auto; text-align: start; text-indent: 0px; text-transform: none; white-space: normal; widows: auto; word-spacing: 0px; -webkit-text-stroke-width: 0px; background-color: rgb(255, 255, 255);"><b>How
+          is this format generated?</b></p>
+      <p style="color: rgb(0, 0, 0); font-family: Verdana, Geneva, sans-serif; font-size: 13.0080003738403px; font-style: normal; font-variant: normal; font-weight: normal; letter-spacing: normal; line-height: 16.910400390625px; orphans: auto; text-align: start; text-indent: 0px; text-transform: none; white-space: normal; widows: auto; word-spacing: 0px; -webkit-text-stroke-width: 0px; background-color: rgb(255, 255, 255);">The
+        most obvious way to fill in an audio data structure is simply to record
+        the sound data directly with a microphone through a simple audio
+        recording software. The Windows and Mac API let you also do this
+        directly from your program, using the audio interface of the sound card.</p>
+      <p style="color: rgb(0, 0, 0); font-family: Verdana, Geneva, sans-serif; font-size: 13.0080003738403px; font-style: normal; font-variant: normal; font-weight: normal; letter-spacing: normal; line-height: 16.910400390625px; orphans: auto; text-align: start; text-indent: 0px; text-transform: none; white-space: normal; widows: auto; word-spacing: 0px; -webkit-text-stroke-width: 0px; background-color: rgb(255, 255, 255);">You
+        can also generate an audio file by processing one of the other layers of
+        music data representations. The processing is then called<span class="Apple-converted-space">&nbsp;</span><i>synthesis</i>,
+        as the program generates each sample according to the structure of
+        another layer, like for instance the MIDI representation, which tells
+        what notes to play and when to play them.</p>
+      <p style="color: rgb(0, 0, 0); font-family: Verdana, Geneva, sans-serif; font-size: 13.0080003738403px; font-style: normal; font-variant: normal; font-weight: normal; letter-spacing: normal; line-height: 16.910400390625px; orphans: auto; text-align: start; text-indent: 0px; text-transform: none; white-space: normal; widows: auto; word-spacing: 0px; -webkit-text-stroke-width: 0px; background-color: rgb(255, 255, 255);">In
+        fact, all three other layers (as further explained) need some type of
+        synthesis so that you can hear the sounds resulting from performing the
+        content of the music data structures.</p>
+      <p style="color: rgb(0, 0, 0); font-family: Verdana, Geneva, sans-serif; font-size: 13.0080003738403px; font-style: normal; font-variant: normal; font-weight: normal; letter-spacing: normal; line-height: 16.910400390625px; orphans: auto; text-align: start; text-indent: 0px; text-transform: none; white-space: normal; widows: auto; word-spacing: 0px; -webkit-text-stroke-width: 0px; background-color: rgb(255, 255, 255);"><b>How
+          can you store this data in memory and on files?</b></p>
+      <p style="color: rgb(0, 0, 0); font-family: Verdana, Geneva, sans-serif; font-size: 13.0080003738403px; font-style: normal; font-variant: normal; font-weight: normal; letter-spacing: normal; line-height: 16.910400390625px; orphans: auto; text-align: start; text-indent: 0px; text-transform: none; white-space: normal; widows: auto; word-spacing: 0px; -webkit-text-stroke-width: 0px; background-color: rgb(255, 255, 255);">Basically
+        all you need for the audio music data structure is:</p>
+      <ul style="list-style-type: disc; margin: 0px 0px 8px 10px; padding-left: 40px; color: rgb(0, 0, 0); font-family: Verdana, Geneva, sans-serif; font-size: 13.0080003738403px; font-style: normal; font-variant: normal; font-weight: normal; letter-spacing: normal; line-height: 16.910400390625px; orphans: auto; text-align: start; text-indent: 0px; text-transform: none; white-space: normal; widows: auto; word-spacing: 0px; -webkit-text-stroke-width: 0px; background-color: rgb(255, 255, 255);">
+        <li style="margin: 0px 0px 8px 5px;">A buffer to the list of samples</li>
+        <li style="margin: 0px 0px 8px 5px;">A variable specifying the useful
+          length of the buffer (the number of samples for instance)</li>
+      </ul>
+      <p style="color: rgb(0, 0, 0); font-family: Verdana, Geneva, sans-serif; font-size: 13.0080003738403px; font-style: normal; font-variant: normal; font-weight: normal; letter-spacing: normal; line-height: 16.910400390625px; orphans: auto; text-align: start; text-indent: 0px; text-transform: none; white-space: normal; widows: auto; word-spacing: 0px; -webkit-text-stroke-width: 0px; background-color: rgb(255, 255, 255);">If
+        your program handles several audio formats, you may need to add
+        variables which will specify the format used:</p>
+      <ul style="list-style-type: disc; margin: 0px 0px 8px 10px; padding-left: 40px; color: rgb(0, 0, 0); font-family: Verdana, Geneva, sans-serif; font-size: 13.0080003738403px; font-style: normal; font-variant: normal; font-weight: normal; letter-spacing: normal; line-height: 16.910400390625px; orphans: auto; text-align: start; text-indent: 0px; text-transform: none; white-space: normal; widows: auto; word-spacing: 0px; -webkit-text-stroke-width: 0px; background-color: rgb(255, 255, 255);">
+        <li style="margin: 0px 0px 8px 5px;">Sampling rate (in samples per
+          second)</li>
+        <li style="margin: 0px 0px 8px 5px;">Size of data (16 bits signed
+          integer, floating point,...)</li>
+        <li style="margin: 0px 0px 8px 5px;">Number of channels (1 for mono, 2
+          for stereo, or multi channels)</li>
+      </ul>
+      <p style="color: rgb(0, 0, 0); font-family: Verdana, Geneva, sans-serif; font-size: 13.0080003738403px; font-style: normal; font-variant: normal; font-weight: normal; letter-spacing: normal; line-height: 16.910400390625px; orphans: auto; text-align: start; text-indent: 0px; text-transform: none; white-space: normal; widows: auto; word-spacing: 0px; -webkit-text-stroke-width: 0px; background-color: rgb(255, 255, 255);">In
+        the case of a 16 bit signed integer, the value of zero represents the
+        sound pressure at rest, when no sound is present. So the full buffer is
+        filled with zero for a silence sound data structure.</p>
+      <p style="color: rgb(0, 0, 0); font-family: Verdana, Geneva, sans-serif; font-size: 13.0080003738403px; font-style: normal; font-variant: normal; font-weight: normal; letter-spacing: normal; line-height: 16.910400390625px; orphans: auto; text-align: start; text-indent: 0px; text-transform: none; white-space: normal; widows: auto; word-spacing: 0px; -webkit-text-stroke-width: 0px; background-color: rgb(255, 255, 255);">The
+        data of a stereo sound (2 channels) is often coded as a unique buffer.
+        The first left sample is followed by the first right sample, then the
+        second left sample and so on. This is because while handling a stereo
+        sound, one often needs to handle both channels at once. This is the case
+        for the WAVE file format.</p>
+      <p style="color: rgb(0, 0, 0); font-family: Verdana, Geneva, sans-serif; font-size: 13.0080003738403px; font-style: normal; font-variant: normal; font-weight: normal; letter-spacing: normal; line-height: 16.910400390625px; orphans: auto; text-align: start; text-indent: 0px; text-transform: none; white-space: normal; widows: auto; word-spacing: 0px; -webkit-text-stroke-width: 0px; background-color: rgb(255, 255, 255);">A
+        sine wave will be represented by a series of numbers that build the
+        shape of a sine wave in the audio buffer:</p>
+      <div class="ImageBlock ImageBlockCenter" style="overflow: hidden; max-width: 100%; text-align: center; margin: 1em 0px; color: rgb(0, 0, 0); font-family: Verdana, Geneva, sans-serif; font-size: 13.0080003738403px; font-style: normal; font-variant: normal; font-weight: normal; letter-spacing: normal; line-height: 16.910400390625px; orphans: auto; text-indent: 0px; text-transform: none; white-space: normal; widows: auto; word-spacing: 0px; -webkit-text-stroke-width: 0px; background-color: rgb(255, 255, 255);"><img src="Music%20data%20structures%20for%20music%20software%20development_files/audio-1.jpg" style="margin: 0px; max-width: none; border-color: rgb(0, 0, 0); border-width: 1px 1px 0px; border-style: solid;" width="286"></div>
+      <p style="color: rgb(0, 0, 0); font-family: Verdana, Geneva, sans-serif; font-size: 13.0080003738403px; font-style: normal; font-variant: normal; font-weight: normal; letter-spacing: normal; line-height: 16.910400390625px; orphans: auto; text-align: start; text-indent: 0px; text-transform: none; white-space: normal; widows: auto; word-spacing: 0px; -webkit-text-stroke-width: 0px; background-color: rgb(255, 255, 255);">You
+        can find the specification of most audio file formats on the internet by
+        looking for instance in Google with the expression "<i>Audio WAVE file
+          format specification</i>".</p>
+      <p style="color: rgb(0, 0, 0); font-family: Verdana, Geneva, sans-serif; font-size: 13.0080003738403px; font-style: normal; font-variant: normal; font-weight: normal; letter-spacing: normal; line-height: 16.910400390625px; orphans: auto; text-align: start; text-indent: 0px; text-transform: none; white-space: normal; widows: auto; word-spacing: 0px; -webkit-text-stroke-width: 0px; background-color: rgb(255, 255, 255);"><b>More
+          about processing audio music data structures</b></p>
+      <p style="color: rgb(0, 0, 0); font-family: Verdana, Geneva, sans-serif; font-size: 13.0080003738403px; font-style: normal; font-variant: normal; font-weight: normal; letter-spacing: normal; line-height: 16.910400390625px; orphans: auto; text-align: start; text-indent: 0px; text-transform: none; white-space: normal; widows: auto; word-spacing: 0px; -webkit-text-stroke-width: 0px; background-color: rgb(255, 255, 255);">One
+        important point is when you combine two or more signals into one, for
+        instance for mixing two waves together. As the signed integers are
+        limited in scope [-32768,+32767], you must take care to avoid any
+        overflow in calculations, as it will result in a loud and disturbing
+        "Clank" or horrible distortion effects when the data will be played
+        back.</p>
+      <p style="color: rgb(0, 0, 0); font-family: Verdana, Geneva, sans-serif; font-size: 13.0080003738403px; font-style: normal; font-variant: normal; font-weight: normal; letter-spacing: normal; line-height: 16.910400390625px; orphans: auto; text-align: start; text-indent: 0px; text-transform: none; white-space: normal; widows: auto; word-spacing: 0px; -webkit-text-stroke-width: 0px; background-color: rgb(255, 255, 255);">You
+        can simply mix several files by adding the signals sample values
+        together and setting the results in a new sound data structure.</p>
+      <p style="color: rgb(0, 0, 0); font-family: Verdana, Geneva, sans-serif; font-size: 13.0080003738403px; font-style: normal; font-variant: normal; font-weight: normal; letter-spacing: normal; line-height: 16.910400390625px; orphans: auto; text-align: start; text-indent: 0px; text-transform: none; white-space: normal; widows: auto; word-spacing: 0px; -webkit-text-stroke-width: 0px; background-color: rgb(255, 255, 255);">You
+        can copy/paste/move blocks of samples and assemble them in various
+        orders. However, be sure that the transitions of the signals between
+        blocks is always smooth as any sudden transition will cause a "click"
+        that will be heard in the sound playback, like for instance the value of
+        two consecutive samples being too much different.</p>
+      <p style="color: rgb(0, 0, 0); font-family: Verdana, Geneva, sans-serif; font-size: 13.0080003738403px; font-style: normal; font-variant: normal; font-weight: normal; letter-spacing: normal; line-height: 16.910400390625px; orphans: auto; text-align: start; text-indent: 0px; text-transform: none; white-space: normal; widows: auto; word-spacing: 0px; -webkit-text-stroke-width: 0px; background-color: rgb(255, 255, 255);">You
+        can invert the time for special effects by reading the samples
+        backwards.</p>
+      <p style="color: rgb(0, 0, 0); font-family: Verdana, Geneva, sans-serif; font-size: 13.0080003738403px; font-style: normal; font-variant: normal; font-weight: normal; letter-spacing: normal; line-height: 16.910400390625px; orphans: auto; text-align: start; text-indent: 0px; text-transform: none; white-space: normal; widows: auto; word-spacing: 0px; -webkit-text-stroke-width: 0px; background-color: rgb(255, 255, 255);">There
+        are thousands of possible sound processing effects, which are globally
+        called DSP (Digital Signal Processing). Some are simple (fade in and
+        fade out is simply the progressive scaling of the samples by
+        multiplication) and some are very complex (creation of a reverberation
+        effect, that simulates a specific room acoustical behaviour for
+        instance).</p>
+      <p style="color: rgb(0, 0, 0); font-family: Verdana, Geneva, sans-serif; font-size: 13.0080003738403px; font-style: normal; font-variant: normal; font-weight: normal; letter-spacing: normal; line-height: 16.910400390625px; orphans: auto; text-align: start; text-indent: 0px; text-transform: none; white-space: normal; widows: auto; word-spacing: 0px; -webkit-text-stroke-width: 0px; background-color: rgb(255, 255, 255);">You
+        can slow down or accelerate the sound, but it requires to use the
+        technique of resampling the sound samples and using enough interpolation
+        of the samples that are in the buffer, otherwise interference will occur
+        and spoil the quality of the results. This is a more advanced technique
+        that needs some mathematics to implement.</p>
+      <p style="color: rgb(0, 0, 0); font-family: Verdana, Geneva, sans-serif; font-size: 13.0080003738403px; font-style: normal; font-variant: normal; font-weight: normal; letter-spacing: normal; line-height: 16.910400390625px; orphans: auto; text-align: start; text-indent: 0px; text-transform: none; white-space: normal; widows: auto; word-spacing: 0px; -webkit-text-stroke-width: 0px; background-color: rgb(255, 255, 255);">If
+        you need to make lots of calculations with the sound samples, if is
+        often better to use floating point buffers for the data, as this will
+        avoid rounding errors that may deteriorate the sound quality.</p>
+      <p style="color: rgb(0, 0, 0); font-family: Verdana, Geneva, sans-serif; font-size: 13.0080003738403px; font-style: normal; font-variant: normal; font-weight: normal; letter-spacing: normal; line-height: 16.910400390625px; orphans: auto; text-align: start; text-indent: 0px; text-transform: none; white-space: normal; widows: auto; word-spacing: 0px; -webkit-text-stroke-width: 0px; background-color: rgb(255, 255, 255);"><b>Bottom
+          line</b></p>
+      <p style="color: rgb(0, 0, 0); font-family: Verdana, Geneva, sans-serif; font-size: 13.0080003738403px; font-style: normal; font-variant: normal; font-weight: normal; letter-spacing: normal; line-height: 16.910400390625px; orphans: auto; text-align: start; text-indent: 0px; text-transform: none; white-space: normal; widows: auto; word-spacing: 0px; -webkit-text-stroke-width: 0px; background-color: rgb(255, 255, 255);">You
+        can do an awful lot of interesting processing with the audio music data
+        structures, as far as you do not need your program to display and/or
+        edit the music in a more readable human format like a score or a
+        sequence of notes to play on a piano keyboard or a guitar fretboard.</p>
+      <p style="color: rgb(0, 0, 0); font-family: Verdana, Geneva, sans-serif; font-size: 13.0080003738403px; font-style: normal; font-variant: normal; font-weight: normal; letter-spacing: normal; line-height: 16.910400390625px; orphans: auto; text-align: start; text-indent: 0px; text-transform: none; white-space: normal; widows: auto; word-spacing: 0px; -webkit-text-stroke-width: 0px; background-color: rgb(255, 255, 255);">If
+        your program needs more advanced access to the content of the music, you
+        will need to use one or more of the three other layers of music data
+        structures.</p>
+      <hr style="border-style: solid; width: 500px; clear: both; color: rgb(0, 0, 0); font-family: Verdana, Geneva, sans-serif; font-size: 13.0080003738403px; font-style: normal; font-variant: normal; font-weight: normal; letter-spacing: normal; line-height: 16.910400390625px; orphans: auto; text-align: start; text-indent: 0px; text-transform: none; white-space: normal; widows: auto; word-spacing: 0px; -webkit-text-stroke-width: 0px; height: 1px; margin-left: 0px; background-color: rgb(255, 255, 255);">
+      <h3 style="font-size: 18.2112007141113px; margin: 8px 0px 14px; color: rgb(0, 0, 0); font-family: Verdana, Geneva, sans-serif; font-style: normal; font-variant: normal; letter-spacing: normal; orphans: auto; text-align: start; text-indent: 0px; text-transform: none; white-space: normal; widows: auto; word-spacing: 0px; -webkit-text-stroke-width: 0px; background-color: rgb(255, 255, 255);"><span style="color: rgb(7, 48, 171);">2 - MIDI as a Music Data Structure</span></h3>
+      <p style="color: rgb(0, 0, 0); font-family: Verdana, Geneva, sans-serif; font-size: 13.0080003738403px; font-style: normal; font-variant: normal; font-weight: normal; letter-spacing: normal; line-height: 16.910400390625px; orphans: auto; text-align: start; text-indent: 0px; text-transform: none; white-space: normal; widows: auto; word-spacing: 0px; -webkit-text-stroke-width: 0px; background-color: rgb(255, 255, 255);">This
+        layer of music representation includes in fact any music data structures
+        that focuses on the playback and editing of music as represented by one
+        or more sequences of notes.</p>
+      <p style="color: rgb(0, 0, 0); font-family: Verdana, Geneva, sans-serif; font-size: 13.0080003738403px; font-style: normal; font-variant: normal; font-weight: normal; letter-spacing: normal; line-height: 16.910400390625px; orphans: auto; text-align: start; text-indent: 0px; text-transform: none; white-space: normal; widows: auto; word-spacing: 0px; -webkit-text-stroke-width: 0px; background-color: rgb(255, 255, 255);">The
+        most common form of this is the MIDI file or any structure that contains
+        such information in memory.</p>
+      <p style="color: rgb(0, 0, 0); font-family: Verdana, Geneva, sans-serif; font-size: 13.0080003738403px; font-style: normal; font-variant: normal; font-weight: normal; letter-spacing: normal; line-height: 16.910400390625px; orphans: auto; text-align: start; text-indent: 0px; text-transform: none; white-space: normal; widows: auto; word-spacing: 0px; -webkit-text-stroke-width: 0px; background-color: rgb(255, 255, 255);">Compared
+        to the audio format, we have here a more subtle understanding of the
+        piece of music, as we have all information about the notes, their
+        starting and ending time, the dynamics, the tempo, volume variations,
+        pitch effects and several other performance information like for
+        instance the type of instruments that must be used to play the notes.</p>
+      <p style="color: rgb(0, 0, 0); font-family: Verdana, Geneva, sans-serif; font-size: 13.0080003738403px; font-style: normal; font-variant: normal; font-weight: normal; letter-spacing: normal; line-height: 16.910400390625px; orphans: auto; text-align: start; text-indent: 0px; text-transform: none; white-space: normal; widows: auto; word-spacing: 0px; -webkit-text-stroke-width: 0px; background-color: rgb(255, 255, 255);">However,
+        we loose the control of the final quality of the sound, as this level of
+        information does not include samples of real instruments or any
+        information that could be used to build the final samples that the sound
+        card will play.</p>
+      <p style="color: rgb(0, 0, 0); font-family: Verdana, Geneva, sans-serif; font-size: 13.0080003738403px; font-style: normal; font-variant: normal; font-weight: normal; letter-spacing: normal; line-height: 16.910400390625px; orphans: auto; text-align: start; text-indent: 0px; text-transform: none; white-space: normal; widows: auto; word-spacing: 0px; -webkit-text-stroke-width: 0px; background-color: rgb(255, 255, 255);">The
+        MIDI language was designed as a universal language to transmit the real
+        time information needed to control an existing synthesizer or musical
+        instrument. It is mostly used so that a computer can control the
+        hardware of an external synthesizer and make it perform a piece of
+        music. You can learn more about the MIDI language here :</p>
+      <p style="color: rgb(0, 0, 0); font-family: Verdana, Geneva, sans-serif; font-size: 13.0080003738403px; font-style: normal; font-variant: normal; font-weight: normal; letter-spacing: normal; line-height: 16.910400390625px; orphans: auto; text-indent: 0px; text-transform: none; white-space: normal; widows: auto; word-spacing: 0px; -webkit-text-stroke-width: 0px; text-align: center; background-color: rgb(255, 255, 255);"><a href="http://www.music-software-development.com/midi-tutorial.html">MIDI
+          Tutorial...</a></p>
+      <p style="color: rgb(0, 0, 0); font-family: Verdana, Geneva, sans-serif; font-size: 13.0080003738403px; font-style: normal; font-variant: normal; font-weight: normal; letter-spacing: normal; line-height: 16.910400390625px; orphans: auto; text-align: start; text-indent: 0px; text-transform: none; white-space: normal; widows: auto; word-spacing: 0px; -webkit-text-stroke-width: 0px; background-color: rgb(255, 255, 255);">At
+        this level, the pitch of a note is represented by an integer number that
+        refers to the music scale in semitones. The most common convention is
+        the one used in the MIDI standard. The value of "0" corresponds to C.
+        The value of "1" corresponds to C# or Db,... and the value of "11"
+        corresponds to B. We continue then with "12" which is again C, and so on
+        for the next octaves. By convention, the central C has the value "60" (a
+        multiple of 12) and corresponds to the lower C in the G clef and the
+        higher C in the F clef:</p>
+      <div class="ImageBlock ImageBlockCenter" style="overflow: hidden; max-width: 100%; text-align: center; margin: 1em 0px; color: rgb(0, 0, 0); font-family: Verdana, Geneva, sans-serif; font-size: 13.0080003738403px; font-style: normal; font-variant: normal; font-weight: normal; letter-spacing: normal; line-height: 16.910400390625px; orphans: auto; text-indent: 0px; text-transform: none; white-space: normal; widows: auto; word-spacing: 0px; -webkit-text-stroke-width: 0px; background-color: rgb(255, 255, 255);"><img src="Music%20data%20structures%20for%20music%20software%20development_files/data-1.jpg" style="margin: 0px; max-width: none;" width="242"></div>
+      <p style="color: rgb(0, 0, 0); font-family: Verdana, Geneva, sans-serif; font-size: 13.0080003738403px; font-style: normal; font-variant: normal; font-weight: normal; letter-spacing: normal; line-height: 16.910400390625px; orphans: auto; text-align: start; text-indent: 0px; text-transform: none; white-space: normal; widows: auto; word-spacing: 0px; -webkit-text-stroke-width: 0px; background-color: rgb(255, 255, 255);"><b>What
+          is needed to play the music?</b></p>
+      <p style="color: rgb(0, 0, 0); font-family: Verdana, Geneva, sans-serif; font-size: 13.0080003738403px; font-style: normal; font-variant: normal; font-weight: normal; letter-spacing: normal; line-height: 16.910400390625px; orphans: auto; text-align: start; text-indent: 0px; text-transform: none; white-space: normal; widows: auto; word-spacing: 0px; -webkit-text-stroke-width: 0px; background-color: rgb(255, 255, 255);">This
+        music data structure needs a synthesizer to be performed, as it does not
+        include any sample of audio data that the hardware of the sound card
+        could recognize.</p>
+      <p style="color: rgb(0, 0, 0); font-family: Verdana, Geneva, sans-serif; font-size: 13.0080003738403px; font-style: normal; font-variant: normal; font-weight: normal; letter-spacing: normal; line-height: 16.910400390625px; orphans: auto; text-align: start; text-indent: 0px; text-transform: none; white-space: normal; widows: auto; word-spacing: 0px; -webkit-text-stroke-width: 0px; background-color: rgb(255, 255, 255);">The
+        simplest way to listen to the music is to send through the MIDI API
+        (Application Programming Interface) of Windows/Mac the correct sequence
+        of MIDI events as represented in the music data structure.</p>
+      <p style="color: rgb(0, 0, 0); font-family: Verdana, Geneva, sans-serif; font-size: 13.0080003738403px; font-style: normal; font-variant: normal; font-weight: normal; letter-spacing: normal; line-height: 16.910400390625px; orphans: auto; text-align: start; text-indent: 0px; text-transform: none; white-space: normal; widows: auto; word-spacing: 0px; -webkit-text-stroke-width: 0px; background-color: rgb(255, 255, 255);">Both
+        Windows and Mac have a built-in synthesizer that can perform the
+        translation of these MIDI commands into an audio stream that is sent to
+        the audio card.</p>
+      <p style="color: rgb(0, 0, 0); font-family: Verdana, Geneva, sans-serif; font-size: 13.0080003738403px; font-style: normal; font-variant: normal; font-weight: normal; letter-spacing: normal; line-height: 16.910400390625px; orphans: auto; text-align: start; text-indent: 0px; text-transform: none; white-space: normal; widows: auto; word-spacing: 0px; -webkit-text-stroke-width: 0px; background-color: rgb(255, 255, 255);">In
+        this case of course, you do not have the control over the final quality
+        of the music, as these basic synthesizers are far from being fully
+        realistic for all instruments.</p>
+      <p style="color: rgb(0, 0, 0); font-family: Verdana, Geneva, sans-serif; font-size: 13.0080003738403px; font-style: normal; font-variant: normal; font-weight: normal; letter-spacing: normal; line-height: 16.910400390625px; orphans: auto; text-align: start; text-indent: 0px; text-transform: none; white-space: normal; widows: auto; word-spacing: 0px; -webkit-text-stroke-width: 0px; background-color: rgb(255, 255, 255);">The
+        next step to increase the sound quality is to send the same MIDI
+        commands to an external synthesizer of good quality, through a MIDI
+        interface (a cheap device that converts USB to MIDI and vice versa).</p>
+      <p style="color: rgb(0, 0, 0); font-family: Verdana, Geneva, sans-serif; font-size: 13.0080003738403px; font-style: normal; font-variant: normal; font-weight: normal; letter-spacing: normal; line-height: 16.910400390625px; orphans: auto; text-align: start; text-indent: 0px; text-transform: none; white-space: normal; widows: auto; word-spacing: 0px; -webkit-text-stroke-width: 0px; background-color: rgb(255, 255, 255);">You
+        can also use a virtual synthesizer, connected by using an internal
+        virtual MIDI connexion between programs. There are many very good sound
+        libraries that include realistic samples and that can render a piece of
+        music with a very high quality.</p>
+      <p style="color: rgb(0, 0, 0); font-family: Verdana, Geneva, sans-serif; font-size: 13.0080003738403px; font-style: normal; font-variant: normal; font-weight: normal; letter-spacing: normal; line-height: 16.910400390625px; orphans: auto; text-align: start; text-indent: 0px; text-transform: none; white-space: normal; widows: auto; word-spacing: 0px; -webkit-text-stroke-width: 0px; background-color: rgb(255, 255, 255);">The
+        last possible step, if you want full control on the audio output, is to
+        build yourself a synthesizer and create the audio stream directly from
+        the notes sequences contained in the music data structures.</p>
+      <p style="color: rgb(0, 0, 0); font-family: Verdana, Geneva, sans-serif; font-size: 13.0080003738403px; font-style: normal; font-variant: normal; font-weight: normal; letter-spacing: normal; line-height: 16.910400390625px; orphans: auto; text-align: start; text-indent: 0px; text-transform: none; white-space: normal; widows: auto; word-spacing: 0px; -webkit-text-stroke-width: 0px; background-color: rgb(255, 255, 255);">One
+        method to do that is to use a library of samples of real instruments.
+        The beginning of a note will start reading an audio buffer that
+        represent the correct note. However, there are several things to manage
+        if you want a good, realistic rendering:</p>
+      <ul style="list-style-type: disc; margin: 0px 0px 8px 10px; padding-left: 40px; color: rgb(0, 0, 0); font-family: Verdana, Geneva, sans-serif; font-size: 13.0080003738403px; font-style: normal; font-variant: normal; font-weight: normal; letter-spacing: normal; line-height: 16.910400390625px; orphans: auto; text-align: start; text-indent: 0px; text-transform: none; white-space: normal; widows: auto; word-spacing: 0px; -webkit-text-stroke-width: 0px; background-color: rgb(255, 255, 255);">
+        <li style="margin: 0px 0px 8px 5px;">As the note may have a duration
+          different than the original note recording in the sample library, you
+          must somehow specify a loop in the samples, so that you can maintain a
+          note longer than the original note by playing that section in loop
+          until the note ends.</li>
+        <li style="margin: 0px 0px 8px 5px;">When you play a note that has a
+          different pitch than the original sample, you must change the rate at
+          which the samples are read, so that the note pitch is correct. This
+          can be done up to a certain level, as otherwise the sound becomes too
+          artificial, as the timbre of an instrument changes according to the
+          pitch. To compensate for this you must sample the real instrument at
+          several different notes, as well as at several dynamics, as the
+          dynamics also changes the timbre of most instruments.</li>
+        <li style="margin: 0px 0px 8px 5px;">A table of music data structures
+          each representing one note must be updated to keep track of which note
+          is still playing. A new data structure must be assigned to a starting
+          note, the real time process must then give some processing time to
+          each note playing and check which notes are finished to release that
+          note from getting processing time.</li>
+        <li style="margin: 0px 0px 8px 5px;">The release of the note must unlock
+          the loop playback and then the release part of the note, as you can
+          not simply stop the reading of sample because a real instrument always
+          has at least a short duration to go from playing a note to a complete
+          silence.</li>
+        <li style="margin: 0px 0px 8px 5px;">Percussion instruments are more
+          easily handled as they do not need a loop.</li>
+      </ul>
+      <p style="color: rgb(0, 0, 0); font-family: Verdana, Geneva, sans-serif; font-size: 13.0080003738403px; font-style: normal; font-variant: normal; font-weight: normal; letter-spacing: normal; line-height: 16.910400390625px; orphans: auto; text-align: start; text-indent: 0px; text-transform: none; white-space: normal; widows: auto; word-spacing: 0px; -webkit-text-stroke-width: 0px; background-color: rgb(255, 255, 255);">You
+        can also experimentally generate simple wave forms and/or add synthesis
+        algorithms that will provide original sounds. This kind of application
+        can be very time consuming and become quite complex, but of course can
+        also be quite exciting to program.</p>
+      <p style="color: rgb(0, 0, 0); font-family: Verdana, Geneva, sans-serif; font-size: 13.0080003738403px; font-style: normal; font-variant: normal; font-weight: normal; letter-spacing: normal; line-height: 16.910400390625px; orphans: auto; text-align: start; text-indent: 0px; text-transform: none; white-space: normal; widows: auto; word-spacing: 0px; -webkit-text-stroke-width: 0px; background-color: rgb(255, 255, 255);"><b>What
+          kind of processing can you do with this music data structure?</b></p>
+      <p style="color: rgb(0, 0, 0); font-family: Verdana, Geneva, sans-serif; font-size: 13.0080003738403px; font-style: normal; font-variant: normal; font-weight: normal; letter-spacing: normal; line-height: 16.910400390625px; orphans: auto; text-align: start; text-indent: 0px; text-transform: none; white-space: normal; widows: auto; word-spacing: 0px; -webkit-text-stroke-width: 0px; background-color: rgb(255, 255, 255);">Your
+        program has access to each note of the music, so you can easily analyse
+        the harmony of the music, you can edit each note individually and in
+        general you have a full editing capability for all notes played by all
+        instruments. Possible applications are:</p>
+      <ul style="list-style-type: disc; margin: 0px 0px 8px 10px; padding-left: 40px; color: rgb(0, 0, 0); font-family: Verdana, Geneva, sans-serif; font-size: 13.0080003738403px; font-style: normal; font-variant: normal; font-weight: normal; letter-spacing: normal; line-height: 16.910400390625px; orphans: auto; text-align: start; text-indent: 0px; text-transform: none; white-space: normal; widows: auto; word-spacing: 0px; -webkit-text-stroke-width: 0px; background-color: rgb(255, 255, 255);">
+        <li style="margin: 0px 0px 8px 5px;">Any general MIDI sequencer program
+          and editor, including real time playback and recording through a MIDI
+          interface and a real MIDI keyboard and/or synthesizer.</li>
+        <li style="margin: 0px 0px 8px 5px;">The transposition of a piece of
+          music or a part of it is very simple, as you simply need to add a
+          constant number to any note pitch.</li>
+        <li style="margin: 0px 0px 8px 5px;">Music generating algorithms for
+          composition applications, which can generate sequences of chords and
+          notes.</li>
+        <li style="margin: 0px 0px 8px 5px;">Music tutorial programs that must
+          play and/or let the user edit and work on exercises.</li>
+      </ul>
+      <p style="color: rgb(0, 0, 0); font-family: Verdana, Geneva, sans-serif; font-size: 13.0080003738403px; font-style: normal; font-variant: normal; font-weight: normal; letter-spacing: normal; line-height: 16.910400390625px; orphans: auto; text-align: start; text-indent: 0px; text-transform: none; white-space: normal; widows: auto; word-spacing: 0px; -webkit-text-stroke-width: 0px; background-color: rgb(255, 255, 255);">As
+        far as you do not need precise music notation handling, you can use the
+        MIDI music data structures explained in this section. You can extract
+        and display raw music notation from the MIDI data structure, but as MIDI
+        was not developed for music notation, there are several drawbacks that
+        will prevent your program from handling music notation correctly. The
+        most obvious one is that C# and Db are represented in MIDI as being the
+        same note, which is not the case on a sheet music.</p>
+      <p style="color: rgb(0, 0, 0); font-family: Verdana, Geneva, sans-serif; font-size: 13.0080003738403px; font-style: normal; font-variant: normal; font-weight: normal; letter-spacing: normal; line-height: 16.910400390625px; orphans: auto; text-align: start; text-indent: 0px; text-transform: none; white-space: normal; widows: auto; word-spacing: 0px; -webkit-text-stroke-width: 0px; background-color: rgb(255, 255, 255);"><b>How
+          is this music data structure generated?</b></p>
+      <p style="color: rgb(0, 0, 0); font-family: Verdana, Geneva, sans-serif; font-size: 13.0080003738403px; font-style: normal; font-variant: normal; font-weight: normal; letter-spacing: normal; line-height: 16.910400390625px; orphans: auto; text-align: start; text-indent: 0px; text-transform: none; white-space: normal; widows: auto; word-spacing: 0px; -webkit-text-stroke-width: 0px; background-color: rgb(255, 255, 255);">You
+        can record directly in MIDI the performance of a musician on a MIDI
+        keyboard, using the MIDI programming interface of Windows and Mac and
+        store it into your data structures.</p>
+      <p style="color: rgb(0, 0, 0); font-family: Verdana, Geneva, sans-serif; font-size: 13.0080003738403px; font-style: normal; font-variant: normal; font-weight: normal; letter-spacing: normal; line-height: 16.910400390625px; orphans: auto; text-align: start; text-indent: 0px; text-transform: none; white-space: normal; widows: auto; word-spacing: 0px; -webkit-text-stroke-width: 0px; background-color: rgb(255, 255, 255);">You
+        can also create a graphic interface like the standard "piano roll"
+        editor, that represents the notes as horizontal bars that the user can
+        add, resize, move, delete, copy/paste, transpose,...</p>
+      <p style="color: rgb(0, 0, 0); font-family: Verdana, Geneva, sans-serif; font-size: 13.0080003738403px; font-style: normal; font-variant: normal; font-weight: normal; letter-spacing: normal; line-height: 16.910400390625px; orphans: auto; text-align: start; text-indent: 0px; text-transform: none; white-space: normal; widows: auto; word-spacing: 0px; -webkit-text-stroke-width: 0px; background-color: rgb(255, 255, 255);">Combined
+        with notation, it looks like this:</p>
+      <div class="ImageBlock ImageBlockCenter" style="overflow: hidden; max-width: 100%; text-align: center; margin: 1em 0px; color: rgb(0, 0, 0); font-family: Verdana, Geneva, sans-serif; font-size: 13.0080003738403px; font-style: normal; font-variant: normal; font-weight: normal; letter-spacing: normal; line-height: 16.910400390625px; orphans: auto; text-indent: 0px; text-transform: none; white-space: normal; widows: auto; word-spacing: 0px; -webkit-text-stroke-width: 0px; background-color: rgb(255, 255, 255);"><img src="Music%20data%20structures%20for%20music%20software%20development_files/data-2.jpg" style="margin: 0px; max-width: none;" width="430"></div>
+      <p style="color: rgb(0, 0, 0); font-family: Verdana, Geneva, sans-serif; font-size: 13.0080003738403px; font-style: normal; font-variant: normal; font-weight: normal; letter-spacing: normal; line-height: 16.910400390625px; orphans: auto; text-align: start; text-indent: 0px; text-transform: none; white-space: normal; widows: auto; word-spacing: 0px; -webkit-text-stroke-width: 0px; background-color: rgb(255, 255, 255);"><span style="font-weight: normal;">Some software can also analyse the notes
+          that are present in an audio file, so that you can go from the audio
+          layer to the MIDI layer. But this processing is quite difficult and
+          complex to handle. For a single melody, it can work pretty well, but
+          as the polyphony increases, results get less and less precise. And
+          when you reach the level of a full orchestra playing, no program<span class="Apple-converted-space">&nbsp;</span></span>at this time can
+        extract the full detailed MIDI information from it.</p>
+      <p style="color: rgb(0, 0, 0); font-family: Verdana, Geneva, sans-serif; font-size: 13.0080003738403px; font-style: normal; font-variant: normal; font-weight: normal; letter-spacing: normal; line-height: 16.910400390625px; orphans: auto; text-align: start; text-indent: 0px; text-transform: none; white-space: normal; widows: auto; word-spacing: 0px; -webkit-text-stroke-width: 0px; background-color: rgb(255, 255, 255);"><b>How
+          can you store these music data structures in memory and on files?</b></p>
+      <p style="color: rgb(0, 0, 0); font-family: Verdana, Geneva, sans-serif; font-size: 13.0080003738403px; font-style: normal; font-variant: normal; font-weight: normal; letter-spacing: normal; line-height: 16.910400390625px; orphans: auto; text-align: start; text-indent: 0px; text-transform: none; white-space: normal; widows: auto; word-spacing: 0px; -webkit-text-stroke-width: 0px; background-color: rgb(255, 255, 255);">The
+        smallest unit of information is a note, which must at least have the
+        following information:</p>
+      <ul style="list-style-type: disc; margin: 0px 0px 8px 10px; padding-left: 40px; color: rgb(0, 0, 0); font-family: Verdana, Geneva, sans-serif; font-size: 13.0080003738403px; font-style: normal; font-variant: normal; font-weight: normal; letter-spacing: normal; line-height: 16.910400390625px; orphans: auto; text-align: start; text-indent: 0px; text-transform: none; white-space: normal; widows: auto; word-spacing: 0px; -webkit-text-stroke-width: 0px; background-color: rgb(255, 255, 255);">
+        <li style="margin: 0px 0px 8px 5px;">The note pitch</li>
+        <li style="margin: 0px 0px 8px 5px;">The note velocity (dynamics)</li>
+        <li style="margin: 0px 0px 8px 5px;">The duration of the note</li>
+      </ul>
+      <p style="color: rgb(0, 0, 0); font-family: Verdana, Geneva, sans-serif; font-size: 13.0080003738403px; font-style: normal; font-variant: normal; font-weight: normal; letter-spacing: normal; line-height: 16.910400390625px; orphans: auto; text-align: start; text-indent: 0px; text-transform: none; white-space: normal; widows: auto; word-spacing: 0px; -webkit-text-stroke-width: 0px; background-color: rgb(255, 255, 255);">The
+        notes are then organized in time sequences. A sequence should at least
+        include the following information:</p>
+      <ul style="list-style-type: disc; margin: 0px 0px 8px 10px; padding-left: 40px; color: rgb(0, 0, 0); font-family: Verdana, Geneva, sans-serif; font-size: 13.0080003738403px; font-style: normal; font-variant: normal; font-weight: normal; letter-spacing: normal; line-height: 16.910400390625px; orphans: auto; text-align: start; text-indent: 0px; text-transform: none; white-space: normal; widows: auto; word-spacing: 0px; -webkit-text-stroke-width: 0px; background-color: rgb(255, 255, 255);">
+        <li style="margin: 0px 0px 8px 5px;">The instrument reference with which
+          the sequence must be played</li>
+        <li style="margin: 0px 0px 8px 5px;">The default values of the volume,
+          pan, reverb and other effects</li>
+        <li style="margin: 0px 0px 8px 5px;">A table of the notes and events and
+          their starting time (an event would be any change of parameter like
+          the volume, that must occur at a given time in the sequence)</li>
+      </ul>
+      <p style="color: rgb(0, 0, 0); font-family: Verdana, Geneva, sans-serif; font-size: 13.0080003738403px; font-style: normal; font-variant: normal; font-weight: normal; letter-spacing: normal; line-height: 16.910400390625px; orphans: auto; text-align: start; text-indent: 0px; text-transform: none; white-space: normal; widows: auto; word-spacing: 0px; -webkit-text-stroke-width: 0px; background-color: rgb(255, 255, 255);">A
+        full piece of music could then consist of one or more such sequences
+        played together.</p>
+      <p style="color: rgb(0, 0, 0); font-family: Verdana, Geneva, sans-serif; font-size: 13.0080003738403px; font-style: normal; font-variant: normal; font-weight: normal; letter-spacing: normal; line-height: 16.910400390625px; orphans: auto; text-align: start; text-indent: 0px; text-transform: none; white-space: normal; widows: auto; word-spacing: 0px; -webkit-text-stroke-width: 0px; background-color: rgb(255, 255, 255);">To
+        store the music data structures on files, you can use the MIDI file
+        format, with the advantage that it can be exchanged between most
+        existing musical applications.</p>
+      <p style="color: rgb(0, 0, 0); font-family: Verdana, Geneva, sans-serif; font-size: 13.0080003738403px; font-style: normal; font-variant: normal; font-weight: normal; letter-spacing: normal; line-height: 16.910400390625px; orphans: auto; text-align: start; text-indent: 0px; text-transform: none; white-space: normal; widows: auto; word-spacing: 0px; -webkit-text-stroke-width: 0px; background-color: rgb(255, 255, 255);">However,
+        if you need to store more information related to the type of processing
+        your application is doing, you will need to develop your own custom file
+        format, like many music software do. But do not forget to implement an
+        import/export function from/to the standard MIDI file format, as it
+        opens the door for file exchange between all musical programs.</p>
+      <p style="color: rgb(0, 0, 0); font-family: Verdana, Geneva, sans-serif; font-size: 13.0080003738403px; font-style: normal; font-variant: normal; font-weight: normal; letter-spacing: normal; line-height: 16.910400390625px; orphans: auto; text-align: start; text-indent: 0px; text-transform: none; white-space: normal; widows: auto; word-spacing: 0px; -webkit-text-stroke-width: 0px; background-color: rgb(255, 255, 255);">An
+        important point of warning is the way to structure the MIDI data inside
+        your program. Try to make one note as one object that contains its
+        duration and that can be placed within a time sequence.</p>
+      <p style="color: rgb(0, 0, 0); font-family: Verdana, Geneva, sans-serif; font-size: 13.0080003738403px; font-style: normal; font-variant: normal; font-weight: normal; letter-spacing: normal; line-height: 16.910400390625px; orphans: auto; text-align: start; text-indent: 0px; text-transform: none; white-space: normal; widows: auto; word-spacing: 0px; -webkit-text-stroke-width: 0px; background-color: rgb(255, 255, 255);">Remember
+        that to play a note, you must send two MIDI messages: a NOTE ON message
+        at the starting point and a NOTE OFF message when the note terminates. A
+        note can be quite long and start in one measure and stop 3 measures
+        later for instance.</p>
+      <p style="color: rgb(0, 0, 0); font-family: Verdana, Geneva, sans-serif; font-size: 13.0080003738403px; font-style: normal; font-variant: normal; font-weight: normal; letter-spacing: normal; line-height: 16.910400390625px; orphans: auto; text-align: start; text-indent: 0px; text-transform: none; white-space: normal; widows: auto; word-spacing: 0px; -webkit-text-stroke-width: 0px; background-color: rgb(255, 255, 255);">In
+        a purely MIDI sequence, such a note would be split in two messages. If
+        each measure is a list of events, then the notes information may be
+        scattered through several measures. This works nicely for playing back a
+        sequence. But if you want to make processing of notes (delete, move,
+        edit, transpose, copy/paste,...) each time you find a starting note, you
+        must run a loop to find its corresponding stop, which makes processing
+        much more complex and susceptible to bugs.</p>
+      <p style="color: rgb(0, 0, 0); font-family: Verdana, Geneva, sans-serif; font-size: 13.0080003738403px; font-style: normal; font-variant: normal; font-weight: normal; letter-spacing: normal; line-height: 16.910400390625px; orphans: auto; text-align: start; text-indent: 0px; text-transform: none; white-space: normal; widows: auto; word-spacing: 0px; -webkit-text-stroke-width: 0px; background-color: rgb(255, 255, 255);">The
+        best way is to have a separate object for each note and before starting
+        to play, prepare a list of MIDI messages to be sent to the MIDI
+        interface.</p>
+      <p style="color: rgb(0, 0, 0); font-family: Verdana, Geneva, sans-serif; font-size: 13.0080003738403px; font-style: normal; font-variant: normal; font-weight: normal; letter-spacing: normal; line-height: 16.910400390625px; orphans: auto; text-align: start; text-indent: 0px; text-transform: none; white-space: normal; widows: auto; word-spacing: 0px; -webkit-text-stroke-width: 0px; background-color: rgb(255, 255, 255);"><b>More
+          about processing MIDI music data structures</b></p>
+      <p style="color: rgb(0, 0, 0); font-family: Verdana, Geneva, sans-serif; font-size: 13.0080003738403px; font-style: normal; font-variant: normal; font-weight: normal; letter-spacing: normal; line-height: 16.910400390625px; orphans: auto; text-align: start; text-indent: 0px; text-transform: none; white-space: normal; widows: auto; word-spacing: 0px; -webkit-text-stroke-width: 0px; background-color: rgb(255, 255, 255);">One
+        important point to keep in mind is the real time aspect of MIDI playback
+        and recording. When your program starts playing or recording a MIDI
+        sequence, it must have a timing architecture that will send the
+        individual MIDI messages exactly on time.</p>
+      <p style="color: rgb(0, 0, 0); font-family: Verdana, Geneva, sans-serif; font-size: 13.0080003738403px; font-style: normal; font-variant: normal; font-weight: normal; letter-spacing: normal; line-height: 16.910400390625px; orphans: auto; text-align: start; text-indent: 0px; text-transform: none; white-space: normal; widows: auto; word-spacing: 0px; -webkit-text-stroke-width: 0px; background-color: rgb(255, 255, 255);">Using
+        a loop and waiting until the next event must be sent is of course a very
+        limited method and is only valid for small basic applications for
+        playing a simple example when the users do not need to interact with the
+        program during the playback.</p>
+      <p style="color: rgb(0, 0, 0); font-family: Verdana, Geneva, sans-serif; font-size: 13.0080003738403px; font-style: normal; font-variant: normal; font-weight: normal; letter-spacing: normal; line-height: 16.910400390625px; orphans: auto; text-align: start; text-indent: 0px; text-transform: none; white-space: normal; widows: auto; word-spacing: 0px; -webkit-text-stroke-width: 0px; background-color: rgb(255, 255, 255);">But
+        for anything more than that, you will need to set up a timer routine
+        that will be called regularly and check what event must be sent to the
+        MIDI driver. Both Windows and Mac OS X have such a mechanism, but be
+        sure to use the timer that uses the interruption level of the processor,
+        which will be called with higher priority than the normal operation of
+        the user interface (do not use the timer event that is simply dropped in
+        the main event loop of the program, as this has a lower priority).</p>
+      <p style="color: rgb(0, 0, 0); font-family: Verdana, Geneva, sans-serif; font-size: 13.0080003738403px; font-style: normal; font-variant: normal; font-weight: normal; letter-spacing: normal; line-height: 16.910400390625px; orphans: auto; text-align: start; text-indent: 0px; text-transform: none; white-space: normal; widows: auto; word-spacing: 0px; -webkit-text-stroke-width: 0px; background-color: rgb(255, 255, 255);">Using
+        an interruption timer that is called every millisecond seems to be
+        enough to reach a good timing resolution. Here is an example on how you
+        can implement the playing of a MIDI sequence:</p>
+      <ol style="list-style-type: decimal; margin: 0px 0px 8px 10px; color: rgb(0, 0, 0); font-family: Verdana, Geneva, sans-serif; font-size: 13.0080003738403px; font-style: normal; font-variant: normal; font-weight: normal; letter-spacing: normal; line-height: 16.910400390625px; orphans: auto; text-align: start; text-indent: 0px; text-transform: none; white-space: normal; widows: auto; word-spacing: 0px; -webkit-text-stroke-width: 0px; background-color: rgb(255, 255, 255);">
+        <li style="margin: 0px 0px 8px 5px;">Set up the music data structures to
+          specify the exact list of MIDI events and their timing, according to
+          the tempo selection and to what the user asked to play. This may
+          require some processing if your basic note and sequence data
+          structures are not strictly in the MIDI format. For a music notation
+          program, it may require to update the playback buffer of the score. Be
+          sure that the data is ready for use and that no memory allocation will
+          be needed while processing the playback itself.</li>
+        <li style="margin: 0px 0px 8px 5px;">Start or activate a timer that will
+          call the real time processing routine. Reset a variable that will
+          count the time relative to the beginning of the sequence.</li>
+        <li style="margin: 0px 0px 8px 5px;">When the real time routine is
+          called, it will check the MIDI event list and send the next events
+          that have reached the time counter. Increment the time counter and the
+          list pointing to the next MIDI event to wait for, then return.</li>
+        <li style="margin: 0px 0px 8px 5px;">During that time, the main program
+          can regularly check the timer counter and for instance update the
+          screen to display the next measures so that the user can see what is
+          playing at any time. Handle any user interaction, like changing the
+          tempo, stopping the playback, jumping to another measure or even
+          editing the music.</li>
+      </ol>
+      <p style="color: rgb(0, 0, 0); font-family: Verdana, Geneva, sans-serif; font-size: 13.0080003738403px; font-style: normal; font-variant: normal; font-weight: normal; letter-spacing: normal; line-height: 16.910400390625px; orphans: auto; text-align: start; text-indent: 0px; text-transform: none; white-space: normal; widows: auto; word-spacing: 0px; -webkit-text-stroke-width: 0px; background-color: rgb(255, 255, 255);">In
+        this way, the user can continue to use the software, while the task of
+        playing a sequence is running. Several major music notation software
+        have neglected this point and when the users starts playing the score,
+        all editing features are disabled. It can be very useful to play a few
+        measures in a continuous loop and be able to edit the music and directly
+        hear the change (for instance to create a drum pattern intuitively). Of
+        course, it requires to correctly handle the possible interferences
+        between the processing that prepares or updates the buffer and the
+        routine that is reading it, so as to avoid any crash or dead lock.</p>
+      <p style="color: rgb(0, 0, 0); font-family: Verdana, Geneva, sans-serif; font-size: 13.0080003738403px; font-style: normal; font-variant: normal; font-weight: normal; letter-spacing: normal; line-height: 16.910400390625px; orphans: auto; text-align: start; text-indent: 0px; text-transform: none; white-space: normal; widows: auto; word-spacing: 0px; -webkit-text-stroke-width: 0px; background-color: rgb(255, 255, 255);"><b>Bottom
+          line</b></p>
+      <p style="color: rgb(0, 0, 0); font-family: Verdana, Geneva, sans-serif; font-size: 13.0080003738403px; font-style: normal; font-variant: normal; font-weight: normal; letter-spacing: normal; line-height: 16.910400390625px; orphans: auto; text-align: start; text-indent: 0px; text-transform: none; white-space: normal; widows: auto; word-spacing: 0px; -webkit-text-stroke-width: 0px; background-color: rgb(255, 255, 255);">If
+        you need to process the music notes themselves (but not based on a
+        precise music notation handling) and if the user must be able to edit
+        the notes, change the instruments, tempo, volumes,... you need at least
+        to have music data structures to represent notes and sequences of notes
+        as described above.</p>
+      <hr style="border-style: solid; width: 500px; clear: both; color: rgb(0, 0, 0); font-family: Verdana, Geneva, sans-serif; font-size: 13.0080003738403px; font-style: normal; font-variant: normal; font-weight: normal; letter-spacing: normal; line-height: 16.910400390625px; orphans: auto; text-align: start; text-indent: 0px; text-transform: none; white-space: normal; widows: auto; word-spacing: 0px; -webkit-text-stroke-width: 0px; height: 1px; margin-left: 0px; background-color: rgb(255, 255, 255);">
+      <h3 style="font-size: 18.2112007141113px; margin: 8px 0px 14px; color: rgb(0, 0, 0); font-family: Verdana, Geneva, sans-serif; font-style: normal; font-variant: normal; letter-spacing: normal; orphans: auto; text-align: start; text-indent: 0px; text-transform: none; white-space: normal; widows: auto; word-spacing: 0px; -webkit-text-stroke-width: 0px; background-color: rgb(255, 255, 255);"><span style="color: rgb(7, 48, 171);">3 - Music Notation as a Music Data
+          Structure</span></h3>
+      <p style="color: rgb(0, 0, 0); font-family: Verdana, Geneva, sans-serif; font-size: 13.0080003738403px; font-style: normal; font-variant: normal; font-weight: normal; letter-spacing: normal; line-height: 16.910400390625px; orphans: auto; text-align: start; text-indent: 0px; text-transform: none; white-space: normal; widows: auto; word-spacing: 0px; -webkit-text-stroke-width: 0px; background-color: rgb(255, 255, 255);">At
+        this level of information, we add the graphic aspects of music notation
+        to the music data structures. The traditional music notation standard
+        has evolved through several centuries to arrive at its present state of
+        development. It is still evolving to adapt itself to the needs of
+        graphic representation of new compositional practices. But the most
+        important part of it is quite conservative and has very precise rules.</p>
+      <p style="color: rgb(0, 0, 0); font-family: Verdana, Geneva, sans-serif; font-size: 13.0080003738403px; font-style: normal; font-variant: normal; font-weight: normal; letter-spacing: normal; line-height: 16.910400390625px; orphans: auto; text-align: start; text-indent: 0px; text-transform: none; white-space: normal; widows: auto; word-spacing: 0px; -webkit-text-stroke-width: 0px; background-color: rgb(255, 255, 255);">The
+        purpose of music notation is to make a written representation of the
+        content of the music, so that musicians can read it and play it back. It
+        is mainly a communication tool so that others can play the music you
+        write and vice versa.</p>
+      <p style="color: rgb(0, 0, 0); font-family: Verdana, Geneva, sans-serif; font-size: 13.0080003738403px; font-style: normal; font-variant: normal; font-weight: normal; letter-spacing: normal; line-height: 16.910400390625px; orphans: auto; text-align: start; text-indent: 0px; text-transform: none; white-space: normal; widows: auto; word-spacing: 0px; -webkit-text-stroke-width: 0px; background-color: rgb(255, 255, 255);">Clarity
+        of the content of the score is of course priority number one so that the
+        musician will be able to read it as easier as possible. However, as it
+        is a graphic representation, we come closer to the graphic arts and
+        there is some aesthetic value to a beautiful, well designed page and
+        content layout of a score.</p>
+      <p style="color: rgb(0, 0, 0); font-family: Verdana, Geneva, sans-serif; font-size: 13.0080003738403px; font-style: normal; font-variant: normal; font-weight: normal; letter-spacing: normal; line-height: 16.910400390625px; orphans: auto; text-align: start; text-indent: 0px; text-transform: none; white-space: normal; widows: auto; word-spacing: 0px; -webkit-text-stroke-width: 0px; background-color: rgb(255, 255, 255);">Before
+        the computer era, music was engraved by professionals working with metal
+        shapes to place every note, dynamic, staff line,... into a metal frame
+        that was then used to print the final score. Correction was practically
+        impossible and before being a professional, you had to spend 10 years
+        being trained on this art.</p>
+      <p style="color: rgb(0, 0, 0); font-family: Verdana, Geneva, sans-serif; font-size: 13.0080003738403px; font-style: normal; font-variant: normal; font-weight: normal; letter-spacing: normal; line-height: 16.910400390625px; orphans: auto; text-align: start; text-indent: 0px; text-transform: none; white-space: normal; widows: auto; word-spacing: 0px; -webkit-text-stroke-width: 0px; background-color: rgb(255, 255, 255);">The
+        MIDI language was invented to communicate from a computer to a
+        synthesizer or between synthesizers. Music notation was not at all the
+        purpose of MIDI, so MIDI is completely inadequate to represent music
+        notation to its fullest extent.</p>
+      <p style="color: rgb(0, 0, 0); font-family: Verdana, Geneva, sans-serif; font-size: 13.0080003738403px; font-style: normal; font-variant: normal; font-weight: normal; letter-spacing: normal; line-height: 16.910400390625px; orphans: auto; text-align: start; text-indent: 0px; text-transform: none; white-space: normal; widows: auto; word-spacing: 0px; -webkit-text-stroke-width: 0px; background-color: rgb(255, 255, 255);">Of
+        course, you can create a sheet music from a MIDI file, but the algorithm
+        to do this is not straightforward and several decisions need to be taken
+        that are not always easy for a computer to take and may be in
+        contradiction with the standard rules of music engraving.</p>
+      <p style="color: rgb(0, 0, 0); font-family: Verdana, Geneva, sans-serif; font-size: 13.0080003738403px; font-style: normal; font-variant: normal; font-weight: normal; letter-spacing: normal; line-height: 16.910400390625px; orphans: auto; text-align: start; text-indent: 0px; text-transform: none; white-space: normal; widows: auto; word-spacing: 0px; -webkit-text-stroke-width: 0px; background-color: rgb(255, 255, 255);">So
+        the main point is that to represent the music as music notation, you
+        need a series of music data structures that modelize the main graphic
+        objects found in a score. You can divide these objects into three main
+        classes:</p>
+      <ol style="list-style-type: decimal; margin: 0px 0px 8px 10px; color: rgb(0, 0, 0); font-family: Verdana, Geneva, sans-serif; font-size: 13.0080003738403px; font-style: normal; font-variant: normal; font-weight: normal; letter-spacing: normal; line-height: 16.910400390625px; orphans: auto; text-align: start; text-indent: 0px; text-transform: none; white-space: normal; widows: auto; word-spacing: 0px; -webkit-text-stroke-width: 0px; background-color: rgb(255, 255, 255);">
+        <li style="margin: 0px 0px 8px 5px;">The first class would be the music
+          content objects and properties , like the notes, rests, accidentals,
+          nuances, articulations, chord symbols, lyrics,... They represent
+          mainly the notes and the way they must be played.</li>
+        <li style="margin: 0px 0px 8px 5px;">The second class of objects are the
+          containers, that is to say the measures, staves, systems and pages.
+          They are the objects that will contain the objects of the first class.</li>
+        <li style="margin: 0px 0px 8px 5px;">The third class are mainly the
+          clefs, key and time signatures and they are the interpreter of how you
+          read the objects that you find in the containers. They are also placed
+          in the containers.</li>
+      </ol>
+      <p style="color: rgb(0, 0, 0); font-family: Verdana, Geneva, sans-serif; font-size: 13.0080003738403px; font-style: normal; font-variant: normal; font-weight: normal; letter-spacing: normal; line-height: 16.910400390625px; orphans: auto; text-align: start; text-indent: 0px; text-transform: none; white-space: normal; widows: auto; word-spacing: 0px; -webkit-text-stroke-width: 0px; background-color: rgb(255, 255, 255);">As
+        we cannot write here a full tutorial about music notation, if you have
+        no knowledge about it, here is a tutorial that explains most of the
+        principles of the music notation language, with examples:</p>
+      <p style="color: rgb(0, 0, 0); font-family: Verdana, Geneva, sans-serif; font-size: 13.0080003738403px; font-style: normal; font-variant: normal; font-weight: normal; letter-spacing: normal; line-height: 16.910400390625px; orphans: auto; text-indent: 0px; text-transform: none; white-space: normal; widows: auto; word-spacing: 0px; -webkit-text-stroke-width: 0px; text-align: center; background-color: rgb(255, 255, 255);"><a href="http://www.arpegemusic.com/manual36/EN100.htm">Music notation
+          tutorial...</a></p>
+      <p style="color: rgb(0, 0, 0); font-family: Verdana, Geneva, sans-serif; font-size: 13.0080003738403px; font-style: normal; font-variant: normal; font-weight: normal; letter-spacing: normal; line-height: 16.910400390625px; orphans: auto; text-align: start; text-indent: 0px; text-transform: none; white-space: normal; widows: auto; word-spacing: 0px; -webkit-text-stroke-width: 0px; background-color: rgb(255, 255, 255);">Let
+        us take an example of the above three classes of objects. Here is a
+        system that contains 2 staves of 3 measures:</p>
+      <div class="ImageBlock ImageBlockCenter" style="overflow: hidden; max-width: 100%; text-align: center; margin: 1em 0px; color: rgb(0, 0, 0); font-family: Verdana, Geneva, sans-serif; font-size: 13.0080003738403px; font-style: normal; font-variant: normal; font-weight: normal; letter-spacing: normal; line-height: 16.910400390625px; orphans: auto; text-indent: 0px; text-transform: none; white-space: normal; widows: auto; word-spacing: 0px; -webkit-text-stroke-width: 0px; background-color: rgb(255, 255, 255);"><img src="Music%20data%20structures%20for%20music%20software%20development_files/data-3.jpg" style="margin: 0px; max-width: none;" width="385"></div>
+      <p style="color: rgb(0, 0, 0); font-family: Verdana, Geneva, sans-serif; font-size: 13.0080003738403px; font-style: normal; font-variant: normal; font-weight: normal; letter-spacing: normal; line-height: 16.910400390625px; orphans: auto; text-align: start; text-indent: 0px; text-transform: none; white-space: normal; widows: auto; word-spacing: 0px; -webkit-text-stroke-width: 0px; background-color: rgb(255, 255, 255);">As
+        it is, there is no reference to time, except that this container is
+        organized as a sequence of three measures. There is also no reference to
+        the pitch. We need to place a time signature and a clef with an optional
+        key signature, so that the pitch and time references are defined:</p>
+      <div class="ImageBlock ImageBlockCenter" style="overflow: hidden; max-width: 100%; text-align: center; margin: 1em 0px; color: rgb(0, 0, 0); font-family: Verdana, Geneva, sans-serif; font-size: 13.0080003738403px; font-style: normal; font-variant: normal; font-weight: normal; letter-spacing: normal; line-height: 16.910400390625px; orphans: auto; text-indent: 0px; text-transform: none; white-space: normal; widows: auto; word-spacing: 0px; -webkit-text-stroke-width: 0px; background-color: rgb(255, 255, 255);"><img src="Music%20data%20structures%20for%20music%20software%20development_files/data-4.jpg" style="margin: 0px; max-width: none;" width="423"></div>
+      <p style="color: rgb(0, 0, 0); font-family: Verdana, Geneva, sans-serif; font-size: 13.0080003738403px; font-style: normal; font-variant: normal; font-weight: normal; letter-spacing: normal; line-height: 16.910400390625px; orphans: auto; text-align: start; text-indent: 0px; text-transform: none; white-space: normal; widows: auto; word-spacing: 0px; -webkit-text-stroke-width: 0px; background-color: rgb(255, 255, 255);">We
+        can now add a series of notes that form a melody:</p>
+      <div class="ImageBlock ImageBlockCenter" style="overflow: hidden; max-width: 100%; text-align: center; margin: 1em 0px; color: rgb(0, 0, 0); font-family: Verdana, Geneva, sans-serif; font-size: 13.0080003738403px; font-style: normal; font-variant: normal; font-weight: normal; letter-spacing: normal; line-height: 16.910400390625px; orphans: auto; text-indent: 0px; text-transform: none; white-space: normal; widows: auto; word-spacing: 0px; -webkit-text-stroke-width: 0px; background-color: rgb(255, 255, 255);"><img src="Music%20data%20structures%20for%20music%20software%20development_files/data-5.jpg" style="margin: 0px; max-width: none;" width="412"></div>
+      <p style="color: rgb(0, 0, 0); font-family: Verdana, Geneva, sans-serif; font-size: 13.0080003738403px; font-style: normal; font-variant: normal; font-weight: normal; letter-spacing: normal; line-height: 16.910400390625px; orphans: auto; text-align: start; text-indent: 0px; text-transform: none; white-space: normal; widows: auto; word-spacing: 0px; -webkit-text-stroke-width: 0px; background-color: rgb(255, 255, 255);">By
+        placing the notes on the staff, each pitch is determined based on the
+        clef that is before it (the upper clef is the G clef, which puts a G
+        note on the second line of the staff, counting from the lower line; the
+        lower clef is the F clef, defining the F note on the fourth line of the
+        staff, counting from the lower line).</p>
+      <p style="color: rgb(0, 0, 0); font-family: Verdana, Geneva, sans-serif; font-size: 13.0080003738403px; font-style: normal; font-variant: normal; font-weight: normal; letter-spacing: normal; line-height: 16.910400390625px; orphans: auto; text-align: start; text-indent: 0px; text-transform: none; white-space: normal; widows: auto; word-spacing: 0px; -webkit-text-stroke-width: 0px; background-color: rgb(255, 255, 255);">The
+        3 sharps present at the beginning of the staff indicates that the F, C
+        and G notes have a sharp by default (one semitone higher than the
+        natural note). The "3/4" indication tells you that there are 3 quarter
+        notes in a measure.</p>
+      <p style="color: rgb(0, 0, 0); font-family: Verdana, Geneva, sans-serif; font-size: 13.0080003738403px; font-style: normal; font-variant: normal; font-weight: normal; letter-spacing: normal; line-height: 16.910400390625px; orphans: auto; text-align: start; text-indent: 0px; text-transform: none; white-space: normal; widows: auto; word-spacing: 0px; -webkit-text-stroke-width: 0px; background-color: rgb(255, 255, 255);"><b>What
+          is needed to play the music?</b></p>
+      <p style="color: rgb(0, 0, 0); font-family: Verdana, Geneva, sans-serif; font-size: 13.0080003738403px; font-style: normal; font-variant: normal; font-weight: normal; letter-spacing: normal; line-height: 16.910400390625px; orphans: auto; text-align: start; text-indent: 0px; text-transform: none; white-space: normal; widows: auto; word-spacing: 0px; -webkit-text-stroke-width: 0px; background-color: rgb(255, 255, 255);">As
+        music notation is designed to communicate what to play to the musician,
+        its music data structure necessarily contains all the information needed
+        to play the music. It requires some basic processing of the music data
+        structures to extract the exact MIDI sequence of messages that need to
+        be sent to a synthesizer to play back the music.</p>
+      <p style="color: rgb(0, 0, 0); font-family: Verdana, Geneva, sans-serif; font-size: 13.0080003738403px; font-style: normal; font-variant: normal; font-weight: normal; letter-spacing: normal; line-height: 16.910400390625px; orphans: auto; text-align: start; text-indent: 0px; text-transform: none; white-space: normal; widows: auto; word-spacing: 0px; -webkit-text-stroke-width: 0px; background-color: rgb(255, 255, 255);">The
+        main steps are:</p>
+      <ul style="list-style-type: disc; margin: 0px 0px 8px 10px; padding-left: 40px; color: rgb(0, 0, 0); font-family: Verdana, Geneva, sans-serif; font-size: 13.0080003738403px; font-style: normal; font-variant: normal; font-weight: normal; letter-spacing: normal; line-height: 16.910400390625px; orphans: auto; text-align: start; text-indent: 0px; text-transform: none; white-space: normal; widows: auto; word-spacing: 0px; -webkit-text-stroke-width: 0px; background-color: rgb(255, 255, 255);">
+        <li style="margin: 0px 0px 8px 5px;">Compute the pitch of a note, based
+          on its position on the staff lines, by taking care of accidentals in
+          the measure, of the key signature and the clef.</li>
+        <li style="margin: 0px 0px 8px 5px;">Compute the start time and duration
+          of the note by its position in the measure compared to the other notes
+          and the time signature. A tempo indication must be used to attach the
+          events to a real time position. The presence of a a staccato sign or a
+          slur may influence the exact duration.</li>
+        <li style="margin: 0px 0px 8px 5px;">Compute the dynamic (velocity) of
+          the note according to the articulations and nuances.</li>
+        <li style="margin: 0px 0px 8px 5px;">The name of the instruments is
+          often displayed in front of the staves in the first system, so with
+          that information, decide which MIDI message you need to send to
+          activate the correct sound in the synthesizer. Most of the time, one
+          staff is assigned to one instrument (but there are exceptions, for
+          instance one musician that alternates two or more instruments, on the
+          same staff).</li>
+        <li style="margin: 0px 0px 8px 5px;">Assemble the sequence of events for
+          each measure and then start feeding them to the real time routine that
+          will send them to the MIDI interface.</li>
+      </ul>
+      <p style="color: rgb(0, 0, 0); font-family: Verdana, Geneva, sans-serif; font-size: 13.0080003738403px; font-style: normal; font-variant: normal; font-weight: normal; letter-spacing: normal; line-height: 16.910400390625px; orphans: auto; text-align: start; text-indent: 0px; text-transform: none; white-space: normal; widows: auto; word-spacing: 0px; -webkit-text-stroke-width: 0px; background-color: rgb(255, 255, 255);">During
+        playback, the application may also color the notes to show which one is
+        played and draw a moving cursor indicating the current playback
+        position.</p>
+      <p style="color: rgb(0, 0, 0); font-family: Verdana, Geneva, sans-serif; font-size: 13.0080003738403px; font-style: normal; font-variant: normal; font-weight: normal; letter-spacing: normal; line-height: 16.910400390625px; orphans: auto; text-align: start; text-indent: 0px; text-transform: none; white-space: normal; widows: auto; word-spacing: 0px; -webkit-text-stroke-width: 0px; background-color: rgb(255, 255, 255);"><b>What
+          kind of processing can you do with this music data structure?</b></p>
+      <p style="color: rgb(0, 0, 0); font-family: Verdana, Geneva, sans-serif; font-size: 13.0080003738403px; font-style: normal; font-variant: normal; font-weight: normal; letter-spacing: normal; line-height: 16.910400390625px; orphans: auto; text-align: start; text-indent: 0px; text-transform: none; white-space: normal; widows: auto; word-spacing: 0px; -webkit-text-stroke-width: 0px; background-color: rgb(255, 255, 255);">You
+        can do most of the processing done with the layer 2 (MIDI) music data
+        structures. However, you must see that the layer 2 and layer 3
+        information stay synchronized.</p>
+      <p style="color: rgb(0, 0, 0); font-family: Verdana, Geneva, sans-serif; font-size: 13.0080003738403px; font-style: normal; font-variant: normal; font-weight: normal; letter-spacing: normal; line-height: 16.910400390625px; orphans: auto; text-align: start; text-indent: 0px; text-transform: none; white-space: normal; widows: auto; word-spacing: 0px; -webkit-text-stroke-width: 0px; background-color: rgb(255, 255, 255);">For
+        instance, if you need to transpose a note, you can still add a number to
+        the original pitch, but you also need to adapt the note position on the
+        staff, according to the clef. You must check the accidentals of the
+        notes before it as well as the key signature. If a slur or articulation
+        symbol is attached to the note, its position must also be adjusted
+        graphically, so the processing is much more complex than handling MIDI
+        data.</p>
+      <p style="color: rgb(0, 0, 0); font-family: Verdana, Geneva, sans-serif; font-size: 13.0080003738403px; font-style: normal; font-variant: normal; font-weight: normal; letter-spacing: normal; line-height: 16.910400390625px; orphans: auto; text-align: start; text-indent: 0px; text-transform: none; white-space: normal; widows: auto; word-spacing: 0px; -webkit-text-stroke-width: 0px; background-color: rgb(255, 255, 255);">When
+        the user adds new notes to the score, an important part is the correct
+        spacing and alignment of the notes inside the measure and between
+        instruments playing together.</p>
+      <p style="color: rgb(0, 0, 0); font-family: Verdana, Geneva, sans-serif; font-size: 13.0080003738403px; font-style: normal; font-variant: normal; font-weight: normal; letter-spacing: normal; line-height: 16.910400390625px; orphans: auto; text-align: start; text-indent: 0px; text-transform: none; white-space: normal; widows: auto; word-spacing: 0px; -webkit-text-stroke-width: 0px; background-color: rgb(255, 255, 255);">Of
+        course, the alignment of 4 quarter notes is quite easy for a solo
+        instrument. But when you have an orchestral score with 30 instruments
+        playing different rhythms, it can become quite complex. Spacing is
+        mainly influenced by the following elements and their combinations:</p>
+      <ul style="list-style-type: disc; margin: 0px 0px 8px 10px; padding-left: 40px; color: rgb(0, 0, 0); font-family: Verdana, Geneva, sans-serif; font-size: 13.0080003738403px; font-style: normal; font-variant: normal; font-weight: normal; letter-spacing: normal; line-height: 16.910400390625px; orphans: auto; text-align: start; text-indent: 0px; text-transform: none; white-space: normal; widows: auto; word-spacing: 0px; -webkit-text-stroke-width: 0px; background-color: rgb(255, 255, 255);">
+        <li style="margin: 0px 0px 8px 5px;">Rhythmic content of each staff</li>
+        <li style="margin: 0px 0px 8px 5px;">Presence of accidentals in front of
+          some notes</li>
+        <li style="margin: 0px 0px 8px 5px;">Tuplets and irregular groups</li>
+        <li style="margin: 0px 0px 8px 5px;">Dotted notes</li>
+        <li style="margin: 0px 0px 8px 5px;">Presence of two or more voices on
+          the same staff and avoiding of collisions between them when they are
+          close together</li>
+        <li style="margin: 0px 0px 8px 5px;">Symbols that need some space to be
+          displayed, in addition to the notes themselves (like grace notes for
+          instance)</li>
+        <li style="margin: 0px 0px 8px 5px;">Lyrics</li>
+        <li style="margin: 0px 0px 8px 5px;">Chord symbols</li>
+        <li style="margin: 0px 0px 8px 5px;">layout of the page and density of
+          the measure content that is considered readable</li>
+        <li style="margin: 0px 0px 8px 5px;">Superposition of notes inside a
+          chord, when notes are put on both sides of a stem (for intervals of a
+          second)</li>
+      </ul>
+      <p style="color: rgb(0, 0, 0); font-family: Verdana, Geneva, sans-serif; font-size: 13.0080003738403px; font-style: normal; font-variant: normal; font-weight: normal; letter-spacing: normal; line-height: 16.910400390625px; orphans: auto; text-align: start; text-indent: 0px; text-transform: none; white-space: normal; widows: auto; word-spacing: 0px; -webkit-text-stroke-width: 0px; background-color: rgb(255, 255, 255);">The
+        algorithm can become quite complex to finally reach a good compromise
+        for readability and the general aesthetics of the score.</p>
+      <p style="color: rgb(0, 0, 0); font-family: Verdana, Geneva, sans-serif; font-size: 13.0080003738403px; font-style: normal; font-variant: normal; font-weight: normal; letter-spacing: normal; line-height: 16.910400390625px; orphans: auto; text-align: start; text-indent: 0px; text-transform: none; white-space: normal; widows: auto; word-spacing: 0px; -webkit-text-stroke-width: 0px; background-color: rgb(255, 255, 255);"><b>How
+          is this music data structure generated?</b></p>
+      <p style="color: rgb(0, 0, 0); font-family: Verdana, Geneva, sans-serif; font-size: 13.0080003738403px; font-style: normal; font-variant: normal; font-weight: normal; letter-spacing: normal; line-height: 16.910400390625px; orphans: auto; text-align: start; text-indent: 0px; text-transform: none; white-space: normal; widows: auto; word-spacing: 0px; -webkit-text-stroke-width: 0px; background-color: rgb(255, 255, 255);">The
+        program can generate most of this automatically from a MIDI file, but
+        some corrections may be needed to reach a nice, natural and readable
+        score.</p>
+      <p style="color: rgb(0, 0, 0); font-family: Verdana, Geneva, sans-serif; font-size: 13.0080003738403px; font-style: normal; font-variant: normal; font-weight: normal; letter-spacing: normal; line-height: 16.910400390625px; orphans: auto; text-align: start; text-indent: 0px; text-transform: none; white-space: normal; widows: auto; word-spacing: 0px; -webkit-text-stroke-width: 0px; background-color: rgb(255, 255, 255);">The
+        algorithm that transforms the raw MIDI data to a natural and smooth
+        music notation is not as simple as it may seem. The main difficulties
+        are related to the following points:</p>
+      <ul style="list-style-type: disc; margin: 0px 0px 8px 10px; padding-left: 40px; color: rgb(0, 0, 0); font-family: Verdana, Geneva, sans-serif; font-size: 13.0080003738403px; font-style: normal; font-variant: normal; font-weight: normal; letter-spacing: normal; line-height: 16.910400390625px; orphans: auto; text-align: start; text-indent: 0px; text-transform: none; white-space: normal; widows: auto; word-spacing: 0px; -webkit-text-stroke-width: 0px; background-color: rgb(255, 255, 255);">
+        <li style="margin: 0px 0px 8px 5px;">Notes from a MIDI file are often
+          only approximations of rhythmic values if they have been recorded from
+          a life performance, so there is an evaluation of the right way to
+          quantize the music for smooth and logical rhythmic notation. In
+          addition to that, the rests that exist between notes must either be
+          written as rests or ignored, according to a legato or staccato
+          playback which the program must also decide.</li>
+        <li style="margin: 0px 0px 8px 5px;">The accidentals must be logical
+          inside the score (C# in MIDI is the same as Db, but not the same on a
+          staff, according to the context).</li>
+        <li style="margin: 0px 0px 8px 5px;">When more than one voice is present
+          in the MIDI track, the algorithm must also decide which note is part
+          of which voice so that the final result looks logical and readable.</li>
+        <li style="margin: 0px 0px 8px 5px;">Grace notes and trills must be
+          detected and written properly.</li>
+      </ul>
+      <p style="color: rgb(0, 0, 0); font-family: Verdana, Geneva, sans-serif; font-size: 13.0080003738403px; font-style: normal; font-variant: normal; font-weight: normal; letter-spacing: normal; line-height: 16.910400390625px; orphans: auto; text-align: start; text-indent: 0px; text-transform: none; white-space: normal; widows: auto; word-spacing: 0px; -webkit-text-stroke-width: 0px; background-color: rgb(255, 255, 255);">If
+        you write a music notation software, you need to provide graphic tools
+        to add, remove, move, copy, paste, transpose notes and selections of
+        notes. This kind of interface is mainly a graphic processing algorithm
+        and may take in itself quite some time to develop.</p>
+      <p style="color: rgb(0, 0, 0); font-family: Verdana, Geneva, sans-serif; font-size: 13.0080003738403px; font-style: normal; font-variant: normal; font-weight: normal; letter-spacing: normal; line-height: 16.910400390625px; orphans: auto; text-align: start; text-indent: 0px; text-transform: none; white-space: normal; widows: auto; word-spacing: 0px; -webkit-text-stroke-width: 0px; background-color: rgb(255, 255, 255);">You
+        can also import a<span class="Apple-converted-space">&nbsp;</span><b>MusicXML<span class="Apple-converted-space">&nbsp;</span></b>file, which has
+        become the standard file format for music notation file interchange.
+        However, reading a MusicXML file, transforming it into your own music
+        data structures and displaying it on screen or to the printer, is not an
+        easy straightforward task to accomplish and may take considerable time
+        to develop. It all depends on what your software must be able to do.</p>
+      <p style="color: rgb(0, 0, 0); font-family: Verdana, Geneva, sans-serif; font-size: 13.0080003738403px; font-style: normal; font-variant: normal; font-weight: normal; letter-spacing: normal; line-height: 16.910400390625px; orphans: auto; text-align: start; text-indent: 0px; text-transform: none; white-space: normal; widows: auto; word-spacing: 0px; -webkit-text-stroke-width: 0px; background-color: rgb(255, 255, 255);"><b>How
+          can you store these music data structures in memory and on files?</b></p>
+      <p style="color: rgb(0, 0, 0); font-family: Verdana, Geneva, sans-serif; font-size: 13.0080003738403px; font-style: normal; font-variant: normal; font-weight: normal; letter-spacing: normal; line-height: 16.910400390625px; orphans: auto; text-align: start; text-indent: 0px; text-transform: none; white-space: normal; widows: auto; word-spacing: 0px; -webkit-text-stroke-width: 0px; background-color: rgb(255, 255, 255);">One
+        way of organizing the music data structures is to consider the score as
+        a hierarchical object, as follows:</p>
+      <ul style="list-style-type: disc; margin: 0px 0px 8px 10px; padding-left: 40px; color: rgb(0, 0, 0); font-family: Verdana, Geneva, sans-serif; font-size: 13.0080003738403px; font-style: normal; font-variant: normal; font-weight: normal; letter-spacing: normal; line-height: 16.910400390625px; orphans: auto; text-align: start; text-indent: 0px; text-transform: none; white-space: normal; widows: auto; word-spacing: 0px; -webkit-text-stroke-width: 0px; background-color: rgb(255, 255, 255);">
+        <li style="margin: 0px 0px 8px 5px;">One score = a number of instruments
+          (staves) playing so many measures. It then consists of a 2 dimensional
+          array of measures; the first index specifies the instrument and the
+          second specifies the measure number.</li>
+        <li style="margin: 0px 0px 8px 5px;">Each element of this array is a
+          measure object and contains a list of elements, including notes,
+          rests, symbols, lyrics, chord symbols, bar lines, clefs, key and time
+          signatures,...</li>
+        <li style="margin: 0px 0px 8px 5px;">For the page layout of the score,
+          the score itself is an array of pages, a page is an array of systems,
+          a system is an array of staves and a staff is an array of measure
+          objects.</li>
+      </ul>
+      <p style="color: rgb(0, 0, 0); font-family: Verdana, Geneva, sans-serif; font-size: 13.0080003738403px; font-style: normal; font-variant: normal; font-weight: normal; letter-spacing: normal; line-height: 16.910400390625px; orphans: auto; text-align: start; text-indent: 0px; text-transform: none; white-space: normal; widows: auto; word-spacing: 0px; -webkit-text-stroke-width: 0px; background-color: rgb(255, 255, 255);">Many
+        processing tasks will nicely fit this hierarchical music data structure.
+        However, there are also several processing tasks that will be rendered
+        more complex because according to the type of music, there can be in
+        fact many links and relations between two or more successive measures of
+        the same instrument, and also some interactions between two consecutive
+        staves.</p>
+      <p style="color: rgb(0, 0, 0); font-family: Verdana, Geneva, sans-serif; font-size: 13.0080003738403px; font-style: normal; font-variant: normal; font-weight: normal; letter-spacing: normal; line-height: 16.910400390625px; orphans: auto; text-align: start; text-indent: 0px; text-transform: none; white-space: normal; widows: auto; word-spacing: 0px; -webkit-text-stroke-width: 0px; background-color: rgb(255, 255, 255);">The
+        most common measure interactions are:</p>
+      <ul style="list-style-type: disc; margin: 0px 0px 8px 10px; padding-left: 40px; color: rgb(0, 0, 0); font-family: Verdana, Geneva, sans-serif; font-size: 13.0080003738403px; font-style: normal; font-variant: normal; font-weight: normal; letter-spacing: normal; line-height: 16.910400390625px; orphans: auto; text-align: start; text-indent: 0px; text-transform: none; white-space: normal; widows: auto; word-spacing: 0px; -webkit-text-stroke-width: 0px; background-color: rgb(255, 255, 255);">
+        <li style="margin: 0px 0px 8px 5px;">the presence of tied notes (notes
+          that play 'through" the bar line without being interrupted)</li>
+        <li style="margin: 0px 0px 8px 5px;">symbols that extend over more than
+          one measure (crescendo, slurs, octava,...).</li>
+        <li style="margin: 0px 0px 8px 5px;">cross staff beaming, used mainly
+          for piano and harp music, where one single rhythmic voice is in fact
+          written using both staves.</li>
+      </ul>
+      <p style="color: rgb(0, 0, 0); font-family: Verdana, Geneva, sans-serif; font-size: 13.0080003738403px; font-style: normal; font-variant: normal; font-weight: normal; letter-spacing: normal; line-height: 16.910400390625px; orphans: auto; text-align: start; text-indent: 0px; text-transform: none; white-space: normal; widows: auto; word-spacing: 0px; -webkit-text-stroke-width: 0px; background-color: rgb(255, 255, 255);">These
+        interactions destroy the nicely organized vertical music data structure
+        explained above and create dependencies between two or more objects that
+        are parts of several different music data structures.</p>
+      <p style="color: rgb(0, 0, 0); font-family: Verdana, Geneva, sans-serif; font-size: 13.0080003738403px; font-style: normal; font-variant: normal; font-weight: normal; letter-spacing: normal; line-height: 16.910400390625px; orphans: auto; text-align: start; text-indent: 0px; text-transform: none; white-space: normal; widows: auto; word-spacing: 0px; -webkit-text-stroke-width: 0px; background-color: rgb(255, 255, 255);">When
+        this happens in a data structure model, it often means that we did not
+        catch the most natural way of handling the data entities involved. If we
+        come back to the above example:</p>
+      <div class="ImageBlock ImageBlockCenter" style="overflow: hidden; max-width: 100%; text-align: center; margin: 1em 0px; color: rgb(0, 0, 0); font-family: Verdana, Geneva, sans-serif; font-size: 13.0080003738403px; font-style: normal; font-variant: normal; font-weight: normal; letter-spacing: normal; line-height: 16.910400390625px; orphans: auto; text-indent: 0px; text-transform: none; white-space: normal; widows: auto; word-spacing: 0px; -webkit-text-stroke-width: 0px; background-color: rgb(255, 255, 255);"><img src="Music%20data%20structures%20for%20music%20software%20development_files/data-5.jpg" style="margin: 0px; max-width: none;" width="412"></div>
+      <p style="color: rgb(0, 0, 0); font-family: Verdana, Geneva, sans-serif; font-size: 13.0080003738403px; font-style: normal; font-variant: normal; font-weight: normal; letter-spacing: normal; line-height: 16.910400390625px; orphans: auto; text-align: start; text-indent: 0px; text-transform: none; white-space: normal; widows: auto; word-spacing: 0px; -webkit-text-stroke-width: 0px; background-color: rgb(255, 255, 255);">we
+        can see that the melody is in itself an entity. But it starts in the
+        middle of the first measure and ends in the middle of the third measure.
+        There are cases where a melodic phrase stops in a measure and a new
+        melodic phrase starts right after it, in the same measure.</p>
+      <p style="color: rgb(0, 0, 0); font-family: Verdana, Geneva, sans-serif; font-size: 13.0080003738403px; font-style: normal; font-variant: normal; font-weight: normal; letter-spacing: normal; line-height: 16.910400390625px; orphans: auto; text-align: start; text-indent: 0px; text-transform: none; white-space: normal; widows: auto; word-spacing: 0px; -webkit-text-stroke-width: 0px; background-color: rgb(255, 255, 255);">So
+        the question is: what is the most natural entity, the measure or the
+        melodic phrase?</p>
+      <p style="color: rgb(0, 0, 0); font-family: Verdana, Geneva, sans-serif; font-size: 13.0080003738403px; font-style: normal; font-variant: normal; font-weight: normal; letter-spacing: normal; line-height: 16.910400390625px; orphans: auto; text-align: start; text-indent: 0px; text-transform: none; white-space: normal; widows: auto; word-spacing: 0px; -webkit-text-stroke-width: 0px; background-color: rgb(255, 255, 255);">As
+        we can easily observe in most cases, the dependencies of two or more
+        measures are used in the context of one melodic phrase (slurs, tied
+        notes, crescendo, cross staff beaming).</p>
+      <p style="color: rgb(0, 0, 0); font-family: Verdana, Geneva, sans-serif; font-size: 13.0080003738403px; font-style: normal; font-variant: normal; font-weight: normal; letter-spacing: normal; line-height: 16.910400390625px; orphans: auto; text-align: start; text-indent: 0px; text-transform: none; white-space: normal; widows: auto; word-spacing: 0px; -webkit-text-stroke-width: 0px; background-color: rgb(255, 255, 255);">So
+        we could slightly modify our hierarchical model as follows:</p>
+      <ul style="list-style-type: disc; margin: 0px 0px 8px 10px; padding-left: 40px; color: rgb(0, 0, 0); font-family: Verdana, Geneva, sans-serif; font-size: 13.0080003738403px; font-style: normal; font-variant: normal; font-weight: normal; letter-spacing: normal; line-height: 16.910400390625px; orphans: auto; text-align: start; text-indent: 0px; text-transform: none; white-space: normal; widows: auto; word-spacing: 0px; -webkit-text-stroke-width: 0px; background-color: rgb(255, 255, 255);">
+        <li style="margin: 0px 0px 8px 5px;">We keep the container part for the
+          pages, systems, staves and measures</li>
+        <li style="margin: 0px 0px 8px 5px;">We build an object called a<span class="Apple-converted-space">&nbsp;</span><b>music
+            data flow</b>, that represents a logical unit of melodic, harmonic
+          and/or rhythmic content.</li>
+        <li style="margin: 0px 0px 8px 5px;">A<span class="Apple-converted-space">&nbsp;</span><b>music
+            data flow</b><span class="Apple-converted-space">&nbsp;</span>consists
+          of a sequence of notes and rests objects.</li>
+        <li style="margin: 0px 0px 8px 5px;">Each note or rest object contains a
+          list of symbols, chords, articulation, lyrics,... that is attached to
+          that specific note or rest and may extend to a further note or rest.</li>
+        <li style="margin: 0px 0px 8px 5px;">A<span class="Apple-converted-space">&nbsp;</span><b>music
+            data flow</b><span class="Apple-converted-space">&nbsp;</span>is
+          independent of the clef, time signature and key signature. Its
+          duration is arbitrary and may only contain one note or several
+          hundreds of notes and rests, but it is organized in a way that no
+          dependencies exist between two consecutive flows, at least on the
+          purely graphical aspect of processing.</li>
+        <li style="margin: 0px 0px 8px 5px;">Each<span class="Apple-converted-space">&nbsp;</span><b>music
+            data flow</b><span class="Apple-converted-space">&nbsp;</span>has a
+          starting point in the structure of pages/systems/staves/measures.</li>
+      </ul>
+      <p style="color: rgb(0, 0, 0); font-family: Verdana, Geneva, sans-serif; font-size: 13.0080003738403px; font-style: normal; font-variant: normal; font-weight: normal; letter-spacing: normal; line-height: 16.910400390625px; orphans: auto; text-align: start; text-indent: 0px; text-transform: none; white-space: normal; widows: auto; word-spacing: 0px; -webkit-text-stroke-width: 0px; background-color: rgb(255, 255, 255);">Of
+        course we have moved the dependency from the level of the container to
+        the level of the music data flows, but they are less arbitrary as they
+        are part of the concept of a natural music entity (the melody for
+        instance). So we may expect to smooth out a part of the complexities
+        that occur while processing the music data structures.</p>
+      <p style="color: rgb(0, 0, 0); font-family: Verdana, Geneva, sans-serif; font-size: 13.0080003738403px; font-style: normal; font-variant: normal; font-weight: normal; letter-spacing: normal; line-height: 16.910400390625px; orphans: auto; text-align: start; text-indent: 0px; text-transform: none; white-space: normal; widows: auto; word-spacing: 0px; -webkit-text-stroke-width: 0px; background-color: rgb(255, 255, 255);">Using
+        this model, we could have a temporary data structure that helps to
+        display the music, by placing each note, rest and symbols in its
+        destination measure with the correct spacing, according to the clef,
+        time and key signature present.</p>
+      <p style="color: rgb(0, 0, 0); font-family: Verdana, Geneva, sans-serif; font-size: 13.0080003738403px; font-style: normal; font-variant: normal; font-weight: normal; letter-spacing: normal; line-height: 16.910400390625px; orphans: auto; text-align: start; text-indent: 0px; text-transform: none; white-space: normal; widows: auto; word-spacing: 0px; -webkit-text-stroke-width: 0px; background-color: rgb(255, 255, 255);">For
+        the playback aspect, a single<span class="Apple-converted-space">&nbsp;</span><b>music
+          data flow</b><span class="Apple-converted-space">&nbsp;</span>can
+        easily be converted into a MIDI sequence, as each note has its absolute
+        pitch value available. We would probably need to add a header to the<span class="Apple-converted-space">&nbsp;</span><b>music data flow</b><span class="Apple-converted-space">&nbsp;</span>so as to include the type
+        of instrument playing it as well as controller values (volume, pan,
+        reverb,...).</p>
+      <p style="color: rgb(0, 0, 0); font-family: Verdana, Geneva, sans-serif; font-size: 13.0080003738403px; font-style: normal; font-variant: normal; font-weight: normal; letter-spacing: normal; line-height: 16.910400390625px; orphans: auto; text-align: start; text-indent: 0px; text-transform: none; white-space: normal; widows: auto; word-spacing: 0px; -webkit-text-stroke-width: 0px; background-color: rgb(255, 255, 255);">Once
+        this main algorithm has been developed properly, the following
+        operations would then become very simple and straightforward, probably
+        only using a few lines of code:</p>
+      <ul style="list-style-type: disc; margin: 0px 0px 8px 10px; padding-left: 40px; color: rgb(0, 0, 0); font-family: Verdana, Geneva, sans-serif; font-size: 13.0080003738403px; font-style: normal; font-variant: normal; font-weight: normal; letter-spacing: normal; line-height: 16.910400390625px; orphans: auto; text-align: start; text-indent: 0px; text-transform: none; white-space: normal; widows: auto; word-spacing: 0px; -webkit-text-stroke-width: 0px; background-color: rgb(255, 255, 255);">
+        <li style="margin: 0px 0px 8px 5px;">changing the clef</li>
+        <li style="margin: 0px 0px 8px 5px;">changing the key and time signature</li>
+        <li style="margin: 0px 0px 8px 5px;">transposing a part of the music</li>
+      </ul>
+      <p style="color: rgb(0, 0, 0); font-family: Verdana, Geneva, sans-serif; font-size: 13.0080003738403px; font-style: normal; font-variant: normal; font-weight: normal; letter-spacing: normal; line-height: 16.910400390625px; orphans: auto; text-align: start; text-indent: 0px; text-transform: none; white-space: normal; widows: auto; word-spacing: 0px; -webkit-text-stroke-width: 0px; background-color: rgb(255, 255, 255);">as
+        well as many others, as the music data structures used is more close to
+        a natural concept of the organization of a piece of music.</p>
+      <p style="color: rgb(0, 0, 0); font-family: Verdana, Geneva, sans-serif; font-size: 13.0080003738403px; font-style: normal; font-variant: normal; font-weight: normal; letter-spacing: normal; line-height: 16.910400390625px; orphans: auto; text-align: start; text-indent: 0px; text-transform: none; white-space: normal; widows: auto; word-spacing: 0px; -webkit-text-stroke-width: 0px; background-color: rgb(255, 255, 255);"><b>How
+          you can add music notation features in your applications</b></p>
+      <p style="color: rgb(0, 0, 0); font-family: Verdana, Geneva, sans-serif; font-size: 13.0080003738403px; font-style: normal; font-variant: normal; font-weight: normal; letter-spacing: normal; line-height: 16.910400390625px; orphans: auto; text-align: start; text-indent: 0px; text-transform: none; white-space: normal; widows: auto; word-spacing: 0px; -webkit-text-stroke-width: 0px; background-color: rgb(255, 255, 255);">As
+        we can see, the addition of the graphic aspects of music notation adds
+        several complexities to the development efforts involved, compared to
+        the MIDI data level and the music data structures are more
+        sophisticated.</p>
+      <p style="color: rgb(0, 0, 0); font-family: Verdana, Geneva, sans-serif; font-size: 13.0080003738403px; font-style: normal; font-variant: normal; font-weight: normal; letter-spacing: normal; line-height: 16.910400390625px; orphans: auto; text-align: start; text-indent: 0px; text-transform: none; white-space: normal; widows: auto; word-spacing: 0px; -webkit-text-stroke-width: 0px; background-color: rgb(255, 255, 255);">But
+        the advantage is that we can display and edit the music in the most
+        common and universal language developed by man: music notation.
+        Moreover, the user can manipulate the music quite naturally, like
+        writing the notes on a sheet of paper.</p>
+      <p style="color: rgb(0, 0, 0); font-family: Verdana, Geneva, sans-serif; font-size: 13.0080003738403px; font-style: normal; font-variant: normal; font-weight: normal; letter-spacing: normal; line-height: 16.910400390625px; orphans: auto; text-align: start; text-indent: 0px; text-transform: none; white-space: normal; widows: auto; word-spacing: 0px; -webkit-text-stroke-width: 0px; background-color: rgb(255, 255, 255);">Since
+        1992, I develop the interface and functions of the<span class="Apple-converted-space">&nbsp;</span><b>Pizzicato
+          music software</b><span class="Apple-converted-space">&nbsp;</span>(which
+        is a general purpose music notation editor) and so I know how much time
+        can be spent in writing music notation algorithms. It is of course a
+        great and exciting adventure.</p>
+      <p style="color: rgb(0, 0, 0); font-family: Verdana, Geneva, sans-serif; font-size: 13.0080003738403px; font-style: normal; font-variant: normal; font-weight: normal; letter-spacing: normal; line-height: 16.910400390625px; orphans: auto; text-align: start; text-indent: 0px; text-transform: none; white-space: normal; widows: auto; word-spacing: 0px; -webkit-text-stroke-width: 0px; background-color: rgb(255, 255, 255);">I
+        sure encourage you to develop your own music software, as it is a great
+        joy to create and develop one's own ideas, see how they become a reality
+        in front of the screen and share it with users.</p>
+      <p style="color: rgb(0, 0, 0); font-family: Verdana, Geneva, sans-serif; font-size: 13.0080003738403px; font-style: normal; font-variant: normal; font-weight: normal; letter-spacing: normal; line-height: 16.910400390625px; orphans: auto; text-align: start; text-indent: 0px; text-transform: none; white-space: normal; widows: auto; word-spacing: 0px; -webkit-text-stroke-width: 0px; background-color: rgb(255, 255, 255);">According
+        to what you want to achieve, layer 1 (audio) and layer 2 (MIDI) are
+        quite affordable in development efforts.</p>
+      <p style="color: rgb(0, 0, 0); font-family: Verdana, Geneva, sans-serif; font-size: 13.0080003738403px; font-style: normal; font-variant: normal; font-weight: normal; letter-spacing: normal; line-height: 16.910400390625px; orphans: auto; text-align: start; text-indent: 0px; text-transform: none; white-space: normal; widows: auto; word-spacing: 0px; -webkit-text-stroke-width: 0px; background-color: rgb(255, 255, 255);">If
+        your program needs full featured music notation display and editing
+        capabilities, it may take you months or years of efforts according to
+        the functions you need to implement.</p>
+      <p style="color: rgb(0, 0, 0); font-family: Verdana, Geneva, sans-serif; font-size: 13.0080003738403px; font-style: normal; font-variant: normal; font-weight: normal; letter-spacing: normal; line-height: 16.910400390625px; orphans: auto; text-align: start; text-indent: 0px; text-transform: none; white-space: normal; widows: auto; word-spacing: 0px; -webkit-text-stroke-width: 0px; background-color: rgb(255, 255, 255);">I
+        have spent myself about 20 years on these development tasks (in addition
+        to other tasks like intuitive composition tools and some other
+        projects).</p>
+      <p style="color: rgb(0, 0, 0); font-family: Verdana, Geneva, sans-serif; font-size: 13.0080003738403px; font-style: normal; font-variant: normal; font-weight: normal; letter-spacing: normal; line-height: 16.910400390625px; orphans: auto; text-align: start; text-indent: 0px; text-transform: none; white-space: normal; widows: auto; word-spacing: 0px; -webkit-text-stroke-width: 0px; background-color: rgb(255, 255, 255);">Originally
+        I started the Pizzicato project mainly because I wanted to develop more
+        advanced intuitive composition tools. It progressively became a full
+        featured score editor and arranging program and today has more than
+        12,000 users worldwide on Windows and Mac OS X.</p>
+      <p style="color: rgb(0, 0, 0); font-family: Verdana, Geneva, sans-serif; font-size: 13.0080003738403px; font-style: normal; font-variant: normal; font-weight: normal; letter-spacing: normal; line-height: 16.910400390625px; orphans: auto; text-align: start; text-indent: 0px; text-transform: none; white-space: normal; widows: auto; word-spacing: 0px; -webkit-text-stroke-width: 0px; background-color: rgb(255, 255, 255);">I
+        recently decided to build a software development kit (SDK) that would
+        help any programmer to add music notation in their applications, so that
+        they could directly focus their development efforts to the specificities
+        of their software and avoid spending months or years rewriting music
+        notation algorithms.</p>
+      <p style="color: rgb(0, 0, 0); font-family: Verdana, Geneva, sans-serif; font-size: 13.0080003738403px; font-style: normal; font-variant: normal; font-weight: normal; letter-spacing: normal; line-height: 16.910400390625px; orphans: auto; text-align: start; text-indent: 0px; text-transform: none; white-space: normal; widows: auto; word-spacing: 0px; -webkit-text-stroke-width: 0px; background-color: rgb(255, 255, 255);">The
+        music notation SDK contains an API that helps you to read and write
+        standard music files (reads MIDI files, musicXML files and Pizzicato
+        files and writes MIDI files, musicXML files, Pizzicato files, audio
+        files and PDF files).</p>
+      <p style="color: rgb(0, 0, 0); font-family: Verdana, Geneva, sans-serif; font-size: 13.0080003738403px; font-style: normal; font-variant: normal; font-weight: normal; letter-spacing: normal; line-height: 16.910400390625px; orphans: auto; text-align: start; text-indent: 0px; text-transform: none; white-space: normal; widows: auto; word-spacing: 0px; -webkit-text-stroke-width: 0px; background-color: rgb(255, 255, 255);">The
+        content of the music documents can be accessed and modified with a set
+        of API (Application Programming Interface) giving editing capabilities
+        of practically every aspect of the score. You can create a new document
+        and build its content directly by programming.</p>
+      <p style="color: rgb(0, 0, 0); font-family: Verdana, Geneva, sans-serif; font-size: 13.0080003738403px; font-style: normal; font-variant: normal; font-weight: normal; letter-spacing: normal; line-height: 16.910400390625px; orphans: auto; text-align: start; text-indent: 0px; text-transform: none; white-space: normal; widows: auto; word-spacing: 0px; -webkit-text-stroke-width: 0px; background-color: rgb(255, 255, 255);">You
+        can find more information about this music notation SDK and its music
+        data structures here:</p>
+      <p style="color: rgb(0, 0, 0); font-family: Verdana, Geneva, sans-serif; font-size: 13.0080003738403px; font-style: normal; font-variant: normal; font-weight: normal; letter-spacing: normal; line-height: 16.910400390625px; orphans: auto; text-indent: 0px; text-transform: none; white-space: normal; widows: auto; word-spacing: 0px; -webkit-text-stroke-width: 0px; text-align: center; background-color: rgb(255, 255, 255);"><a href="http://www.music-software-development.com/music-sdk.html">Music
+          Notation SDK information...</a></p>
+      <p style="color: rgb(0, 0, 0); font-family: Verdana, Geneva, sans-serif; font-size: 13.0080003738403px; font-style: normal; font-variant: normal; font-weight: normal; letter-spacing: normal; line-height: 16.910400390625px; orphans: auto; text-align: start; text-indent: 0px; text-transform: none; white-space: normal; widows: auto; word-spacing: 0px; -webkit-text-stroke-width: 0px; background-color: rgb(255, 255, 255);">In
+        any case, feel free to contact me, I would be happy to discuss these
+        music development subjects with you. You can write to me at:</p>
+      <p style="color: rgb(0, 0, 0); font-family: Verdana, Geneva, sans-serif; font-size: 13.0080003738403px; font-style: normal; font-variant: normal; font-weight: normal; letter-spacing: normal; line-height: 16.910400390625px; orphans: auto; text-indent: 0px; text-transform: none; white-space: normal; widows: auto; word-spacing: 0px; -webkit-text-stroke-width: 0px; text-align: center; background-color: rgb(255, 255, 255);">info@arpegemusic.com</p>
+      <hr style="border-style: solid; width: 500px; clear: both; color: rgb(0, 0, 0); font-family: Verdana, Geneva, sans-serif; font-size: 13.0080003738403px; font-style: normal; font-variant: normal; font-weight: normal; letter-spacing: normal; line-height: 16.910400390625px; orphans: auto; text-align: start; text-indent: 0px; text-transform: none; white-space: normal; widows: auto; word-spacing: 0px; -webkit-text-stroke-width: 0px; height: 1px; margin-left: 0px; background-color: rgb(255, 255, 255);">
+      <h3 style="font-size: 18.2112007141113px; margin: 8px 0px 14px; color: rgb(0, 0, 0); font-family: Verdana, Geneva, sans-serif; font-style: normal; font-variant: normal; letter-spacing: normal; orphans: auto; text-align: start; text-indent: 0px; text-transform: none; white-space: normal; widows: auto; word-spacing: 0px; -webkit-text-stroke-width: 0px; background-color: rgb(255, 255, 255);"><span style="color: rgb(7, 48, 171);">4 - Music Composition Models</span></h3>
+      <p style="color: rgb(0, 0, 0); font-family: Verdana, Geneva, sans-serif; font-size: 13.0080003738403px; font-style: normal; font-variant: normal; font-weight: normal; letter-spacing: normal; line-height: 16.910400390625px; orphans: auto; text-align: start; text-indent: 0px; text-transform: none; white-space: normal; widows: auto; word-spacing: 0px; -webkit-text-stroke-width: 0px; background-color: rgb(255, 255, 255);">The
+        last layer of music data structures is more abstract and is above the
+        level of single notes and MIDI messages.</p>
+      <p style="color: rgb(0, 0, 0); font-family: Verdana, Geneva, sans-serif; font-size: 13.0080003738403px; font-style: normal; font-variant: normal; font-weight: normal; letter-spacing: normal; line-height: 16.910400390625px; orphans: auto; text-align: start; text-indent: 0px; text-transform: none; white-space: normal; widows: auto; word-spacing: 0px; -webkit-text-stroke-width: 0px; background-color: rgb(255, 255, 255);">The
+        purpose here is to develop algorithms that can help the user to compose
+        his own music more intuitively.</p>
+      <p style="color: rgb(0, 0, 0); font-family: Verdana, Geneva, sans-serif; font-size: 13.0080003738403px; font-style: normal; font-variant: normal; font-weight: normal; letter-spacing: normal; line-height: 16.910400390625px; orphans: auto; text-align: start; text-indent: 0px; text-transform: none; white-space: normal; widows: auto; word-spacing: 0px; -webkit-text-stroke-width: 0px; background-color: rgb(255, 255, 255);">I
+        do NOT mean that the computer will compose for the user, which would be
+        the wrong way to look at it, as a computer can not "compose" music.</p>
+      <p style="color: rgb(0, 0, 0); font-family: Verdana, Geneva, sans-serif; font-size: 13.0080003738403px; font-style: normal; font-variant: normal; font-weight: normal; letter-spacing: normal; line-height: 16.910400390625px; orphans: auto; text-align: start; text-indent: 0px; text-transform: none; white-space: normal; widows: auto; word-spacing: 0px; -webkit-text-stroke-width: 0px; background-color: rgb(255, 255, 255);">Sure
+        the computer can generate random patterns that may look nice, but
+        composing is much more than that. It is the process by which the
+        composer will express his own feelings, emotions and ideas into a series
+        of notes and sounds that will be able to communicate and be shared by
+        the people who listen to his music.</p>
+      <p style="color: rgb(0, 0, 0); font-family: Verdana, Geneva, sans-serif; font-size: 13.0080003738403px; font-style: normal; font-variant: normal; font-weight: normal; letter-spacing: normal; line-height: 16.910400390625px; orphans: auto; text-align: start; text-indent: 0px; text-transform: none; white-space: normal; widows: auto; word-spacing: 0px; -webkit-text-stroke-width: 0px; background-color: rgb(255, 255, 255);">This
+        music data structures may be associated to methods that generate music
+        that will sound nice and that will still be the creation of the user.</p>
+      <p style="color: rgb(0, 0, 0); font-family: Verdana, Geneva, sans-serif; font-size: 13.0080003738403px; font-style: normal; font-variant: normal; font-weight: normal; letter-spacing: normal; line-height: 16.910400390625px; orphans: auto; text-align: start; text-indent: 0px; text-transform: none; white-space: normal; widows: auto; word-spacing: 0px; -webkit-text-stroke-width: 0px; background-color: rgb(255, 255, 255);">It
+        is like a piano player who plays on the piano and lets his imagination
+        run freely with his hands. In this way, the piano helps him to compose,
+        by reacting to his handling of the piano.</p>
+      <p style="color: rgb(0, 0, 0); font-family: Verdana, Geneva, sans-serif; font-size: 13.0080003738403px; font-style: normal; font-variant: normal; font-weight: normal; letter-spacing: normal; line-height: 16.910400390625px; orphans: auto; text-align: start; text-indent: 0px; text-transform: none; white-space: normal; widows: auto; word-spacing: 0px; -webkit-text-stroke-width: 0px; background-color: rgb(255, 255, 255);">But
+        nobody would accuse the piano of having made the composition, right? So
+        it is the same while composing with a computer: the computer can
+        stimulate the imagination of the user and let him become more creative
+        and compose his own music.</p>
+      <p style="color: rgb(0, 0, 0); font-family: Verdana, Geneva, sans-serif; font-size: 13.0080003738403px; font-style: normal; font-variant: normal; font-weight: normal; letter-spacing: normal; line-height: 16.910400390625px; orphans: auto; text-align: start; text-indent: 0px; text-transform: none; white-space: normal; widows: auto; word-spacing: 0px; -webkit-text-stroke-width: 0px; background-color: rgb(255, 255, 255);"><b>What
+          is needed to play the music?</b></p>
+      <p style="color: rgb(0, 0, 0); font-family: Verdana, Geneva, sans-serif; font-size: 13.0080003738403px; font-style: normal; font-variant: normal; font-weight: normal; letter-spacing: normal; line-height: 16.910400390625px; orphans: auto; text-align: start; text-indent: 0px; text-transform: none; white-space: normal; widows: auto; word-spacing: 0px; -webkit-text-stroke-width: 0px; background-color: rgb(255, 255, 255);">It
+        all depends on the algorithm and methods used. Most of the time, you can
+        directly and easily generate a MIDI sequence that will be the expression
+        intended in the music data structure of your algorithm.</p>
+      <p style="color: rgb(0, 0, 0); font-family: Verdana, Geneva, sans-serif; font-size: 13.0080003738403px; font-style: normal; font-variant: normal; font-weight: normal; letter-spacing: normal; line-height: 16.910400390625px; orphans: auto; text-align: start; text-indent: 0px; text-transform: none; white-space: normal; widows: auto; word-spacing: 0px; -webkit-text-stroke-width: 0px; background-color: rgb(255, 255, 255);">From
+        the MIDI sequence, you can also display the corresponding music notation
+        in a more human and readable form than a list of MIDI messages with
+        numbers.</p>
+      <p style="color: rgb(0, 0, 0); font-family: Verdana, Geneva, sans-serif; font-size: 13.0080003738403px; font-style: normal; font-variant: normal; font-weight: normal; letter-spacing: normal; line-height: 16.910400390625px; orphans: auto; text-align: start; text-indent: 0px; text-transform: none; white-space: normal; widows: auto; word-spacing: 0px; -webkit-text-stroke-width: 0px; background-color: rgb(255, 255, 255);"><b>Examples</b></p>
+      <p style="color: rgb(0, 0, 0); font-family: Verdana, Geneva, sans-serif; font-size: 13.0080003738403px; font-style: normal; font-variant: normal; font-weight: normal; letter-spacing: normal; line-height: 16.910400390625px; orphans: auto; text-align: start; text-indent: 0px; text-transform: none; white-space: normal; widows: auto; word-spacing: 0px; -webkit-text-stroke-width: 0px; background-color: rgb(255, 255, 255);">Let
+        us take a very simple example, an arpeggiator.</p>
+      <p style="color: rgb(0, 0, 0); font-family: Verdana, Geneva, sans-serif; font-size: 13.0080003738403px; font-style: normal; font-variant: normal; font-weight: normal; letter-spacing: normal; line-height: 16.910400390625px; orphans: auto; text-align: start; text-indent: 0px; text-transform: none; white-space: normal; widows: auto; word-spacing: 0px; -webkit-text-stroke-width: 0px; background-color: rgb(255, 255, 255);">The
+        user can define several types of arpeggios, including some random
+        factors, specify the instrument that must play them, the speed of the
+        arpeggios (quarter notes, eighth notes, triplets, ...) and the range of
+        the notes to be used.</p>
+      <p style="color: rgb(0, 0, 0); font-family: Verdana, Geneva, sans-serif; font-size: 13.0080003738403px; font-style: normal; font-variant: normal; font-weight: normal; letter-spacing: normal; line-height: 16.910400390625px; orphans: auto; text-align: start; text-indent: 0px; text-transform: none; white-space: normal; widows: auto; word-spacing: 0px; -webkit-text-stroke-width: 0px; background-color: rgb(255, 255, 255);">You
+        can define a music data structure that will contain all these parameters
+        and store them in memory or in a file as one object called an<i>arpeggiator</i>.
+        You can let the user assemble many different arpeggiator in sequence
+        and/or in parallel.</p>
+      <p style="color: rgb(0, 0, 0); font-family: Verdana, Geneva, sans-serif; font-size: 13.0080003738403px; font-style: normal; font-variant: normal; font-weight: normal; letter-spacing: normal; line-height: 16.910400390625px; orphans: auto; text-align: start; text-indent: 0px; text-transform: none; white-space: normal; widows: auto; word-spacing: 0px; -webkit-text-stroke-width: 0px; background-color: rgb(255, 255, 255);">You
+        could also define a music data structure called a<span class="Apple-converted-space">&nbsp;</span><i>chord
+          progression</i>and let the user associate it with a sequence of<span class="Apple-converted-space">&nbsp;</span><i>arpeggiators.</i></p>
+      <p style="color: rgb(0, 0, 0); font-family: Verdana, Geneva, sans-serif; font-size: 13.0080003738403px; font-style: normal; font-variant: normal; font-weight: normal; letter-spacing: normal; line-height: 16.910400390625px; orphans: auto; text-align: start; text-indent: 0px; text-transform: none; white-space: normal; widows: auto; word-spacing: 0px; -webkit-text-stroke-width: 0px; background-color: rgb(255, 255, 255);">Your
+        program must then be able, starting from this array of music data
+        structures called<span class="Apple-converted-space">&nbsp;</span><i>Arpeggiators,<span class="Apple-converted-space">&nbsp;</span></i>to generate the
+        sequence of notes according to the chord progression so as to send the
+        correct messages to the MIDI interface and hear the resulting music.</p>
+      <p style="color: rgb(0, 0, 0); font-family: Verdana, Geneva, sans-serif; font-size: 13.0080003738403px; font-style: normal; font-variant: normal; font-weight: normal; letter-spacing: normal; line-height: 16.910400390625px; orphans: auto; text-align: start; text-indent: 0px; text-transform: none; white-space: normal; widows: auto; word-spacing: 0px; -webkit-text-stroke-width: 0px; background-color: rgb(255, 255, 255);">The
+        Pizzicato music software offers several examples of this kind of tools,
+        each time around a specific customized music data structure, like for
+        instance:</p>
+      <ul style="list-style-type: disc; margin: 0px 0px 8px 10px; padding-left: 40px; color: rgb(0, 0, 0); font-family: Verdana, Geneva, sans-serif; font-size: 13.0080003738403px; font-style: normal; font-variant: normal; font-weight: normal; letter-spacing: normal; line-height: 16.910400390625px; orphans: auto; text-align: start; text-indent: 0px; text-transform: none; white-space: normal; widows: auto; word-spacing: 0px; -webkit-text-stroke-width: 0px; background-color: rgb(255, 255, 255);">
+        <li style="margin: 0px 0px 8px 5px;">The<span class="Apple-converted-space">&nbsp;</span><b>music
+            vectors</b>, which is sort of vectorial curve that determines the
+          general shape of a melody and that can be applied through a specific
+          chord progression. See the details by<a href="http://www.arpegemusic.com/manual36/EN855.htm">clicking
+            here</a>.</li>
+        <li style="margin: 0px 0px 8px 5px;">The<span class="Apple-converted-space">&nbsp;</span><b>music
+            generators</b>, which is a sort of hierarchical container with
+          combinatory behaviour for notes, rhythms and chords. See the details
+          by<span class="Apple-converted-space">&nbsp;</span><a href="http://www.arpegemusic.com/manual36/EN826.htm">clicking
+            here</a>.</li>
+        <li style="margin: 0px 0px 8px 5px;">The<span class="Apple-converted-space">&nbsp;</span><b>smart
+            link function</b>, that enables you to copy/paste independent
+          rhythms, notes and chords together. See the details by<span class="Apple-converted-space">&nbsp;</span><a href="http://www.arpegemusic.com/manual36/EN800.htm">clicking here</a>.</li>
+        <li style="margin: 0px 0px 8px 5px;">The<span class="Apple-converted-space">&nbsp;</span><b>harmonic
+            space</b>, which enables you to intuitively design chord
+          progressions based on several factors. See the details by<a href="http://www.arpegemusic.com/manual36/EN822.htm">clicking
+            here</a>.</li>
+      </ul>
+      <hr style="border-style: solid; width: 500px; clear: both; color: rgb(0, 0, 0); font-family: Verdana, Geneva, sans-serif; font-size: 13.0080003738403px; font-style: normal; font-variant: normal; font-weight: normal; letter-spacing: normal; line-height: 16.910400390625px; orphans: auto; text-align: start; text-indent: 0px; text-transform: none; white-space: normal; widows: auto; word-spacing: 0px; -webkit-text-stroke-width: 0px; height: 1px; margin-left: 0px; background-color: rgb(255, 255, 255);">
+      <h3 style="font-size: 18.2112007141113px; margin: 8px 0px 14px; color: rgb(0, 0, 0); font-family: Verdana, Geneva, sans-serif; font-style: normal; font-variant: normal; letter-spacing: normal; orphans: auto; text-align: start; text-indent: 0px; text-transform: none; white-space: normal; widows: auto; word-spacing: 0px; -webkit-text-stroke-width: 0px; background-color: rgb(255, 255, 255);"><span style="color: rgb(7, 48, 171);">Conclusion</span></h3>
+      <p style="color: rgb(0, 0, 0); font-family: Verdana, Geneva, sans-serif; font-size: 13.0080003738403px; font-style: normal; font-variant: normal; font-weight: normal; letter-spacing: normal; line-height: 16.910400390625px; orphans: auto; text-align: start; text-indent: 0px; text-transform: none; white-space: normal; widows: auto; word-spacing: 0px; -webkit-text-stroke-width: 0px; background-color: rgb(255, 255, 255);">The
+        four layers of music data structures explained here offer a wide range
+        of possible applications.</p>
+      <p style="color: rgb(0, 0, 0); font-family: Verdana, Geneva, sans-serif; font-size: 13.0080003738403px; font-style: normal; font-variant: normal; font-weight: normal; letter-spacing: normal; line-height: 16.910400390625px; orphans: auto; text-align: start; text-indent: 0px; text-transform: none; white-space: normal; widows: auto; word-spacing: 0px; -webkit-text-stroke-width: 0px; background-color: rgb(255, 255, 255);">According
+        to your software specification, you may need to use only one of them or
+        use several or all of them.</p>
+      <p style="color: rgb(0, 0, 0); font-family: Verdana, Geneva, sans-serif; font-size: 13.0080003738403px; font-style: normal; font-variant: normal; font-weight: normal; letter-spacing: normal; line-height: 16.910400390625px; orphans: auto; text-align: start; text-indent: 0px; text-transform: none; white-space: normal; widows: auto; word-spacing: 0px; -webkit-text-stroke-width: 0px; background-color: rgb(255, 255, 255);">I
+        wish you a nice time developing music software.</p>
+      <p style="color: rgb(0, 0, 0); font-family: Verdana, Geneva, sans-serif; font-size: 13.0080003738403px; font-style: normal; font-variant: normal; font-weight: normal; letter-spacing: normal; line-height: 16.910400390625px; orphans: auto; text-align: start; text-indent: 0px; text-transform: none; white-space: normal; widows: auto; word-spacing: 0px; -webkit-text-stroke-width: 0px; background-color: rgb(255, 255, 255);">If
+        you have any question about this article, feel free to contact me at :</p>
+      <p style="color: rgb(0, 0, 0); font-family: Verdana, Geneva, sans-serif; font-size: 13.0080003738403px; font-style: normal; font-variant: normal; font-weight: normal; letter-spacing: normal; line-height: 16.910400390625px; orphans: auto; text-indent: 0px; text-transform: none; white-space: normal; widows: auto; word-spacing: 0px; -webkit-text-stroke-width: 0px; text-align: center; background-color: rgb(255, 255, 255);">info@arpegemusic.com</p>
+      <p style="color: rgb(0, 0, 0); font-family: Verdana, Geneva, sans-serif; font-size: 13.0080003738403px; font-style: normal; font-variant: normal; font-weight: normal; letter-spacing: normal; line-height: 16.910400390625px; orphans: auto; text-align: start; text-indent: 0px; text-transform: none; white-space: normal; widows: auto; word-spacing: 0px; -webkit-text-stroke-width: 0px; background-color: rgb(255, 255, 255);">Musically
+        yours,</p>
+      <p style="color: rgb(0, 0, 0); font-family: Verdana, Geneva, sans-serif; font-size: 13.0080003738403px; font-style: normal; font-variant: normal; font-weight: normal; letter-spacing: normal; line-height: 16.910400390625px; orphans: auto; text-align: start; text-indent: 0px; text-transform: none; white-space: normal; widows: auto; word-spacing: 0px; -webkit-text-stroke-width: 0px; background-color: rgb(255, 255, 255);">Dominique
+        Vandenneucker<br>
+        Music Software Designer<span class="Apple-converted-space">&nbsp;</span><br>
+        since 1992 at Arpege Music</p>
+      <div class="ImageBlock ImageBlockLeft" style="overflow: hidden; max-width: 100%; float: left; text-align: center; color: rgb(0, 0, 0); font-family: Verdana, Geneva, sans-serif; font-size: 13.0080003738403px; font-style: normal; font-variant: normal; font-weight: normal; letter-spacing: normal; line-height: 16.910400390625px; orphans: auto; text-indent: 0px; text-transform: none; white-space: normal; widows: auto; word-spacing: 0px; -webkit-text-stroke-width: 0px; background-color: rgb(255, 255, 255);"><img src="Music%20data%20structures%20for%20music%20software%20development_files/domi-1.jpg" style="margin: 0px 5px 0px 0px; max-width: none;" width="116"></div>
+      <p style="color: rgb(0, 0, 0); font-family: Verdana, Geneva, sans-serif; font-size: 13.0080003738403px; font-style: normal; font-variant: normal; font-weight: normal; letter-spacing: normal; line-height: 16.910400390625px; orphans: auto; text-align: start; text-indent: 0px; text-transform: none; white-space: normal; widows: auto; word-spacing: 0px; -webkit-text-stroke-width: 0px; background-color: rgb(255, 255, 255);"><a href="http://www.music-software-development.com/index.html"><br>
+        </a></p>
+      <p style="color: rgb(0, 0, 0); font-family: Verdana, Geneva, sans-serif; font-size: 13.0080003738403px; font-style: normal; font-variant: normal; font-weight: normal; letter-spacing: normal; line-height: 16.910400390625px; orphans: auto; text-align: start; text-indent: 0px; text-transform: none; white-space: normal; widows: auto; word-spacing: 0px; -webkit-text-stroke-width: 0px; background-color: rgb(255, 255, 255);"><a href="http://www.music-software-development.com/index.html"><br>
+        </a></p>
+      <p style="color: rgb(0, 0, 0); font-family: Verdana, Geneva, sans-serif; font-size: 13.0080003738403px; font-style: normal; font-variant: normal; font-weight: normal; letter-spacing: normal; line-height: 16.910400390625px; orphans: auto; text-align: start; text-indent: 0px; text-transform: none; white-space: normal; widows: auto; word-spacing: 0px; -webkit-text-stroke-width: 0px; background-color: rgb(255, 255, 255);"><a href="http://www.music-software-development.com/index.html"><br>
+        </a></p>
+      <p style="color: rgb(0, 0, 0); font-family: Verdana, Geneva, sans-serif; font-size: 13.0080003738403px; font-style: normal; font-variant: normal; font-weight: normal; letter-spacing: normal; line-height: 16.910400390625px; orphans: auto; text-align: start; text-indent: 0px; text-transform: none; white-space: normal; widows: auto; word-spacing: 0px; -webkit-text-stroke-width: 0px; background-color: rgb(255, 255, 255);"><a href="http://www.music-software-development.com/index.html"><br>
+        </a></p>
+      <p style="color: rgb(0, 0, 0); font-family: Verdana, Geneva, sans-serif; font-size: 13.0080003738403px; font-style: normal; font-variant: normal; font-weight: normal; letter-spacing: normal; line-height: 16.910400390625px; orphans: auto; text-align: start; text-indent: 0px; text-transform: none; white-space: normal; widows: auto; word-spacing: 0px; -webkit-text-stroke-width: 0px; background-color: rgb(255, 255, 255);"><a href="http://www.music-software-development.com/index.html">Back from
+          "Music Data Structures" page to "Music Software Development" page</a></p>
+    </div>
+  </div>
+        </div>
+        <div id="area-column-33">
+          <div id="area-column-content"></div>
+        </div>
+      </div>
+      <div id="bar3d"> </div>
+      <div id="area-bottom" bgcolor="#FFFFFF">
+    <div style="text-align: center;"><em><br>
+        <br>
+        <span style="color: #3333ff;">Copyright 2012 - Arpege Music - Dominique
+          Vandenneucker</span></em></div>
+  </div>
+      <div id="bar3d"> </div>
+    </div>
+    
+  
+<div id="ghostery-tracker-tally" class="ghostery-bottom ghostery-right ghostery-none ghostery-collapsed"><div id="ghostery-box"><div id="ghostery-count" style="background: rgba(0, 0, 0, 0) none repeat scroll 0% 0%; color: rgb(255, 255, 255);">0</div><div id="ghostery-pb-icons-container"><span id="ghostery-breaking-tracker" class="ghostery-pb-tracker" title="Tracker Pagina Orfana" style="background: rgba(0, 0, 0, 0) url(&quot;data:image/svg+xml;base64,PD94bWwgdmVyc2lvbj0iMS4wIiBlbmNvZGluZz0iVVRGLTgiIHN0YW5kYWxvbmU9Im5vIj8+DQo8c3ZnIHdpZHRoPSIxOHB4IiBoZWlnaHQ9IjE4cHgiIHZpZXdCb3g9IjAgMCAxOCAxOCIgdmVyc2lvbj0iMS4xIiB4bWxucz0iaHR0cDovL3d3dy53My5vcmcvMjAwMC9zdmciIHhtbG5zOnhsaW5rPSJodHRwOi8vd3d3LnczLm9yZy8xOTk5L3hsaW5rIj4NCiAgICA8IS0tIEdlbmVyYXRvcjogU2tldGNoIDQwICgzMzc2MikgLSBodHRwOi8vd3d3LmJvaGVtaWFuY29kaW5nLmNvbS9za2V0Y2ggLS0+DQogICAgPHRpdGxlPmJyZWFraW5ncGFnZTwvdGl0bGU+DQogICAgPGRlc2M+Q3JlYXRlZCB3aXRoIFNrZXRjaC48L2Rlc2M+DQogICAgPGRlZnM+PC9kZWZzPg0KICAgIDxnIGlkPSJQdXJwbGUtQm94IiBzdHJva2U9Im5vbmUiIHN0cm9rZS13aWR0aD0iMSIgZmlsbD0ibm9uZSIgZmlsbC1ydWxlPSJldmVub2RkIj4NCiAgICAgICAgPGcgdHJhbnNmb3JtPSJ0cmFuc2xhdGUoLTQxNi4wMDAwMDAsIC00NTMuMDAwMDAwKSIgaWQ9ImJhbSEtYnJlYWtpbmctdGhlLXBhZ2UtY29weS0yIiBmaWxsPSIjRkNCQTMzIj4NCiAgICAgICAgICAgIDxnIHRyYW5zZm9ybT0idHJhbnNsYXRlKDQxNi4wMDAwMDAsIDQ1My4wMDAwMDApIj4NCiAgICAgICAgICAgICAgICA8cGF0aCBkPSJNOSwwLjE5NTY1MjE3NCBDNC4xNDQzNjAyNSwwLjE5NTY1MjE3NCAwLjE5NTY1MjE3NCw0LjE0NDM2MDI1IDAuMTk1NjUyMTc0LDkgQzAuMTk1NjUyMTc0LDEzLjg1NTYzOTggNC4xNDQzNjAyNSwxNy44MDQzNDc4IDksMTcuODA0MzQ3OCBDMTMuODU1NjM5OCwxNy44MDQzNDc4IDE3LjgwNDM0NzgsMTMuODU1NjM5OCAxNy44MDQzNDc4LDkgQzE3LjgwNDM0NzgsNC4xNDQzNjAyNSAxMy44NTU2Mzk4LDAuMTk1NjUyMTc0IDksMC4xOTU2NTIxNzQgWiBNMTEuNDg1NTg5OSwxMy40MTA0NDQxIEwxMS4wNzcwNzk4LDEzLjAyMDY3NjggTDEyLjEwMDQ3MTEsMTIuMjE2OTU3OSBMMTEuMDQ2MjQ1MSwxMi4yMTY5NTc5IEwxMS4yMzQ0NzgxLDEwLjg3MDcwODcgTDkuODAzMTgxNDIsMTEuNzk1NzUxMiBMOS40MDMzMzczNCw5LjM0NTA5MzkyIEw4LjY5NDc0MjY5LDExLjA4NjU1MTkgTDcuMzI1NzIwMDksMTAuMTcwOTgxNSBMNy43NTI1Njk3NywxMS45Mjk1NyBMNi41NTQyNDY3MywxMi4zMTE0Nzc1IEw3Ljg4MjM1Nzg3LDEzLjQxMDQ0NDEgTDExLjQ4NTU4OTksMTMuNDEwNDQ0MSBaIE02LjcxNTY3NTcyLDEzLjQxMDQ0NDEgTDUuMDI4NjMxOTcsMTIuMDA2NzU3NiBMNi44Njg0Mzg3MywxMS40MzE5ODE4IEw2LjE2Mzg3NDc3LDguNDg4NTczMDkgTDguMzQ5MzEyODgsOS45NTk5NzUxMiBMOS43MDQwMjY1NCw2LjYxMjQ5MDE1IEwxMC4zNTAzNDcxLDEwLjU1NjcxODIgTDEyLjE5NDk5MDcsOS4zNzY1MzMyOCBMMTEuODk4OTM2OCwxMS40NzY5MjM5IEwxNC4yNjI5MzQzLDExLjQ3NjkyMzkgTDEyLjIxMjkyNzIsMTMuMDc4OTIwMiBMMTIuNTY3MjI0NSwxMy40MTA0NDQxIEwxNS4zMzEyNjc3LDEzLjQxMDQ0NDEgTDE0LjQ3Mzk0MDcsMTIuNTk4NjYzOSBMMTcuMjA3MzUwNiwxMC40NjY4MzM5IEwxMy4wNjA3ODIxLDEwLjQ2NjgzMzkgTDEzLjQ5NjI5NzcsNy4zNDg2OTUgTDExLjA5OTg1MzIsOC44Nzg5NDUwNSBMMTAuMTIxMjAyNiwyLjg5Mjc3MTMgTDcuODc3NzIyNTgsOC40MjU0OTI4NSBMNC41NzA1NDQ0Nyw2LjIwMzk4MDEgTDUuNjY1NDgwNDEsMTAuNzUwMzkyNyBMMi45NTEwMTQ3MiwxMS41OTgyNDc2IEw1LjEzNjQ1MjgzLDEzLjQxMDQ0NDEgTDYuNzE1Njc1NzIsMTMuNDEwNDQ0MSBaIiBpZD0iYnJlYWtpbmdwYWdlIj48L3BhdGg+DQogICAgICAgICAgICA8L2c+DQogICAgICAgIDwvZz4NCiAgICA8L2c+DQo8L3N2Zz4=&quot;) repeat scroll 0% 0%; opacity: 0.5;"></span><span id="ghostery-slow-tracker" class="ghostery-pb-tracker" title="Tracker Lenti" style="background: rgba(0, 0, 0, 0) url(&quot;data:image/svg+xml;base64,PD94bWwgdmVyc2lvbj0iMS4wIiBlbmNvZGluZz0iVVRGLTgiIHN0YW5kYWxvbmU9Im5vIj8+DQo8c3ZnIHdpZHRoPSIxN3B4IiBoZWlnaHQ9IjE3cHgiIHZpZXdCb3g9IjAgMCAxNyAxNyIgdmVyc2lvbj0iMS4xIiB4bWxucz0iaHR0cDovL3d3dy53My5vcmcvMjAwMC9zdmciIHhtbG5zOnhsaW5rPSJodHRwOi8vd3d3LnczLm9yZy8xOTk5L3hsaW5rIj4NCiAgICA8IS0tIEdlbmVyYXRvcjogU2tldGNoIDQwICgzMzc2MikgLSBodHRwOi8vd3d3LmJvaGVtaWFuY29kaW5nLmNvbS9za2V0Y2ggLS0+DQogICAgPHRpdGxlPnNsb3d0cmFja2VyczwvdGl0bGU+DQogICAgPGRlc2M+Q3JlYXRlZCB3aXRoIFNrZXRjaC48L2Rlc2M+DQogICAgPGRlZnM+PC9kZWZzPg0KICAgIDxnIGlkPSJQdXJwbGUtQm94IiBzdHJva2U9Im5vbmUiIHN0cm9rZS13aWR0aD0iMSIgZmlsbD0ibm9uZSIgZmlsbC1ydWxlPSJldmVub2RkIj4NCiAgICAgICAgPGcgdHJhbnNmb3JtPSJ0cmFuc2xhdGUoLTM5NS4wMDAwMDAsIC00NTQuMDAwMDAwKSIgaWQ9InNsb3d0cmFja2VycyIgZmlsbD0iI0ZDQkEzMyI+DQogICAgICAgICAgICA8cGF0aCBkPSJNNDAzLjUsNDU0IEMzOTguODEyMjEsNDU0IDM5NSw0NTcuODEyMjEgMzk1LDQ2Mi41IEMzOTUsNDY3LjE4Nzc5IDM5OC44MTIyMSw0NzEgNDAzLjUsNDcxIEM0MDguMTg3NzksNDcxIDQxMiw0NjcuMTg3NzkgNDEyLDQ2Mi41IEM0MTIsNDU3LjgxMjIxIDQwOC4xODc3OSw0NTQgNDAzLjUsNDU0IFogTTQwOS42MDk1ODQsNDY1LjE3ODY1NCBDNDA5LjUzMDI1OSw0NjUuMTU0MDkgNDA4LjY3NzI4Myw0NjQuNzQ2NDIgNDA3LjU2MTA5MSw0NjQuMzYyNjM3IEM0MDguNDg0Mzc4LDQ2My43NDU2MSA0MDkuMDk0NDE4LDQ2Mi42OTM2NDUgNDA5LjA5NDQxOCw0NjEuNTAxNzMzIEM0MDkuMDk0NDE4LDQ1OS42MDU1ODEgNDA3LjU1MTQwMSw0NTguMDYyMzM4IDQwNS42NTUyNDksNDU4LjA2MjMzOCBDNDAzLjc1OTA5Nyw0NTguMDYyMzM4IDQwMi4yMTU4NTQsNDU5LjYwNTU4MSA0MDIuMjE1ODU0LDQ2MS41MDE3MzMgQzQwMi4yMTU4NTQsNDYyLjA0OTM1IDQwMi4zNDUyMDgsNDYyLjU2Njc2OSA0MDIuNTczMjY5LDQ2My4wMjY0OTcgQzQwMi43ODgwMzQsNDYzLjA2ODYzOCA0MDMuMzQ0NDQsNDYzLjE3NTIzMiA0MDQuMjIzNzgyLDQ2My4zMjM5NjggQzQwNS4yMDQ1MzUsNDYzLjQ5MDI4MSA0MDUuODUyNDM2LDQ2My4zNTY0MTkgNDA2LjM5MTAzOSw0NjIuODc2NjM0IEM0MDYuNzI4MTcyLDQ2Mi41NzY0NTkgNDA2LjkyODA2NCw0NjIuMTYzNjA2IDQwNi45NTM1MjksNDYxLjcxMzc5NCBDNDA2Ljk4MDEyMSw0NjEuMjYzOTgxIDQwNi44Mjk1ODMsNDYwLjgyOTk0NCA0MDYuNTI5NDA4LDQ2MC40OTM3MTIgQzQwNi4wNDY5MTksNDU5Ljk1MjQwNSA0MDUuMjE1MTI3LDQ1OS45MDM5NTMgNDA0LjY3MjY5Myw0NjAuMzg1NTQxIEM0MDQuMjM5NTU3LDQ2MC43NzExMjYgNDA0LjE4NTAyMSw0NjEuNDQ0NDkyIDQwNC41NTIxMjcsNDYxLjg1NzM0NiBDNDA0Ljg0MDEzMyw0NjIuMTgwNTA3IDQwNS4zNjk5NDcsNDYyLjIxNzQ2NiA0MDUuNjg2Nzk5LDQ2MS45MzU3NyBDNDA1LjgwMzk4NCw0NjEuODMxODggNDA1Ljg3MzM5NCw0NjEuNjkyODM1IDQwNS44ODA2MDYsNDYxLjU0NDc3NiBDNDA1Ljg4NjY5LDQ2MS40MjQyMSA0MDUuODUwNjMzLDQ2MS4zMTA2MyA0MDUuNzgwOTk4LDQ2MS4yMzQwMDkgQzQwNS43MTg1NzQsNDYxLjE2NTUgNDA1LjYxOTE5Miw0NjEuMTI3NjQxIDQwNS41MTY4OCw0NjEuMTI4NTQyIEM0MDUuNDI5ODkyLDQ2MS4xMzEwMjEgNDA1LjMxNzIxNCw0NjEuMTY1NSA0MDUuMjQ0MTk4LDQ2MS4yMzc2MTUgQzQwNS4yMjYzOTUsNDYxLjI1NDI5MSA0MDUuMjA0NTM1LDQ2MS4yNjQ4ODMgNDA1LjE3OTc0Niw0NjEuMjY0ODgzIEM0MDUuMTI2MTExLDQ2MS4yNjQ4ODMgNDA1LjA4MzA2OCw0NjEuMjE2NDMxIDQwNS4wODMwNjgsNDYxLjE1NzYxMyBDNDA1LjA4MzA2OCw0NjEuMTIxMzMxIDQwNS4wOTc5NDEsNDYxLjA5NDk2NCA0MDUuMTE2NDIxLDQ2MS4wNjk0OTggQzQwNS4yMjYzOTUsNDYwLjkxODk2IDQwNS4zODE0NCw0NjAuODMxNzQ3IDQwNS41MzUzNTksNDYwLjgxODY3NiBDNDA1Ljc0NDAzOSw0NjAuODAxMDk5IDQwNS45MTMwNTcsNDYwLjg2MDgxOCA0MDYuMDQ2OTE5LDQ2MS4wMDc3NTEgQzQwNi4xNzk4NzksNDYxLjE1NDAwNyA0MDYuMjQ5Mjg5LDQ2MS4zNDg0OSA0MDYuMjM3MTIsNDYxLjU2MzI1NSBDNDA2LjIyMzgyNCw0NjEuODA2MTkgNDA2LjExMjk0OCw0NjIuMDMyNDQ4IDQwNS45MjM2NDksNDYyLjIwMDU2NCBDNDA1LjQ1NzE2LDQ2Mi42MTYxMjIgNDA0LjcwNzE3Myw0NjIuNTY2MDkzIDQwNC4yODU1Myw0NjIuMDkzMjk0IEM0MDMuNzg5NzQ1LDQ2MS41MzU5ODcgNDAzLjg1ODQ3OSw0NjAuNjMyMDgxIDQwNC40MzUxNjcsNDYwLjExNzgxNyBDNDA1LjEyMzQwNyw0NTkuNTA1Mjk3IDQwNi4xODI1ODQsNDU5LjU2NjgyIDQwNi43OTQyMDIsNDYwLjI1NTI4NCBDNDA3LjE1NzAyNiw0NjAuNjYyNzMgNDA3LjM0MDAxNiw0NjEuMTg4MjYyIDQwNy4zMDg0NjYsNDYxLjczMzE3NCBDNDA3LjI3NjY5MSw0NjIuMjc4OTg4IDQwNy4wMzQ2NTgsNDYyLjc3OTA1NSA0MDYuNjI2OTg3LDQ2My4xNDE2NTQgQzQwNi4xNjgzODYsNDYzLjU1MDIyNiA0MDUuNjMyMjYyLDQ2My43NDY1MTIgNDA0Ljk0NjUwMiw0NjMuNzQ2NTEyIEM0MDQuNzA1MzcsNDYzLjc0NjUxMiA0MDQuNDQ0ODU3LDQ2My43MjE3MjIgNDA0LjE2MzE2Miw0NjMuNjc0Mzk3IEM0MDMuMTkyMDk5LDQ2My41MDk2NjIgNDAyLjE1NTAwNyw0NjMuMzI0ODY5IDQwMi4wMTU5NjIsNDYzLjMwNTQ4OCBDNDAxLjMxNzEzMSw0NjMuMjEyMTkxIDQwMC43MzYxNjEsNDYyLjczNzU4OSA0MDAuNzE3NjgyLDQ2Mi4wMzk2NTkgTDQwMC44OTQ1ODcsNDU4Ljk4NzY1MyBDNDAwLjg5NDU4Nyw0NTguNzkxMzY3IDQwMC43MzUyNiw0NTguNjMxMTM4IDQwMC41MzgwNzIsNDU4LjYzMTEzOCBDNDAwLjM0MDg4NSw0NTguNjMxMTM4IDQwMC4xODE1NTgsNDU4Ljc5MDQ2NSA0MDAuMTgxNTU4LDQ1OC45ODc2NTMgQzQwMC4xODE1NTgsNDU4Ljk4NzY1MyA0MDAuMjg1NDQ3LDQ2MC44NDE0MzcgNDAwLjI5NzYxNyw0NjEuMDc1NTgzIEM0MDAuMzIwNjAzLDQ2MS41MjAyMTIgMzk5LjkxMTEzLDQ2MS44NzY3MjYgMzk5LjQ2MDQxNiw0NjEuODc2NzI2IEMzOTguOTk4NDM1LDQ2MS44NzY3MjYgMzk4LjU4NzE1OSw0NjEuNTAwODMxIDM5OC42MjM0NDEsNDYxLjAzOTUyNiBDMzk4LjY0MzQ5OCw0NjAuNzg0MTk3IDM5OC42NjQ2ODIsNDYwLjUyMDA3OSAzOTguNjg1ODY1LDQ2MC4yNzI4NjIgTDM5OC43NTk3ODIsNDU5LjAwOTUxMiBDMzk4Ljc1OTc4Miw0NTguODEzMjI2IDM5OC42MDA0NTUsNDU4LjY1Mjk5OCAzOTguNDAzMjY4LDQ1OC42NTI5OTggQzM5OC4yMDYwOCw0NTguNjUyOTk4IDM5OC4wNDY3NTMsNDU4LjgxMjMyNSAzOTguMDQ2NzUzLDQ1OS4wMDk1MTIgTDM5OC4yMjAyNzgsNDYxLjk5OTk5NyBMMzk4LjIyMDI3OCw0NjIuMDA1MTggQzM5OC4yMjAyNzgsNDY0LjA5NzYxNyAzOTkuNDE3MzczLDQ2NS44MDI4OTIgNDAxLjUxMDcxMiw0NjUuODAxMDg5IEM0MDMuNjIyNTMxLDQ2NS43OTgzODUgNDA5LjYwODY4Myw0NjUuODAxMDg5IDQwOS42MDg2ODMsNDY1LjgwMTA4OSBDNDA5Ljc4MTA4MSw0NjUuODAxMDg5IDQwOS45MjAzNTEsNDY1LjY2MTE0MyA0MDkuOTIwMzUxLDQ2NS40ODk0MjEgQzQwOS45MjAzNTEsNDY1LjMxNzAyMyA0MDkuNzczMTkzLDQ2NS4yMzA3MTEgNDA5LjYwOTU4NCw0NjUuMTc4NjU0IFoiPjwvcGF0aD4NCiAgICAgICAgPC9nPg0KICAgIDwvZz4NCjwvc3ZnPg==&quot;) repeat scroll 0% 0%; opacity: 0.5;"></span><span id="ghostery-non-secure-tracker" class="ghostery-pb-tracker" title="Tracker non sicuri" style="background: rgba(0, 0, 0, 0) url(&quot;data:image/svg+xml;base64,PD94bWwgdmVyc2lvbj0iMS4wIiBlbmNvZGluZz0iVVRGLTgiIHN0YW5kYWxvbmU9Im5vIj8+DQo8c3ZnIHdpZHRoPSIxOHB4IiBoZWlnaHQ9IjE4cHgiIHZpZXdCb3g9IjAgMCAxOCAxOCIgdmVyc2lvbj0iMS4xIiB4bWxucz0iaHR0cDovL3d3dy53My5vcmcvMjAwMC9zdmciIHhtbG5zOnhsaW5rPSJodHRwOi8vd3d3LnczLm9yZy8xOTk5L3hsaW5rIj4NCiAgICA8IS0tIEdlbmVyYXRvcjogU2tldGNoIDQwICgzMzc2MikgLSBodHRwOi8vd3d3LmJvaGVtaWFuY29kaW5nLmNvbS9za2V0Y2ggLS0+DQogICAgPHRpdGxlPndhcm5pbmc8L3RpdGxlPg0KICAgIDxkZXNjPkNyZWF0ZWQgd2l0aCBTa2V0Y2guPC9kZXNjPg0KICAgIDxkZWZzPjwvZGVmcz4NCiAgICA8ZyBpZD0iUHVycGxlLUJveCIgc3Ryb2tlPSJub25lIiBzdHJva2Utd2lkdGg9IjEiIGZpbGw9Im5vbmUiIGZpbGwtcnVsZT0iZXZlbm9kZCI+DQogICAgICAgIDxnIHRyYW5zZm9ybT0idHJhbnNsYXRlKC0zNzMuMDAwMDAwLCAtNDUzLjAwMDAwMCkiIGlkPSJ3YXJuaW5nIiBmaWxsPSIjRkVCMDMyIj4NCiAgICAgICAgICAgIDxnIHRyYW5zZm9ybT0idHJhbnNsYXRlKDM3My4wMDAwMDAsIDQ1My4wMDAwMDApIj4NCiAgICAgICAgICAgICAgICA8cGF0aCBkPSJNOSwwLjYzMDQzNDc4MyBDNC4zODQxNDQ5MywwLjYzMDQzNDc4MyAwLjYzMDQzNDc4Myw0LjM4NDE0NDkzIDAuNjMwNDM0NzgzLDkgQzAuNjMwNDM0NzgzLDEzLjYxNTg1NTEgNC4zODQxNDQ5MywxNy4zNjk1NjUyIDksMTcuMzY5NTY1MiBDMTMuNjE1ODU1MSwxNy4zNjk1NjUyIDE3LjM2OTU2NTIsMTMuNjE1ODU1MSAxNy4zNjk1NjUyLDkgQzE3LjM2OTU2NTIsNC4zODQxNDQ5MyAxMy42MTU4NTUxLDAuNjMwNDM0NzgzIDksMC42MzA0MzQ3ODMgWiBNNC42NDI5MjgxMSwxMS43ODk4NTUxIEM1LjI1MDQxMTY1LDExLjc4OTg1NTEgNS43NTY5NTIzNCwxMS4zNjA3NTY3IDUuODc4NzE2OTMsMTAuODgxMzY5NSBDNi4wMDA0ODE1MiwxMS4zNjEyNDM3IDYuNTA3MDIyMjIsMTEuNzIzNzM2OSA3LjExNDM4NCwxMS43MjM3MzY5IEM3LjcyNDE4MTA2LDExLjcyMzczNjkgOC4yMzI2Njk5OSwxMS4zNjUwMTg0IDguMzUxNTEyMjMsMTAuODgyNzA4OSBDOC40NzA5NjMzLDExLjM2NTAxODQgOC45Nzk0NTIyMywxMS43MzY1MjIyIDkuNTg4NzYyMjQsMTEuNzM2NTIyMiBDMTAuMTk0NjYyOCwxMS43MzY1MjIyIDEwLjcwMTIwMzUsMTEuMzk0OTcyNSAxMC44MjM0NTUyLDEwLjkxNjU1OTQgQzEwLjk0NTcwNjgsMTEuMzk0OTcyNSAxMS40NTIyNDc1LDExLjc4OTM2OCAxMi4wNTgyNjk5LDExLjc4OTM2OCBDMTIuMzUzNjcwOCwxMS43ODkzNjggMTIuNjI0NzE4OCwxMS42OTkzODQgMTIuODM5NzU1LDExLjU1OTU5ODIgQzExLjAwOTUxMTUsOC43MTgwOTk3NSAxMi4xNDUzMzE2LDQuMTM3NjgxMTYgMTIuMTQ1MzMxNiw0LjEzNzY4MTE2IEM2Ljk0NjQ3MDYzLDUuMjMxNjE0MjQgNC42NjU4MTk4NSwxMC4xMDAzNzE0IDQuMDU3OTcxMDEsMTEuNjY2MTQyMiBDNC4yMzI5NDY3MywxMS43NDMyMTkyIDQuNDMxNzg4MzEsMTEuNzg5ODU1MSA0LjY0MjkyODExLDExLjc4OTg1NTEgWiIgaWQ9Indhcm5pbmd0cmFja2VycyI+PC9wYXRoPg0KICAgICAgICAgICAgPC9nPg0KICAgICAgICA8L2c+DQogICAgPC9nPg0KPC9zdmc+&quot;) repeat scroll 0% 0%; opacity: 0.5;"></span></div><div id="ghostery-title" style="left: 25px;">Tracker</div><div id="ghostery-minimize"><span id="ghostery-minimize-icon"></span></div><span id="ghostery-close" style="background: rgba(0, 0, 0, 0) url(&quot;data:image/svg+xml;base64,PD94bWwgdmVyc2lvbj0iMS4wIiBlbmNvZGluZz0iVVRGLTgiIHN0YW5kYWxvbmU9Im5vIj8+DQo8c3ZnIHdpZHRoPSIxNXB4IiBoZWlnaHQ9IjE1cHgiIHZpZXdCb3g9IjAgMCAxNSAxNSIgdmVyc2lvbj0iMS4xIiB4bWxucz0iaHR0cDovL3d3dy53My5vcmcvMjAwMC9zdmciIHhtbG5zOnhsaW5rPSJodHRwOi8vd3d3LnczLm9yZy8xOTk5L3hsaW5rIj4NCiAgICA8IS0tIEdlbmVyYXRvcjogU2tldGNoIDMuNy4yICgyODI3NikgLSBodHRwOi8vd3d3LmJvaGVtaWFuY29kaW5nLmNvbS9za2V0Y2ggLS0+DQogICAgPHRpdGxlPmNvbGxhcHNlIGNvcHkgMjwvdGl0bGU+DQogICAgPGRlc2M+Q3JlYXRlZCB3aXRoIFNrZXRjaC48L2Rlc2M+DQogICAgPGRlZnM+PC9kZWZzPg0KICAgIDxnIGlkPSJQdXJwbGUtQm94IiBzdHJva2U9Im5vbmUiIHN0cm9rZS13aWR0aD0iMSIgZmlsbD0ibm9uZSIgZmlsbC1ydWxlPSJldmVub2RkIj4NCiAgICAgICAgPGcgaWQ9ImNvbGxhcHNlLWNvcHktMiI+DQogICAgICAgICAgICA8Y2lyY2xlIGlkPSJPdmFsLTMxNSIgZmlsbC1vcGFjaXR5PSIwLjI3MDE1Mzk4NiIgZmlsbD0iI0Q4RDhEOCIgY3g9IjcuNSIgY3k9IjcuNSIgcj0iNy41Ij48L2NpcmNsZT4NCiAgICAgICAgICAgIDxwYXRoIGQ9Ik00LjM2LDQuMzYgTDEwLjU3NDU2MzQsMTAuNTc0NTYzNCIgaWQ9IkxpbmUiIHN0cm9rZT0iI0ZGRkZGRiIgc3Ryb2tlLWxpbmVjYXA9InNxdWFyZSI+PC9wYXRoPg0KICAgICAgICAgICAgPHBhdGggZD0iTTQuMzYsNC4zNiBMMTAuNTc0NTYzNCwxMC41NzQ1NjM0IiBpZD0iTGluZS1Db3B5IiBzdHJva2U9IiNGRkZGRkYiIHN0cm9rZS1saW5lY2FwPSJzcXVhcmUiIHRyYW5zZm9ybT0idHJhbnNsYXRlKDcuNjAwMDAwLCA3LjYwMDAwMCkgc2NhbGUoLTEsIDEpIHRyYW5zbGF0ZSgtNy42MDAwMDAsIC03LjYwMDAwMCkgIj48L3BhdGg+DQogICAgICAgIDwvZz4NCiAgICA8L2c+DQo8L3N2Zz4=&quot;) repeat scroll 0% 0%;"></span></div><div id="ghostery-pb-background" style="height: 0px; overflow-y: hidden;"><div id="ghostery-trackerList"></div></div></div></body></html>

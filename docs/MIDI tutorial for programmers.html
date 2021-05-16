@@ -1,0 +1,618 @@
+<!DOCTYPE html PUBLIC "-//W3C//DTD HTML 4.01//EN">
+<html data-lt-installed="true"><head>
+<meta http-equiv="Content-Type" content="text/html; charset=windows-1252">
+<meta http-equiv="Content-Language" content="fr">
+<link rel="stylesheet" href="MIDI%20tutorial%20for%20programmers_files/sdk.css" type="text/css" media="">
+<script src="MIDI%20tutorial%20for%20programmers_files/sdk.js"></script>
+<meta name="DESCRIPTION" content="This MIDI tutorial will help programmers understand the MIDI language">
+<meta name="KEYWORDS" content="MIDI tutorial,MIDI explained,MIDI language,What is MIDI">
+<title>MIDI tutorial for programmers</title>
+</head>
+<body>
+<a name="TopOfPage"></a>
+
+
+    <div id="conteneur-level-0">
+      <div id="bar3d"> </div>
+      <div id="area-header"></div>
+      <div id="bar3d"> </div>
+      <div id="area-menu" bgcolor="#FFFFFF">
+<div align="center"><a href="http://www.music-software-development.com/index.html"><img src="MIDI%20tutorial%20for%20programmers_files/but1n.jpg" alt="Home page" name="BTN1" onmouseout="document['BTN1'].src='images/but1n.jpg';status='';return true;" onmouseover="document['BTN1'].src='images/but1s.jpg';status='Home page';return true;" title="Home page" border="0"></a><a href="http://www.music-software-development.com/music-sdk.html"><img src="MIDI%20tutorial%20for%20programmers_files/but2n.jpg" alt="Music Notation SDK" name="BTN2" onmouseout="document['BTN2'].src='images/but2n.jpg';status='';return true;" onmouseover="document['BTN2'].src='images/but2s.jpg';status='Music Notation SDK';return true;" title="Music Notation SDK" border="0"></a><img src="MIDI%20tutorial%20for%20programmers_files/but3e.jpg" alt="MIDI Tutorial" name="BTN3" onmouseout="status=''; return true;" onmouseover="status='Vous êtes ici.';return true;" title="Vous êtes ici." border="0"><a href="http://www.music-software-development.com/music-data-structures.html"><img src="MIDI%20tutorial%20for%20programmers_files/but4n.jpg" alt="Music Data Structures" name="BTN4" onmouseout="document['BTN4'].src='images/but4n.jpg';status='';return true;" onmouseover="document['BTN4'].src='images/but4s.jpg';status='Organizing Music Data structures';return true;" title="Organizing Music Data structures" border="0"></a></div>
+</div>
+      <div id="bar3d"> </div> 
+      <div id="area-main">
+        <div id="area-column-66">
+          <div id="area-column-content" bgcolor="#FFFFFF">
+    <div style="margin-left: 120px;">
+      <h1 style="font-size: 26.0160007476807px; margin: 8px 0px 14px; color: rgb(0, 0, 0); font-family: Verdana, Geneva, sans-serif; font-style: normal; font-variant: normal; letter-spacing: normal; orphans: auto; text-align: start; text-indent: 0px; text-transform: none; white-space: normal; widows: auto; word-spacing: 0px; -webkit-text-stroke-width: 0px; background-color: rgb(255, 255, 255);"><span style="color: rgb(7, 48, 171);">MIDI Tutorial</span></h1>
+      <p><span style="color: rgb(0, 0, 0); font-family: Verdana, Geneva, sans-serif; font-size: 13.0080003738403px; font-style: normal; font-variant: normal; font-weight: normal; letter-spacing: normal; line-height: 16.910400390625px; orphans: auto; text-align: start; text-indent: 0px; text-transform: none; white-space: normal; widows: auto; word-spacing: 0px; -webkit-text-stroke-width: 0px; display: inline !important; float: none; background-color: rgb(255, 255, 255);">This
+          MIDI tutorial will help you to understand how you can use the MIDI
+          language to control any device that uses the MIDI protocol.</span></p>
+      <h2 style=" font-size: 18.2112007141113px; margin: 8px 0px 14px; color: rgb(0, 0, 0); font-family: Verdana, Geneva, sans-serif; font-style: normal; font-variant: normal; letter-spacing: normal; orphans: auto; text-align: start; text-indent: 0px; text-transform: none; white-space: normal; widows: auto; word-spacing: 0px; -webkit-text-stroke-width: 0px; background-color: rgb(255, 255, 255);"><span style="color: rgb(7, 48, 171);">MIDI Tutorial Part 1 - MIDI Messages</span></h2>
+      <p style="color: rgb(0, 0, 0); font-family: Verdana, Geneva, sans-serif; font-size: 13.0080003738403px; font-style: normal; font-variant: normal; font-weight: normal; letter-spacing: normal; line-height: 16.910400390625px; orphans: auto; text-align: start; text-indent: 0px; text-transform: none; white-space: normal; widows: auto; word-spacing: 0px; -webkit-text-stroke-width: 0px; background-color: rgb(255, 255, 255);">The
+        MIDI language is used to transmit real time information for the playback
+        of a piece of music.</p>
+      <p style="color: rgb(0, 0, 0); font-family: Verdana, Geneva, sans-serif; font-size: 13.0080003738403px; font-style: normal; font-variant: normal; font-weight: normal; letter-spacing: normal; line-height: 16.910400390625px; orphans: auto; text-align: start; text-indent: 0px; text-transform: none; white-space: normal; widows: auto; word-spacing: 0px; -webkit-text-stroke-width: 0px; background-color: rgb(255, 255, 255);">"<em>Real
+          time</em>" means that each message is sent exactly at the moment it
+        must be interpreted by the target synthesizer (which can be a hardware
+        synthesizer or software synthesizer).</p>
+      <p style="color: rgb(0, 0, 0); font-family: Verdana, Geneva, sans-serif; font-size: 13.0080003738403px; font-style: normal; font-variant: normal; font-weight: normal; letter-spacing: normal; line-height: 16.910400390625px; orphans: auto; text-align: start; text-indent: 0px; text-transform: none; white-space: normal; widows: auto; word-spacing: 0px; -webkit-text-stroke-width: 0px; background-color: rgb(255, 255, 255);">Various
+        messages are defined to transmit the information needed to perform the
+        playback of music.</p>
+      <p style="color: rgb(0, 0, 0); font-family: Verdana, Geneva, sans-serif; font-size: 13.0080003738403px; font-style: normal; font-variant: normal; font-weight: normal; letter-spacing: normal; line-height: 16.910400390625px; orphans: auto; text-align: start; text-indent: 0px; text-transform: none; white-space: normal; widows: auto; word-spacing: 0px; -webkit-text-stroke-width: 0px; background-color: rgb(255, 255, 255);">The
+        important point is that the MIDI language does not define the sound
+        itself, but only the sequence of instructions to create the sound in the
+        target synthesizer.</p>
+      <p style="color: rgb(0, 0, 0); font-family: Verdana, Geneva, sans-serif; font-size: 13.0080003738403px; font-style: normal; font-variant: normal; font-weight: normal; letter-spacing: normal; line-height: 16.910400390625px; orphans: auto; text-align: start; text-indent: 0px; text-transform: none; white-space: normal; widows: auto; word-spacing: 0px; -webkit-text-stroke-width: 0px; background-color: rgb(255, 255, 255);">The
+        MIDI messages are sent as a time sequence of one or more bytes (8 bits).
+        The first byte is a<span class="Apple-converted-space">&nbsp;</span><b>STATUS
+          byte</b>, often followed by<span class="Apple-converted-space">&nbsp;</span><b>DATA
+          bytes</b>with additional parameters. A<span class="Apple-converted-space">&nbsp;</span><b>STATUS
+          byte</b><span class="Apple-converted-space">&nbsp;</span>has bit 7 set
+        to 1 and a<b>DATA byte</b><span class="Apple-converted-space">&nbsp;</span>has
+        bit 7 set to 0.</p>
+      <p style="color: rgb(0, 0, 0); font-family: Verdana, Geneva, sans-serif; font-size: 13.0080003738403px; font-style: normal; font-variant: normal; font-weight: normal; letter-spacing: normal; line-height: 16.910400390625px; orphans: auto; text-align: start; text-indent: 0px; text-transform: none; white-space: normal; widows: auto; word-spacing: 0px; -webkit-text-stroke-width: 0px; background-color: rgb(255, 255, 255);">The<span class="Apple-converted-space">&nbsp;</span><b>STATUS byte</b><span class="Apple-converted-space">&nbsp;</span>determines
+        the type of the message. The number of DATA bytes that follow depend on
+        the type of the message.</p>
+      <p style="color: rgb(0, 0, 0); font-family: Verdana, Geneva, sans-serif; font-size: 13.0080003738403px; font-style: normal; font-variant: normal; font-weight: normal; letter-spacing: normal; line-height: 16.910400390625px; orphans: auto; text-align: start; text-indent: 0px; text-transform: none; white-space: normal; widows: auto; word-spacing: 0px; -webkit-text-stroke-width: 0px; background-color: rgb(255, 255, 255);">Except
+        for some system MIDI messages, the<span class="Apple-converted-space">&nbsp;</span><b>STATUS
+          byte</b><span class="Apple-converted-space">&nbsp;</span>contains the<i>MIDI
+          channel<span class="Apple-converted-space">&nbsp;</span></i>number.
+        There are 16 possible MIDI channels, numbered from 0 to 15 in
+        hexadecimal. In practice, musicians and software refer to the MIDI
+        channels by counting them from 1 to 16, so that there is a difference of
+        1 when you program them in hexadecimal (channel "1" is coded "0",
+        channel "10" is coded "9" and channel 16 is coded "F").</p>
+      <p style="color: rgb(0, 0, 0); font-family: Verdana, Geneva, sans-serif; font-size: 13.0080003738403px; font-style: normal; font-variant: normal; font-weight: normal; letter-spacing: normal; line-height: 16.910400390625px; orphans: auto; text-align: start; text-indent: 0px; text-transform: none; white-space: normal; widows: auto; word-spacing: 0px; -webkit-text-stroke-width: 0px; background-color: rgb(255, 255, 255);">In
+        the same MIDI cable, up to 16 MIDI channels may be used to control up to
+        16 different instruments playing independently.</p>
+      <div style="color: rgb(0, 0, 0); font-family: Verdana, Geneva, sans-serif; font-size: 10px; font-style: normal; font-variant: normal; font-weight: normal; letter-spacing: normal; line-height: 16.910400390625px; orphans: auto; text-indent: 0px; text-transform: none; white-space: normal; widows: auto; word-spacing: 0px; -webkit-text-stroke-width: 0px; background-color: rgb(255, 255, 255);" align="center">
+        <center><font size="2" face="Verdana">
+            <table style="width: 520px; height: 373px;" cellspacing="1" cellpadding="10" border="1" bgcolor="#BFDFFF">
+              <tbody>
+                <tr>
+                  <td><em><strong>MIDI RUNNING STATUS<span class="Apple-converted-space">&nbsp;</span></strong>While
+                      reading bytes coming from a MIDI message, you must know
+                      that the STATUS byte can in fact be omitted (except in the
+                      first message of that type). </em><br>
+                    <em>In such a case, you can receive a message that only has
+                      DATA bytes. The STATUS byte is then supposed to be the
+                      same as the last STATUS byte received.</em><br>
+                    <em> </em><br>
+                    <em>This is called MIDI RUNNING STATUS. It is useful for
+                      instance to optimize transmission when a long series of
+                      the same messages are sent. An example would be a pitch
+                      bend or crescendo volume curve.</em><br>
+                    <em> </em><br>
+                    <em>You can also use this MIDI RUNNING STATUS when you
+                      generate MIDI messages, but you should care about how the
+                      target synthesizer or software will receive it, to be sure
+                      it is well interpreted.</em><br>
+                  </td>
+                </tr>
+              </tbody>
+            </table>
+          </font></center><font size="2" face="Verdana">
+      </font></div><font size="2" face="Verdana">
+      <br>
+      <h2 style=" font-size: 18.2000007629395px; margin: 8px 0px 14px; color: rgb(0, 0, 0); font-family: Verdana; font-style: normal; font-variant: normal; letter-spacing: normal; orphans: auto; text-align: start; text-indent: 0px; text-transform: none; white-space: normal; widows: auto; word-spacing: 0px; -webkit-text-stroke-width: 0px; background-color: rgb(255, 255, 255);"><span style="color: rgb(7, 48, 171);">MIDI Tutorial Part 2 - NOTE Messages</span></h2>
+      <p style="color: rgb(0, 0, 0); font-family: Verdana; font-size: small; font-style: normal; font-variant: normal; font-weight: normal; letter-spacing: normal; line-height: 16.8999996185303px; orphans: auto; text-align: start; text-indent: 0px; text-transform: none; white-space: normal; widows: auto; word-spacing: 0px; -webkit-text-stroke-width: 0px; background-color: rgb(255, 255, 255);">The
+        main messages are the<span class="Apple-converted-space">&nbsp;</span><b>NOTE
+          ON</b><span class="Apple-converted-space">&nbsp;</span>and<span class="Apple-converted-space">&nbsp;</span><b>NOTE
+          OFF</b><span class="Apple-converted-space">&nbsp;</span>messages.</p>
+      <p style="color: rgb(0, 0, 0); font-family: Verdana; font-size: small; font-style: normal; font-variant: normal; font-weight: normal; letter-spacing: normal; line-height: 16.8999996185303px; orphans: auto; text-align: start; text-indent: 0px; text-transform: none; white-space: normal; widows: auto; word-spacing: 0px; -webkit-text-stroke-width: 0px; background-color: rgb(255, 255, 255);">The<span class="Apple-converted-space">&nbsp;</span><b>NOTE ON</b><span class="Apple-converted-space">&nbsp;</span>message
+        is sent when the performer hits a key of the music keyboard. It contains
+        parameters to specify the pitch of the note as well as the velocity
+        (intensity of the note when it is hit).</p>
+      <p style="color: rgb(0, 0, 0); font-family: Verdana; font-size: small; font-style: normal; font-variant: normal; font-weight: normal; letter-spacing: normal; line-height: 16.8999996185303px; orphans: auto; text-align: start; text-indent: 0px; text-transform: none; white-space: normal; widows: auto; word-spacing: 0px; -webkit-text-stroke-width: 0px; background-color: rgb(255, 255, 255);">When
+        a synthesizer receives this message, it starts playing that note with
+        the correct pitch and force level.</p>
+      <p style="color: rgb(0, 0, 0); font-family: Verdana; font-size: small; font-style: normal; font-variant: normal; font-weight: normal; letter-spacing: normal; line-height: 16.8999996185303px; orphans: auto; text-align: start; text-indent: 0px; text-transform: none; white-space: normal; widows: auto; word-spacing: 0px; -webkit-text-stroke-width: 0px; background-color: rgb(255, 255, 255);">When
+        the<span class="Apple-converted-space">&nbsp;</span><b>NOTE OFF</b><span class="Apple-converted-space">&nbsp;</span>message is received, the
+        corresponding note is switched off by the synthesizer.</p>
+      <br style="color: rgb(0, 0, 0); font-family: Verdana; font-size: small; font-style: normal; font-variant: normal; font-weight: normal; letter-spacing: normal; line-height: 16.8999996185303px; orphans: auto; text-align: start; text-indent: 0px; text-transform: none; white-space: normal; widows: auto; word-spacing: 0px; -webkit-text-stroke-width: 0px; background-color: rgb(255, 255, 255);">
+      <div style="color: rgb(0, 0, 0); font-family: Verdana; font-size: small; font-style: normal; font-variant: normal; font-weight: normal; letter-spacing: normal; line-height: 16.8999996185303px; orphans: auto; text-indent: 0px; text-transform: none; white-space: normal; widows: auto; word-spacing: 0px; -webkit-text-stroke-width: 0px; background-color: rgb(255, 255, 255);" align="center">
+        <center><font size="2" face="Verdana">
+            <table width="400" cellspacing="1" cellpadding="10" border="1" bgcolor="#BFDFFF">
+              <tbody>
+                <tr>
+                  <td><em>Every NOTE ON message requires its corresponding NOTE
+                      OFF message, otherwise the note will play forever. The
+                      only exception is for percussion instruments, where it can
+                      happen that only the NOTE ON is sent, as the percussion
+                      note stops by itself automatically. But it is better
+                      practice to send the NOTE OFF in every case, because you
+                      are not sure how it could be interpreted by the synthesize
+                      receiving it.</em></td>
+                </tr>
+              </tbody>
+            </table>
+          </font></center><font size="2" face="Verdana">
+      </font></div><font size="2" face="Verdana">
+      <font style="color: rgb(0, 0, 0); font-family: Verdana; font-size: small; font-style: normal; font-variant: normal; font-weight: normal; letter-spacing: normal; line-height: 16.8999996185303px; orphans: auto; text-align: start; text-indent: 0px; text-transform: none; white-space: normal; widows: auto; word-spacing: 0px; -webkit-text-stroke-width: 0px; background-color: rgb(255, 255, 255);" size="2" face="Verdana"><br>
+        <p>The<span class="Apple-converted-space">&nbsp;</span><b>NOTE ON</b><span class="Apple-converted-space">&nbsp;</span>message is structured as
+          follows:</p>
+        <ul style="list-style-type: disc; margin: 0px 0px 8px 10px; padding-left: 40px;">
+          <li style="margin: 0px 0px 8px 5px;">Status byte : 1001 CCCC</li>
+          <li style="margin: 0px 0px 8px 5px;">Data byte 1 : 0PPP PPPP</li>
+          <li style="margin: 0px 0px 8px 5px;">Data byte 2 : 0VVV VVVV</li>
+        </ul>
+        <p>where:</p>
+        <div align="center">
+          <center><font size="2" face="Verdana">
+              <table width="430" border="0">
+                <tbody>
+                  <tr>
+                    <td>"CCCC" is the MIDI channel (from 0 to 15)<br>
+                      "PPP PPPP" is the pitch value (from 0 to 127)<br>
+                      "VVV VVVV" is the velocity value (from 0 to 127)</td>
+                  </tr>
+                </tbody>
+              </table>
+            </font></center><font size="2" face="Verdana">
+        </font></div><font size="2" face="Verdana">
+        <p>The pitch value determines the frequency of the note to be played. It
+          goes from 0 to 127, with the middle C note being represented by the
+          value of 60:</p>
+        <div class="ImageBlock ImageBlockCenter" style="overflow: hidden; max-width: 100%; text-align: center; margin: 1em 0px;"><img src="MIDI%20tutorial%20for%20programmers_files/midi-note-c60.jpg" style="margin: 0px; max-width: none; border: 1px solid rgb(0, 0, 0);" width="106"></div>
+        <p>The value is represented in half steps, so that C# will be 61, D will
+          be 62,...</p>
+        <p>To transpose a note one octave higher, add 12 to its pitch value. By
+          using MIDI, transposition is very simple as it is done simply by
+          adding or subtracting a fixed value.</p>
+        <p>Be cautious however about the range of MIDI notes that goes from 0 to
+          127. By adding for instance 4 octaves (+48) to a note of value 96, the
+          total is 144, which is outside the range and may be truncated to 16
+          (144 - 128) so that a very low note will result.</p>
+        <p>The velocity value normally goes from 1 to 127, covering the range
+          from a practically inaudible note up to the maximum note level. It
+          basically corresponds to the scale of nuances found in music notation,
+          as follows (it is more indicative than exact values):</p>
+        <div class="ImageBlock ImageBlockCenter" style="overflow: hidden; max-width: 100%; text-align: center; margin: 1em 0px;"><img src="MIDI%20tutorial%20for%20programmers_files/nuance-velocity-table.jpg" style="margin: 0px; max-width: none; border: 1px solid rgb(0, 0, 0);" width="141"></div>
+        <p>In basic synthesizers, the velocity value is used only to determine
+          the force with which the note is played, the only effect being a note
+          that is louder or softer in volume.</p>
+        <p>In more sophisticated synthesizer, this value will also affect the
+          sound quality. Indeed, on a real piano, hitting a note harder will not
+          only affect its loudness but also the quality of the sound itself, the
+          timber. This is practically the case with any real instrument.</p>
+        <p>There is a special case if the velocity is set to zero. The<span class="Apple-converted-space">&nbsp;</span><b>NOTE
+            ON</b>message then has the same meaning as a<span class="Apple-converted-space">&nbsp;</span><b>NOTE
+            OFF</b><span class="Apple-converted-space">&nbsp;</span>message,
+          switching the note off.</p>
+        <p>The<span class="Apple-converted-space">&nbsp;</span><b>NOTE OFF</b><span class="Apple-converted-space">&nbsp;</span>message is structured as
+          follows:</p>
+        <ul style="list-style-type: disc; margin: 0px 0px 8px 10px; padding-left: 40px;">
+          <li style="margin: 0px 0px 8px 5px;">Status byte : 1000 CCCC</li>
+          <li style="margin: 0px 0px 8px 5px;">Data byte 1 : 0PPP PPPP</li>
+          <li style="margin: 0px 0px 8px 5px;">Data byte 2 : 0VVV VVVV</li>
+        </ul>
+        <p>where CCCC and PPPPPPP have the same meaning as above. The VVVVVVV is
+          the release velocity, which is very rarely used. By default, set it to
+          zero.</p>
+      
+      <h2 style=" font-size: 18.2000007629395px; margin: 8px 0px 14px; color: rgb(0, 0, 0); font-family: Verdana; font-style: normal; font-variant: normal; letter-spacing: normal; orphans: auto; text-align: start; text-indent: 0px; text-transform: none; white-space: normal; widows: auto; word-spacing: 0px; -webkit-text-stroke-width: 0px; background-color: rgb(255, 255, 255);"><span style="color: rgb(7, 48, 171);">MIDI Tutorial Part 3 - Playing notes
+          and chords</span></h2>
+      <p style="color: rgb(0, 0, 0); font-family: Verdana; font-size: small; font-style: normal; font-variant: normal; font-weight: normal; letter-spacing: normal; line-height: 16.8999996185303px; orphans: auto; text-align: start; text-indent: 0px; text-transform: none; white-space: normal; widows: auto; word-spacing: 0px; -webkit-text-stroke-width: 0px; background-color: rgb(255, 255, 255);">When
+        you send a<span class="Apple-converted-space">&nbsp;</span><b>NOTE ON</b><span class="Apple-converted-space">&nbsp;</span>message to a synthesizer,
+        this note starts playing. Meanwhile, you can send other<span class="Apple-converted-space">&nbsp;</span><b>NOTE
+          ON</b><span class="Apple-converted-space">&nbsp;</span>messages, with
+        different note pitches, so as to hear a chord. However, you need to keep
+        track of the notes that are playing, so that you can send a
+        corresponding<b>NOTE OFF</b><span class="Apple-converted-space">&nbsp;</span>for
+        each note, otherwise there will be stuck notes playing forever.</p>
+      <p style="color: rgb(0, 0, 0); font-family: Verdana; font-size: small; font-style: normal; font-variant: normal; font-weight: normal; letter-spacing: normal; line-height: 16.8999996185303px; orphans: auto; text-align: start; text-indent: 0px; text-transform: none; white-space: normal; widows: auto; word-spacing: 0px; -webkit-text-stroke-width: 0px; background-color: rgb(255, 255, 255);">Let's
+        take an example. What are the MIDI messages needed to play the following
+        measure?</p>
+      <div class="ImageBlock ImageBlockCenter" style="overflow: hidden; max-width: 100%; text-align: center; margin: 1em 0px; color: rgb(0, 0, 0); font-family: Verdana; font-size: small; font-style: normal; font-variant: normal; font-weight: normal; letter-spacing: normal; line-height: 16.8999996185303px; orphans: auto; text-indent: 0px; text-transform: none; white-space: normal; widows: auto; word-spacing: 0px; -webkit-text-stroke-width: 0px; background-color: rgb(255, 255, 255);"><img src="MIDI%20tutorial%20for%20programmers_files/Midi-example-1.jpg" style="margin: 0px; max-width: none; border: 1px solid rgb(0, 0, 0);" width="199"></div>
+      <p style="color: rgb(0, 0, 0); font-family: Verdana; font-size: small; font-style: normal; font-variant: normal; font-weight: normal; letter-spacing: normal; line-height: 16.8999996185303px; orphans: auto; text-align: start; text-indent: 0px; text-transform: none; white-space: normal; widows: auto; word-spacing: 0px; -webkit-text-stroke-width: 0px; background-color: rgb(255, 255, 255);">As
+        the time dimension must be present to hear the music, here is the time
+        sequence of the MIDI messages that you need to send to a synthesizer to
+        have it play the above music on channel 1 (remember, coded as 0), with a
+        velocity of 64 (<i>mezzo forte</i>), in hexadecimal (0x means
+        hexadecimal notation):</p>
+      <ul style="list-style-type: disc; margin: 0px 0px 8px 10px; padding-left: 40px; color: rgb(0, 0, 0); font-family: Verdana; font-size: small; font-style: normal; font-variant: normal; font-weight: normal; letter-spacing: normal; line-height: 16.8999996185303px; orphans: auto; text-align: start; text-indent: 0px; text-transform: none; white-space: normal; widows: auto; word-spacing: 0px; -webkit-text-stroke-width: 0px; background-color: rgb(255, 255, 255);">
+        <li style="margin: 0px 0px 8px 5px;">t=0 :<span class="Apple-converted-space">&nbsp;</span><b>0x90</b><span class="Apple-converted-space">&nbsp;</span>-<span class="Apple-converted-space">&nbsp;</span><b>0x40<span class="Apple-converted-space">&nbsp;</span></b>-<span class="Apple-converted-space">&nbsp;</span><b>0x40</b><span class="Apple-converted-space">&nbsp;</span>(Start of E3 note, pitch
+          = 64)</li>
+        <li style="margin: 0px 0px 8px 5px;">t=0 :<span class="Apple-converted-space">&nbsp;</span><b>0x90<span class="Apple-converted-space">&nbsp;</span></b>-<span class="Apple-converted-space">&nbsp;</span><b>0x43<span class="Apple-converted-space">&nbsp;</span></b>-<span class="Apple-converted-space">&nbsp;</span><b>0x40<span class="Apple-converted-space">&nbsp;</span></b>(Start of G3 note,
+          pitch= 67)</li>
+        <li style="margin: 0px 0px 8px 5px;">t=1 :<span class="Apple-converted-space">&nbsp;</span><b>0x80<span class="Apple-converted-space">&nbsp;</span></b>-<span class="Apple-converted-space">&nbsp;</span><b>0x43<span class="Apple-converted-space">&nbsp;</span></b>-<span class="Apple-converted-space">&nbsp;</span><b>0x00<span class="Apple-converted-space">&nbsp;</span></b>(End of G3 note,
+          pitch=67)</li>
+        <li style="margin: 0px 0px 8px 5px;">t=1 :<span class="Apple-converted-space">&nbsp;</span><b>0x90<span class="Apple-converted-space">&nbsp;</span></b>-<span class="Apple-converted-space">&nbsp;</span><b>0x45<span class="Apple-converted-space">&nbsp;</span></b>-<span class="Apple-converted-space">&nbsp;</span><b>0x40<span class="Apple-converted-space">&nbsp;</span></b>(Start of A3 note,
+          pitch=69)</li>
+        <li style="margin: 0px 0px 8px 5px;">t=2 :<span class="Apple-converted-space">&nbsp;</span><b>0x80<span class="Apple-converted-space">&nbsp;</span></b>-<span class="Apple-converted-space">&nbsp;</span><b>0x45<span class="Apple-converted-space">&nbsp;</span></b>-<span class="Apple-converted-space">&nbsp;</span><b>0x00<span class="Apple-converted-space">&nbsp;</span></b>(End of A3 note,
+          pitch=69)</li>
+        <li style="margin: 0px 0px 8px 5px;">t=2 :<span class="Apple-converted-space">&nbsp;</span><b>0x80<span class="Apple-converted-space">&nbsp;</span></b>-<span class="Apple-converted-space">&nbsp;</span><b>0x40<span class="Apple-converted-space">&nbsp;</span></b>-<span class="Apple-converted-space">&nbsp;</span><b>0x00<span class="Apple-converted-space">&nbsp;</span></b>(End of E3 note,
+          pitch=64)</li>
+        <li style="margin: 0px 0px 8px 5px;">t=2 :<span class="Apple-converted-space">&nbsp;</span><b>0x90</b><span class="Apple-converted-space">&nbsp;</span>-<span class="Apple-converted-space">&nbsp;</span><b>0x3C<span class="Apple-converted-space">&nbsp;</span></b>-<span class="Apple-converted-space">&nbsp;</span><b>0x40</b><span class="Apple-converted-space">&nbsp;</span>(Start of C3 note, pitch
+          = 60)</li>
+        <li style="margin: 0px 0px 8px 5px;">t=2 :<span class="Apple-converted-space">&nbsp;</span><b>0x90<span class="Apple-converted-space">&nbsp;</span></b>-<span class="Apple-converted-space">&nbsp;</span><b>0x47<span class="Apple-converted-space">&nbsp;</span></b>-<span class="Apple-converted-space">&nbsp;</span><b>0x40<span class="Apple-converted-space">&nbsp;</span></b>(Start of B3 note,
+          pitch= 71)</li>
+        <li style="margin: 0px 0px 8px 5px;">t=3 :<span class="Apple-converted-space">&nbsp;</span><b>0x80<span class="Apple-converted-space">&nbsp;</span></b>-<span class="Apple-converted-space">&nbsp;</span><b>0x47<span class="Apple-converted-space">&nbsp;</span></b>-<span class="Apple-converted-space">&nbsp;</span><b>0x00<span class="Apple-converted-space">&nbsp;</span></b>(End of B3 note,
+          pitch= 71)</li>
+        <li style="margin: 0px 0px 8px 5px;">t=3 :<span class="Apple-converted-space">&nbsp;</span><b>0x90<span class="Apple-converted-space">&nbsp;</span></b>-<span class="Apple-converted-space">&nbsp;</span><b>0x48<span class="Apple-converted-space">&nbsp;</span></b>-<span class="Apple-converted-space">&nbsp;</span><b>0x40<span class="Apple-converted-space">&nbsp;</span></b>(Start of C4 note,
+          pitch= 72)</li>
+        <li style="margin: 0px 0px 8px 5px;">t=4 :<span class="Apple-converted-space">&nbsp;</span><b>0x80<span class="Apple-converted-space">&nbsp;</span></b>-<span class="Apple-converted-space">&nbsp;</span><b>0x48<span class="Apple-converted-space">&nbsp;</span></b>-<span class="Apple-converted-space">&nbsp;</span><b>0x00<span class="Apple-converted-space">&nbsp;</span></b>(End of C4 note,
+          pitch= 72)</li>
+        <li style="margin: 0px 0px 8px 5px;">t=4 :<span class="Apple-converted-space">&nbsp;</span><b>0x80</b><span class="Apple-converted-space">&nbsp;</span>-<span class="Apple-converted-space">&nbsp;</span><b>0x3C<span class="Apple-converted-space">&nbsp;</span></b>-<span class="Apple-converted-space">&nbsp;</span><b>0x40</b><span class="Apple-converted-space">&nbsp;</span>(End of C3 note, pitch =
+          60)</li>
+      </ul>
+      <p style="color: rgb(0, 0, 0); font-family: Verdana; font-size: small; font-style: normal; font-variant: normal; font-weight: normal; letter-spacing: normal; line-height: 16.8999996185303px; orphans: auto; text-align: start; text-indent: 0px; text-transform: none; white-space: normal; widows: auto; word-spacing: 0px; -webkit-text-stroke-width: 0px; background-color: rgb(255, 255, 255);">"t"
+        represents the time in seconds. The score plays at 60 beats per minute,
+        so each quarter note is 1 second.</p>
+      <h2 style=" font-size: 18.2000007629395px; margin: 8px 0px 14px; color: rgb(0, 0, 0); font-family: Verdana; font-style: normal; font-variant: normal; letter-spacing: normal; orphans: auto; text-align: start; text-indent: 0px; text-transform: none; white-space: normal; widows: auto; word-spacing: 0px; -webkit-text-stroke-width: 0px; background-color: rgb(255, 255, 255);"><span style="color: rgb(7, 48, 171);">MIDI Tutorial Part 4 - Selecting
+          Instruments</span></h2>
+      <p>Up to now, there is no information to tell the synthesizer what sound
+        must be used to play the notes. The synthesizer would probably use the
+        piano or its default instrument.</p>
+      <p>There is a MIDI message to specify an instrument from a predefined list
+        of 128 sounds. In theory, each synthesizer may have its own custom list
+        of instruments, but the "General Midi (GM)" standard defines a list of
+        128 instruments that simplifies compatibility. Most synthesizer have at
+        least a compatibility mode with the GM standard. You can find the list
+        of General MIDI instruments here :</p>
+      <p style="text-align: center;"><span style="text-align: start;"><a href="http://www.midi.org/techspecs/gm1sound.php" target="_blank">General MIDI standard</a></span></p>
+      <p style="text-align: left;"><span style="text-align: start;">The MIDI
+          message used to specify the instrument is called a "program change"
+          message. It has one STATUS byte and one DATA byte :</span></p>
+      <ul style="list-style-type: disc; margin: 0px 0px 8px 10px; padding-left: 40px;">
+        <li style="margin: 0px 0px 8px 5px;">Status byte : 1100 CCCC</li>
+        <li style="margin: 0px 0px 8px 5px;">Data byte 1 : 0XXX XXXX</li>
+      </ul>
+      <p>where CCCC is the MIDI channel (0 to 15) and XXXXXXX is the instrument
+        number from 0 to 127. Similarly to MIDI channels, you will often see
+        that the instrument numbers in synthesizers and in GM lists, are
+        numbered from 1 to 128 so you also need to add or subtract 1 for the
+        conversion.</p>
+      <p>For instance, the trumpet instrument has number 57 in the GM list, so
+        in the above MIDI message you must set XXXXXXX = 56 to get the correct
+        instrument in the target synthesizer.</p>
+      <p>The notes sent to the synthesizer after that message will be played
+        with a trumpet sound.</p>
+      <br>
+      <div align="center">
+        <center><font size="2" face="Verdana">
+            <table width="400" cellspacing="1" cellpadding="10" border="1" bgcolor="#BFDFFF">
+              <tbody>
+                <tr>
+                  <td><em><strong>Sound Quality of Instruments<span class="Apple-converted-space">&nbsp;</span></strong>You
+                      will notice that the sound quality as produced by the
+                      target synthesizer has nothing to do with MIDI messages.
+                      After receiving a program change specifying the trumpet
+                      instrument, a cheap, low quality sound card synthesizer
+                      may play a pretty bad trumpet sound, while a high quality
+                      sampler may render a beautiful and realistic trumpet
+                      sound.</em>
+                    <p><em>This is the main problem with MIDI sequences, is that
+                        you have no control of the final quality of
+                        reproduction, as you do not know what is the synthesizer
+                        that will play it when you publish a MIDI sequence.</em></p>
+                  </td>
+                </tr>
+              </tbody>
+            </table>
+          </font></center><font size="2" face="Verdana">
+      </font></div><font size="2" face="Verdana">
+      <font size="2" face="Verdana"><br style="color: rgb(0, 0, 0); font-family: Verdana; font-size: small; font-style: normal; font-variant: normal; font-weight: normal; letter-spacing: normal; line-height: 16.8999996185303px; orphans: auto; text-align: start; text-indent: 0px; text-transform: none; white-space: normal; widows: auto; word-spacing: 0px; -webkit-text-stroke-width: 0px; background-color: rgb(255, 255, 255);">
+      
+      <h2 style=" font-size: 18.2000007629395px; margin: 8px 0px 14px; color: rgb(0, 0, 0); font-family: Verdana; font-style: normal; font-variant: normal; letter-spacing: normal; orphans: auto; text-align: start; text-indent: 0px; text-transform: none; white-space: normal; widows: auto; word-spacing: 0px; -webkit-text-stroke-width: 0px; background-color: rgb(255, 255, 255);"><span style="color: rgb(7, 48, 171);">MIDI Tutorial Part 5 - Drum
+          instruments</span></h2>
+      <p style="color: rgb(0, 0, 0); font-family: Verdana; font-size: small; font-style: normal; font-variant: normal; font-weight: normal; letter-spacing: normal; line-height: 16.8999996185303px; orphans: auto; text-align: start; text-indent: 0px; text-transform: none; white-space: normal; widows: auto; word-spacing: 0px; -webkit-text-stroke-width: 0px; background-color: rgb(255, 255, 255);">Drum
+        instruments form a special case, as they do not have a specific pitch
+        like on a piano or trumpet. A specific MIDI channel is used to transmit
+        the playback of drum instruments. In General Midi, it is channel 10, but
+        you will find synthesizers that can be programmed to receive drums on
+        any channel.</p>
+      <p style="color: rgb(0, 0, 0); font-family: Verdana; font-size: small; font-style: normal; font-variant: normal; font-weight: normal; letter-spacing: normal; line-height: 16.8999996185303px; orphans: auto; text-align: start; text-indent: 0px; text-transform: none; white-space: normal; widows: auto; word-spacing: 0px; -webkit-text-stroke-width: 0px; background-color: rgb(255, 255, 255);">In
+        the case of a channel assigned to drum instruments (and also for special
+        sound effects often included in synthesizers), the NOTE ON and NOTE OFF
+        message information for the pitch is in fact used to select which drum
+        or sound effect will play.</p>
+      <p style="color: rgb(0, 0, 0); font-family: Verdana; font-size: small; font-style: normal; font-variant: normal; font-weight: normal; letter-spacing: normal; line-height: 16.8999996185303px; orphans: auto; text-align: start; text-indent: 0px; text-transform: none; white-space: normal; widows: auto; word-spacing: 0px; -webkit-text-stroke-width: 0px; background-color: rgb(255, 255, 255);">For
+        General MIDI, you can find the standard list of drum instruments here
+        (at the end of that page):</p>
+      <p style="color: rgb(0, 0, 0); font-family: Verdana; font-size: small; font-style: normal; font-variant: normal; font-weight: normal; letter-spacing: normal; line-height: 16.8999996185303px; orphans: auto; text-indent: 0px; text-transform: none; white-space: normal; widows: auto; word-spacing: 0px; -webkit-text-stroke-width: 0px; text-align: center; background-color: rgb(255, 255, 255);"><span style="color: rgb(0, 0, 238);"><u><a href="http://www.midi.org/techspecs/gm1sound.php">General
+              MIDI drum instruments list</a></u></span></p>
+      <p style="color: rgb(0, 0, 0); font-family: Verdana; font-size: small; font-style: normal; font-variant: normal; font-weight: normal; letter-spacing: normal; line-height: 16.8999996185303px; orphans: auto; text-align: start; text-indent: 0px; text-transform: none; white-space: normal; widows: auto; word-spacing: 0px; -webkit-text-stroke-width: 0px; background-color: rgb(255, 255, 255);">For
+        instance, to play a bass drum instrument on channel 10, send the NOTE ON
+        message as follows:</p>
+      <ul style="list-style-type: disc; margin: 0px 0px 8px 10px; padding-left: 40px; color: rgb(0, 0, 0); font-family: Verdana; font-size: small; font-style: normal; font-variant: normal; font-weight: normal; letter-spacing: normal; line-height: 16.8999996185303px; orphans: auto; text-align: start; text-indent: 0px; text-transform: none; white-space: normal; widows: auto; word-spacing: 0px; -webkit-text-stroke-width: 0px; background-color: rgb(255, 255, 255);">
+        <li style="margin: 0px 0px 8px 5px;">0x99 0x23 0x40</li>
+      </ul>
+      <p style="color: rgb(0, 0, 0); font-family: Verdana; font-size: small; font-style: normal; font-variant: normal; font-weight: normal; letter-spacing: normal; line-height: 16.8999996185303px; orphans: auto; text-align: start; text-indent: 0px; text-transform: none; white-space: normal; widows: auto; word-spacing: 0px; -webkit-text-stroke-width: 0px; background-color: rgb(255, 255, 255);">0x99
+        is the STATUS byte for the NOTE ON message, using channel 10 (coded 9).
+        0x23 is decimal 35 which is the note number used for the acoustic bass
+        drum in the GM list above. 0x40 is decimal 64 for a velocity around the<span class="Apple-converted-space">&nbsp;</span><i>mezzo forte</i><span class="Apple-converted-space">&nbsp;</span>nuance.
+        You should then send the NOTE OFF message as follows:</p>
+      <ul style="list-style-type: disc; margin: 0px 0px 8px 10px; padding-left: 40px; color: rgb(0, 0, 0); font-family: Verdana; font-size: small; font-style: normal; font-variant: normal; font-weight: normal; letter-spacing: normal; line-height: 16.8999996185303px; orphans: auto; text-align: start; text-indent: 0px; text-transform: none; white-space: normal; widows: auto; word-spacing: 0px; -webkit-text-stroke-width: 0px; background-color: rgb(255, 255, 255);">
+        <li style="margin: 0px 0px 8px 5px;">0x89 0x23 0x00</li>
+      </ul>
+      <h2 style=" font-size: 18.2000007629395px; margin: 8px 0px 14px; color: rgb(0, 0, 0); font-family: Verdana; font-style: normal; font-variant: normal; letter-spacing: normal; orphans: auto; text-align: start; text-indent: 0px; text-transform: none; white-space: normal; widows: auto; word-spacing: 0px; -webkit-text-stroke-width: 0px; background-color: rgb(255, 255, 255);"><span style="color: rgb(7, 48, 171);">MIDI Tutorial Part 6 - Using MIDI
+          Channels</span></h2>
+      <p style="color: rgb(0, 0, 0); font-family: Verdana; font-size: small; font-style: normal; font-variant: normal; font-weight: normal; letter-spacing: normal; line-height: 16.8999996185303px; orphans: auto; text-align: start; text-indent: 0px; text-transform: none; white-space: normal; widows: auto; word-spacing: 0px; -webkit-text-stroke-width: 0px; background-color: rgb(255, 255, 255);">The
+        MIDI protocol handles up to 16 different MIDI channels. Each channel has
+        its own status, for instance the current instrument defined, the notes
+        that are currently playing, as well as other values like the volume, the
+        panoramic,...</p>
+      <p style="color: rgb(0, 0, 0); font-family: Verdana; font-size: small; font-style: normal; font-variant: normal; font-weight: normal; letter-spacing: normal; line-height: 16.8999996185303px; orphans: auto; text-align: start; text-indent: 0px; text-transform: none; white-space: normal; widows: auto; word-spacing: 0px; -webkit-text-stroke-width: 0px; background-color: rgb(255, 255, 255);">By
+        using different MIDI channels, you can define a specific instrument for
+        each. By sending notes on the corresponding MIDI channels, these notes
+        will sound with the given instruments.</p>
+      <p style="color: rgb(0, 0, 0); font-family: Verdana; font-size: small; font-style: normal; font-variant: normal; font-weight: normal; letter-spacing: normal; line-height: 16.8999996185303px; orphans: auto; text-align: start; text-indent: 0px; text-transform: none; white-space: normal; widows: auto; word-spacing: 0px; -webkit-text-stroke-width: 0px; background-color: rgb(255, 255, 255);">Here
+        is a score example with three instruments.</p>
+      <div class="ImageBlock ImageBlockCenter" style="overflow: hidden; max-width: 100%; text-align: center; margin: 1em 0px; color: rgb(0, 0, 0); font-family: Verdana; font-size: small; font-style: normal; font-variant: normal; font-weight: normal; letter-spacing: normal; line-height: 16.8999996185303px; orphans: auto; text-indent: 0px; text-transform: none; white-space: normal; widows: auto; word-spacing: 0px; -webkit-text-stroke-width: 0px; background-color: rgb(255, 255, 255);"><img src="MIDI%20tutorial%20for%20programmers_files/Midi-example-2.jpg" style="margin: 0px; max-width: none; border: 1px solid rgb(0, 0, 0);" width="419"></div>
+      <p style="color: rgb(0, 0, 0); font-family: Verdana; font-size: small; font-style: normal; font-variant: normal; font-weight: normal; letter-spacing: normal; line-height: 16.8999996185303px; orphans: auto; text-align: start; text-indent: 0px; text-transform: none; white-space: normal; widows: auto; word-spacing: 0px; -webkit-text-stroke-width: 0px; background-color: rgb(255, 255, 255);">The
+        sax, piano and bass drum will use respectively channels 1, 2 and 10. The
+        MIDI message sequence is the following.</p>
+      <p style="color: rgb(0, 0, 0); font-family: Verdana; font-size: small; font-style: normal; font-variant: normal; font-weight: normal; letter-spacing: normal; line-height: 16.8999996185303px; orphans: auto; text-align: start; text-indent: 0px; text-transform: none; white-space: normal; widows: auto; word-spacing: 0px; -webkit-text-stroke-width: 0px; background-color: rgb(255, 255, 255);">First
+        send the program changes to specify the instruments to use on each
+        channel:</p>
+      <ul style="list-style-type: disc; margin: 0px 0px 8px 10px; padding-left: 40px; color: rgb(0, 0, 0); font-family: Verdana; font-size: small; font-style: normal; font-variant: normal; font-weight: normal; letter-spacing: normal; line-height: 16.8999996185303px; orphans: auto; text-align: start; text-indent: 0px; text-transform: none; white-space: normal; widows: auto; word-spacing: 0px; -webkit-text-stroke-width: 0px; background-color: rgb(255, 255, 255);">
+        <li style="margin: 0px 0px 8px 5px;">t=0 :<span class="Apple-converted-space">&nbsp;</span><b>0xC0</b><span class="Apple-converted-space">&nbsp;</span>-<span class="Apple-converted-space">&nbsp;</span><b>0x41</b><span class="Apple-converted-space">&nbsp;</span>(Alto Sax = 66 ==&gt;
+          coded 65 = 0x41)</li>
+        <li style="margin: 0px 0px 8px 5px;">t=0 :<span class="Apple-converted-space">&nbsp;</span><b>0xC1<span class="Apple-converted-space">&nbsp;</span></b>-<span class="Apple-converted-space">&nbsp;</span><b>0x00</b><b><span class="Apple-converted-space">&nbsp;</span></b>(Piano = 1 ==&gt;
+          coded 0)</li>
+        <li style="margin: 0px 0px 8px 5px;">t=0 :<span class="Apple-converted-space">&nbsp;</span><b>0xC9<span class="Apple-converted-space">&nbsp;</span></b>-<span class="Apple-converted-space">&nbsp;</span><b>0x00</b><b><span class="Apple-converted-space">&nbsp;</span></b>(Standard Drums Kit
+          = 1 ==&gt; coded 0)</li>
+      </ul>
+      <p style="color: rgb(0, 0, 0); font-family: Verdana; font-size: small; font-style: normal; font-variant: normal; font-weight: normal; letter-spacing: normal; line-height: 16.8999996185303px; orphans: auto; text-align: start; text-indent: 0px; text-transform: none; white-space: normal; widows: auto; word-spacing: 0px; -webkit-text-stroke-width: 0px; background-color: rgb(255, 255, 255);">For
+        drums on General MIDI it is the program change 1 (coded 0) which is the
+        standard drums kit. Some synthesizers also propose<span class="Apple-converted-space">&nbsp;</span><i>Jazz
+          kits, Orchestral kits, Electronic kits,...</i><span class="Apple-converted-space">&nbsp;</span>with
+        different drum sounds).</p>
+      <p style="color: rgb(0, 0, 0); font-family: Verdana; font-size: small; font-style: normal; font-variant: normal; font-weight: normal; letter-spacing: normal; line-height: 16.8999996185303px; orphans: auto; text-align: start; text-indent: 0px; text-transform: none; white-space: normal; widows: auto; word-spacing: 0px; -webkit-text-stroke-width: 0px; background-color: rgb(255, 255, 255);">Then
+        we can send the notes as already explained. Notice that here, we have
+        used the<span class="Apple-converted-space">&nbsp;</span><b>NOTE ON</b><span class="Apple-converted-space">&nbsp;</span>message with a velocity of
+        zero, as the equivalent of the<span class="Apple-converted-space">&nbsp;</span><b>NOTE
+          OFF</b><span class="Apple-converted-space">&nbsp;</span>message. This
+        is often used in practice.</p>
+      <ul style="list-style-type: disc; margin: 0px 0px 8px 10px; padding-left: 40px; color: rgb(0, 0, 0); font-family: Verdana; font-size: small; font-style: normal; font-variant: normal; font-weight: normal; letter-spacing: normal; line-height: 16.8999996185303px; orphans: auto; text-align: start; text-indent: 0px; text-transform: none; white-space: normal; widows: auto; word-spacing: 0px; -webkit-text-stroke-width: 0px; background-color: rgb(255, 255, 255);">
+        <li style="margin: 0px 0px 8px 5px;">t=0 :<span class="Apple-converted-space">&nbsp;</span><b>0x90</b><span class="Apple-converted-space">&nbsp;</span>-<span class="Apple-converted-space">&nbsp;</span><b>0x48<span class="Apple-converted-space">&nbsp;</span></b>-<span class="Apple-converted-space">&nbsp;</span><b>0x40</b><span class="Apple-converted-space">&nbsp;</span>(Start sax C4, pitch = 72
+          = 0x48)</li>
+        <li style="margin: 0px 0px 8px 5px;">t=0 :<span class="Apple-converted-space">&nbsp;</span><b>0x91</b><span class="Apple-converted-space">&nbsp;</span>-<span class="Apple-converted-space">&nbsp;</span><b>0x3C<span class="Apple-converted-space">&nbsp;</span></b>-<span class="Apple-converted-space">&nbsp;</span><b>0x40</b><span class="Apple-converted-space">&nbsp;</span>(Start piano C3, pitch =
+          60 = 0x3C)</li>
+        <li style="margin: 0px 0px 8px 5px;">t=0 :<span class="Apple-converted-space">&nbsp;</span><b>0x91</b><span class="Apple-converted-space">&nbsp;</span>-<span class="Apple-converted-space">&nbsp;</span><b>0x43<span class="Apple-converted-space">&nbsp;</span></b>-<span class="Apple-converted-space">&nbsp;</span><b>0x40</b><span class="Apple-converted-space">&nbsp;</span>(Start piano G3, pitch =
+          67 = 0x43)</li>
+        <li style="margin: 0px 0px 8px 5px;">t=0 :<span class="Apple-converted-space">&nbsp;</span><b>0x91</b><span class="Apple-converted-space">&nbsp;</span>-<span class="Apple-converted-space">&nbsp;</span><b>0x4C<span class="Apple-converted-space">&nbsp;</span></b>-<span class="Apple-converted-space">&nbsp;</span><b>0x40</b><span class="Apple-converted-space">&nbsp;</span>(Start piano E4, pitch =
+          76 = 0x4C)</li>
+        <li style="margin: 0px 0px 8px 5px;">t=0 :<span class="Apple-converted-space">&nbsp;</span><b>0x99</b><span class="Apple-converted-space">&nbsp;</span>-<span class="Apple-converted-space">&nbsp;</span><b>0x23<span class="Apple-converted-space">&nbsp;</span></b>-<span class="Apple-converted-space">&nbsp;</span><b>0x40</b><span class="Apple-converted-space">&nbsp;</span>(Start Bass Drum = 35 =
+          0x23)</li>
+        <li style="margin: 0px 0px 8px 5px;">t=1 :<span class="Apple-converted-space">&nbsp;</span><b>0x90</b><span class="Apple-converted-space">&nbsp;</span>-<span class="Apple-converted-space">&nbsp;</span><b>0x48<span class="Apple-converted-space">&nbsp;</span></b>-<span class="Apple-converted-space">&nbsp;</span><b>0x00</b><span class="Apple-converted-space">&nbsp;</span>(Stop sax C4, pitch = 72
+          = 0x48)</li>
+        <li style="margin: 0px 0px 8px 5px;">t=1 :<span class="Apple-converted-space">&nbsp;</span><b>0x99</b><span class="Apple-converted-space">&nbsp;</span>-<span class="Apple-converted-space">&nbsp;</span><b>0x23<span class="Apple-converted-space">&nbsp;</span></b>-<span class="Apple-converted-space">&nbsp;</span><b>0x00</b><span class="Apple-converted-space">&nbsp;</span>(Stop Bass Drum = 35 =
+          0x23)</li>
+        <li style="margin: 0px 0px 8px 5px;">t=1 :<span class="Apple-converted-space">&nbsp;</span><b>0x90</b><span class="Apple-converted-space">&nbsp;</span>-<span class="Apple-converted-space">&nbsp;</span><b>0x4A<span class="Apple-converted-space">&nbsp;</span></b>-<span class="Apple-converted-space">&nbsp;</span><b>0x40</b><span class="Apple-converted-space">&nbsp;</span>(Start sax D4, pitch = 74
+          = 0x4A)</li>
+        <li style="margin: 0px 0px 8px 5px;">t=2 :<span class="Apple-converted-space">&nbsp;</span><b>0x90</b><span class="Apple-converted-space">&nbsp;</span>-<span class="Apple-converted-space">&nbsp;</span><b>0x4A<span class="Apple-converted-space">&nbsp;</span></b>-<span class="Apple-converted-space">&nbsp;</span><b>0x00</b><span class="Apple-converted-space">&nbsp;</span>(Stop sax D4, pitch = 74
+          = 0x4A)</li>
+        <li style="margin: 0px 0px 8px 5px;">t=2 :<span class="Apple-converted-space">&nbsp;</span><b>0x90</b><span class="Apple-converted-space">&nbsp;</span>-<span class="Apple-converted-space">&nbsp;</span><b>0x4C<span class="Apple-converted-space">&nbsp;</span></b>-<span class="Apple-converted-space">&nbsp;</span><b>0x40</b><span class="Apple-converted-space">&nbsp;</span>(Start sax E4, pitch = 76
+          = 0x4C)</li>
+        <li style="margin: 0px 0px 8px 5px;">t=2 :<span class="Apple-converted-space">&nbsp;</span><b>0x99</b><span class="Apple-converted-space">&nbsp;</span>-<span class="Apple-converted-space">&nbsp;</span><b>0x23<span class="Apple-converted-space">&nbsp;</span></b>-<span class="Apple-converted-space">&nbsp;</span><b>0x40</b><span class="Apple-converted-space">&nbsp;</span>(Start Bass Drum = 35 =
+          0x23)</li>
+        <li style="margin: 0px 0px 8px 5px;">t=3 :<span class="Apple-converted-space">&nbsp;</span><b>0x90</b><span class="Apple-converted-space">&nbsp;</span>-<span class="Apple-converted-space">&nbsp;</span><b>0x4C<span class="Apple-converted-space">&nbsp;</span></b>-<span class="Apple-converted-space">&nbsp;</span><b>0x00</b><span class="Apple-converted-space">&nbsp;</span>(Stop sax E4, pitch = 76
+          = 0x4C)</li>
+        <li style="margin: 0px 0px 8px 5px;">t=3 :<span class="Apple-converted-space">&nbsp;</span><b>0x99</b><span class="Apple-converted-space">&nbsp;</span>-<span class="Apple-converted-space">&nbsp;</span><b>0x23<span class="Apple-converted-space">&nbsp;</span></b>-<span class="Apple-converted-space">&nbsp;</span><b>0x00</b><span class="Apple-converted-space">&nbsp;</span>(Stop Bass Drum = 35 =
+          0x23)</li>
+        <li style="margin: 0px 0px 8px 5px;">t=3 :<span class="Apple-converted-space">&nbsp;</span><b>0x90</b><span class="Apple-converted-space">&nbsp;</span>-<span class="Apple-converted-space">&nbsp;</span><b>0x4F<span class="Apple-converted-space">&nbsp;</span></b>-<span class="Apple-converted-space">&nbsp;</span><b>0x40</b><span class="Apple-converted-space">&nbsp;</span>(Start sax G4, pitch = 79
+          = 0x4F)</li>
+        <li style="margin: 0px 0px 8px 5px;">t=4 :<span class="Apple-converted-space">&nbsp;</span><b>0x90</b><span class="Apple-converted-space">&nbsp;</span>-<span class="Apple-converted-space">&nbsp;</span><b>0x4F<span class="Apple-converted-space">&nbsp;</span></b>-<span class="Apple-converted-space">&nbsp;</span><b>0x00</b><span class="Apple-converted-space">&nbsp;</span>(Stop sax G4, pitch = 79
+          = 0x4F)</li>
+        <li style="margin: 0px 0px 8px 5px;">t=4 :<span class="Apple-converted-space">&nbsp;</span><b>0x91</b><span class="Apple-converted-space">&nbsp;</span>-<span class="Apple-converted-space">&nbsp;</span><b>0x3C<span class="Apple-converted-space">&nbsp;</span></b>-<span class="Apple-converted-space">&nbsp;</span><b>0x00</b><span class="Apple-converted-space">&nbsp;</span>(Stop piano C3, pitch =
+          60 = 0x3C)</li>
+        <li style="margin: 0px 0px 8px 5px;">t=4 :<span class="Apple-converted-space">&nbsp;</span><b>0x91</b><span class="Apple-converted-space">&nbsp;</span>-<span class="Apple-converted-space">&nbsp;</span><b>0x43<span class="Apple-converted-space">&nbsp;</span></b>-<span class="Apple-converted-space">&nbsp;</span><b>0x00</b><span class="Apple-converted-space">&nbsp;</span>(Stop piano G3, pitch =
+          67 = 0x43)</li>
+        <li style="margin: 0px 0px 8px 5px;">t=4 :<span class="Apple-converted-space">&nbsp;</span><b>0x91</b><span class="Apple-converted-space">&nbsp;</span>-<span class="Apple-converted-space">&nbsp;</span><b>0x4C<span class="Apple-converted-space">&nbsp;</span></b>-<span class="Apple-converted-space">&nbsp;</span><b>0x00</b><span class="Apple-converted-space">&nbsp;</span>(Stop piano E4, pitch =
+          76 = 0x4C)</li>
+      </ul>
+      <h2 style=" font-size: 18.2000007629395px; margin: 8px 0px 14px; color: rgb(0, 0, 0); font-family: Verdana; font-style: normal; font-variant: normal; letter-spacing: normal; orphans: auto; text-align: start; text-indent: 0px; text-transform: none; white-space: normal; widows: auto; word-spacing: 0px; -webkit-text-stroke-width: 0px; background-color: rgb(255, 255, 255);"><span style="color: rgb(7, 48, 171);">MIDI Tutorial Part 7 - MIDI
+          Controllers</span></h2>
+      <p style="color: rgb(0, 0, 0); font-family: Verdana; font-size: small; font-style: normal; font-variant: normal; font-weight: normal; letter-spacing: normal; line-height: 16.8999996185303px; orphans: auto; text-align: start; text-indent: 0px; text-transform: none; white-space: normal; widows: auto; word-spacing: 0px; -webkit-text-stroke-width: 0px; background-color: rgb(255, 255, 255);">There
+        are 128 MIDI controllers defined, but only a few of them are used in
+        practice. The purpose of a MIDI controller is to set a value of a
+        parameter in the synthesizer playing the notes, like the volume, the
+        panoramic (position in space from left to right in stereo), the level of
+        reverberation,...</p>
+      <p style="color: rgb(0, 0, 0); font-family: Verdana; font-size: small; font-style: normal; font-variant: normal; font-weight: normal; letter-spacing: normal; line-height: 16.8999996185303px; orphans: auto; text-align: start; text-indent: 0px; text-transform: none; white-space: normal; widows: auto; word-spacing: 0px; -webkit-text-stroke-width: 0px; background-color: rgb(255, 255, 255);">The
+        message is constructed as follows:</p>
+      <ul style="list-style-type: disc; margin: 0px 0px 8px 10px; padding-left: 40px; color: rgb(0, 0, 0); font-family: Verdana; font-size: small; font-style: normal; font-variant: normal; font-weight: normal; letter-spacing: normal; line-height: 16.8999996185303px; orphans: auto; text-align: start; text-indent: 0px; text-transform: none; white-space: normal; widows: auto; word-spacing: 0px; -webkit-text-stroke-width: 0px; background-color: rgb(255, 255, 255);">
+        <li style="margin: 0px 0px 8px 5px;">Status byte : 1011 CCCC</li>
+        <li style="margin: 0px 0px 8px 5px;">Data byte 1 : 0NNN NNNN</li>
+        <li style="margin: 0px 0px 8px 5px;">Data byte 2 : 0VVV VVVV</li>
+      </ul>
+      <p style="color: rgb(0, 0, 0); font-family: Verdana; font-size: small; font-style: normal; font-variant: normal; font-weight: normal; letter-spacing: normal; line-height: 16.8999996185303px; orphans: auto; text-align: start; text-indent: 0px; text-transform: none; white-space: normal; widows: auto; word-spacing: 0px; -webkit-text-stroke-width: 0px; background-color: rgb(255, 255, 255);">where
+        CCCC is the MIDI channel, NNNNNNN is the controller number (from 0 to
+        127) and VVVVVVV is the value assigned to the controller (also from 0 to
+        127).</p>
+      <p style="color: rgb(0, 0, 0); font-family: Verdana; font-size: small; font-style: normal; font-variant: normal; font-weight: normal; letter-spacing: normal; line-height: 16.8999996185303px; orphans: auto; text-align: start; text-indent: 0px; text-transform: none; white-space: normal; widows: auto; word-spacing: 0px; -webkit-text-stroke-width: 0px; background-color: rgb(255, 255, 255);">The
+        most common controller numbers are the following:</p>
+      <ul style="list-style-type: disc; margin: 0px 0px 8px 10px; padding-left: 40px; color: rgb(0, 0, 0); font-family: Verdana; font-size: small; font-style: normal; font-variant: normal; font-weight: normal; letter-spacing: normal; line-height: 16.8999996185303px; orphans: auto; text-align: start; text-indent: 0px; text-transform: none; white-space: normal; widows: auto; word-spacing: 0px; -webkit-text-stroke-width: 0px; background-color: rgb(255, 255, 255);">
+        <li style="margin: 0px 0px 8px 5px;">0 = Sound bank selection (MSB)</li>
+        <li style="margin: 0px 0px 8px 5px;">1 = Modulation wheel, often
+          assigned to a vibrato or tremolo effect.</li>
+        <li style="margin: 0px 0px 8px 5px;">7 = Volume level of the instrument</li>
+        <li style="margin: 0px 0px 8px 5px;">10 = Panoramic (0 = left; 64 =
+          center; 127 = right)</li>
+        <li style="margin: 0px 0px 8px 5px;">11 = Expression (sometimes used
+          also for volume control or similar, depending on the synthesizer)</li>
+        <li style="margin: 0px 0px 8px 5px;">32 = Sound bank selection (LSB)</li>
+        <li style="margin: 0px 0px 8px 5px;">64 = Sustain pedal (0 = no pedal;
+          &gt;= 64 =&gt; pedal ON)</li>
+        <li style="margin: 0px 0px 8px 5px;">121 = All controllers off (this
+          message clears all the controller values for this channel, back to
+          their default values)</li>
+        <li style="margin: 0px 0px 8px 5px;">123 = All notes off (this message
+          stops all the notes that are currently playing)</li>
+      </ul>
+      <p style="color: rgb(0, 0, 0); font-family: Verdana; font-size: small; font-style: normal; font-variant: normal; font-weight: normal; letter-spacing: normal; line-height: 16.8999996185303px; orphans: auto; text-align: start; text-indent: 0px; text-transform: none; white-space: normal; widows: auto; word-spacing: 0px; -webkit-text-stroke-width: 0px; background-color: rgb(255, 255, 255);"><b><u>Volume
+            and velocity</u></b></p>
+      <p style="color: rgb(0, 0, 0); font-family: Verdana; font-size: small; font-style: normal; font-variant: normal; font-weight: normal; letter-spacing: normal; line-height: 16.8999996185303px; orphans: auto; text-align: start; text-indent: 0px; text-transform: none; white-space: normal; widows: auto; word-spacing: 0px; -webkit-text-stroke-width: 0px; background-color: rgb(255, 255, 255);">For
+        instance, if you want to set the volume to a value of 100 (in the 0 to
+        127 range of values, 100 = 0x64) for the instrument playing on channel 1
+        (coded 0), you can send the following message:</p>
+      <ul style="list-style-type: disc; margin: 0px 0px 8px 10px; padding-left: 40px; color: rgb(0, 0, 0); font-family: Verdana; font-size: small; font-style: normal; font-variant: normal; font-weight: normal; letter-spacing: normal; line-height: 16.8999996185303px; orphans: auto; text-align: start; text-indent: 0px; text-transform: none; white-space: normal; widows: auto; word-spacing: 0px; -webkit-text-stroke-width: 0px; background-color: rgb(255, 255, 255);">
+        <li style="margin: 0px 0px 8px 5px;"><b>0xB0</b><span class="Apple-converted-space">&nbsp;</span>-<span class="Apple-converted-space">&nbsp;</span><b>0x07<span class="Apple-converted-space">&nbsp;</span></b>-<span class="Apple-converted-space">&nbsp;</span><b>0x64</b></li>
+      </ul>
+      <p style="color: rgb(0, 0, 0); font-family: Verdana; font-size: small; font-style: normal; font-variant: normal; font-weight: normal; letter-spacing: normal; line-height: 16.8999996185303px; orphans: auto; text-indent: 0px; text-transform: none; white-space: normal; widows: auto; word-spacing: 0px; -webkit-text-stroke-width: 0px; text-align: left; background-color: rgb(255, 255, 255);"><span style="font-weight: normal;">The volume change has an impact on all
+          notes currently playing as well as the notes that will start playing
+          later. The synthesizer keeps that volume level until another volume
+          level is sent.</span></p>
+      <p style="color: rgb(0, 0, 0); font-family: Verdana; font-size: small; font-style: normal; font-variant: normal; font-weight: normal; letter-spacing: normal; line-height: 16.8999996185303px; orphans: auto; text-indent: 0px; text-transform: none; white-space: normal; widows: auto; word-spacing: 0px; -webkit-text-stroke-width: 0px; text-align: left; background-color: rgb(255, 255, 255);"><span style="font-weight: normal;">Remember that the velocity of a note is
+          sent with the<span class="Apple-converted-space">&nbsp;</span></span><b>NOTE
+          ON</b><span style="font-weight: normal;"><span class="Apple-converted-space">&nbsp;</span>message
+          itself. The velocity cannot be changed once the note has been started,
+          so you can use the volume controller to change the level of the note
+          after it has been started.</span></p>
+      <p style="color: rgb(0, 0, 0); font-family: Verdana; font-size: small; font-style: normal; font-variant: normal; font-weight: normal; letter-spacing: normal; line-height: 16.8999996185303px; orphans: auto; text-indent: 0px; text-transform: none; white-space: normal; widows: auto; word-spacing: 0px; -webkit-text-stroke-width: 0px; text-align: left; background-color: rgb(255, 255, 255);"><span style="font-weight: normal;">To create a crescendo, you need to send a
+          sequence of increasing volume values.</span></p>
+      <p style="color: rgb(0, 0, 0); font-family: Verdana; font-size: small; font-style: normal; font-variant: normal; font-weight: normal; letter-spacing: normal; line-height: 16.8999996185303px; orphans: auto; text-indent: 0px; text-transform: none; white-space: normal; widows: auto; word-spacing: 0px; -webkit-text-stroke-width: 0px; text-align: left; background-color: rgb(255, 255, 255);"><span style="font-weight: normal;">You must always balance out the velocity
+          and volume values to use, so that both are in a correct range of
+          value. If one of them is too low, the notes may not be heard correctly
+          even if the other value is at its maximal value. The effect of both
+          values are multiplicative to determine the real loudness of the note.</span></p>
+      <p style="color: rgb(0, 0, 0); font-family: Verdana; font-size: small; font-style: normal; font-variant: normal; font-weight: normal; letter-spacing: normal; line-height: 16.8999996185303px; orphans: auto; text-indent: 0px; text-transform: none; white-space: normal; widows: auto; word-spacing: 0px; -webkit-text-stroke-width: 0px; text-align: left; background-color: rgb(255, 255, 255);"><b><u>Instrument
+            selection</u></b></p>
+      <p style="color: rgb(0, 0, 0); font-family: Verdana; font-size: small; font-style: normal; font-variant: normal; font-weight: normal; letter-spacing: normal; line-height: 16.8999996185303px; orphans: auto; text-indent: 0px; text-transform: none; white-space: normal; widows: auto; word-spacing: 0px; -webkit-text-stroke-width: 0px; text-align: left; background-color: rgb(255, 255, 255);"><span style="font-weight: normal;">As we have seen before, you can select a
+          sound on a synthesizer with the 128 values of the program change
+          message. The sound bank selection messages (LSB<span class="Apple-converted-space">&nbsp;</span><i>Least
+            Significant Byte</i><span class="Apple-converted-space">&nbsp;</span>and
+          MSB<span class="Apple-converted-space">&nbsp;</span><i>Most
+            Significant Byte</i>) are used in addition to the program change
+          message.</span></p>
+      <p style="color: rgb(0, 0, 0); font-family: Verdana; font-size: small; font-style: normal; font-variant: normal; font-weight: normal; letter-spacing: normal; line-height: 16.8999996185303px; orphans: auto; text-indent: 0px; text-transform: none; white-space: normal; widows: auto; word-spacing: 0px; -webkit-text-stroke-width: 0px; text-align: left; background-color: rgb(255, 255, 255);"><span style="font-weight: normal;">A synthesizer may contain one or more
+          sound banks, each containing 128 sounds. If you want to use a specific
+          sound bank of the synthesizer, you must first activate the new bank
+          and then send the program change message.</span></p>
+      <p style="color: rgb(0, 0, 0); font-family: Verdana; font-size: small; font-style: normal; font-variant: normal; font-weight: normal; letter-spacing: normal; line-height: 16.8999996185303px; orphans: auto; text-indent: 0px; text-transform: none; white-space: normal; widows: auto; word-spacing: 0px; -webkit-text-stroke-width: 0px; text-align: left; background-color: rgb(255, 255, 255);"><span style="font-weight: normal;">As an example, if you want to use sound
+          number 3 (encoded 2) on channel 1 (coded 0) in the bank with
+          specification LSB=1; MSB=5, you must send the following sequence of
+          MIDI messages:</span></p>
+      <ul style="list-style-type: disc; margin: 0px 0px 8px 10px; padding-left: 40px; color: rgb(0, 0, 0); font-family: Verdana; font-size: small; font-style: normal; font-variant: normal; font-weight: normal; letter-spacing: normal; line-height: 16.8999996185303px; orphans: auto; text-align: start; text-indent: 0px; text-transform: none; white-space: normal; widows: auto; word-spacing: 0px; -webkit-text-stroke-width: 0px; background-color: rgb(255, 255, 255);">
+        <li style="margin: 0px 0px 8px 5px;"><b>0xB0</b><span class="Apple-converted-space">&nbsp;</span>-<span class="Apple-converted-space">&nbsp;</span><b>0x00<span class="Apple-converted-space">&nbsp;</span></b>-<span class="Apple-converted-space">&nbsp;</span><b>0x05<span class="Apple-converted-space">&nbsp;</span></b>(MSB
+          sound bank selection)</li>
+        <li style="margin: 0px 0px 8px 5px;"><b>0xB0 - 0x20 - 0x01</b><span class="Apple-converted-space">&nbsp;</span>(LSB
+          sound bank selection)</li>
+        <li style="margin: 0px 0px 8px 5px;"><b>0xC0 - 0x02</b><span class="Apple-converted-space">&nbsp;</span>(sound
+          selection in the current sound bank)</li>
+      </ul>
+      <p style="color: rgb(0, 0, 0); font-family: Verdana; font-size: small; font-style: normal; font-variant: normal; font-weight: normal; letter-spacing: normal; line-height: 16.8999996185303px; orphans: auto; text-align: start; text-indent: 0px; text-transform: none; white-space: normal; widows: auto; word-spacing: 0px; -webkit-text-stroke-width: 0px; background-color: rgb(255, 255, 255);">After
+        receiving these messages, the synthesizer will play the following notes
+        with that specific sound.</p>
+      <p style="color: rgb(0, 0, 0); font-family: Verdana; font-size: small; font-style: normal; font-variant: normal; font-weight: normal; letter-spacing: normal; line-height: 16.8999996185303px; orphans: auto; text-align: start; text-indent: 0px; text-transform: none; white-space: normal; widows: auto; word-spacing: 0px; -webkit-text-stroke-width: 0px; background-color: rgb(255, 255, 255);">As
+        the MSB and LSB can range from 0 to 127, there is a total of 128 x 128 =
+        16384 possible sound bank to be selected. In practice, only a few are
+        implemented.</p>
+      <p style="color: rgb(0, 0, 0); font-family: Verdana; font-size: small; font-style: normal; font-variant: normal; font-weight: normal; letter-spacing: normal; line-height: 16.8999996185303px; orphans: auto; text-align: start; text-indent: 0px; text-transform: none; white-space: normal; widows: auto; word-spacing: 0px; -webkit-text-stroke-width: 0px; background-color: rgb(255, 255, 255);">The
+        information about the program change numbers and the sound banks
+        available is to be found in the MIDI implementation chart and MIDI
+        specifications of the synthesizer you are using.</p>
+      <h2 style=" font-size: 18.2000007629395px; margin: 8px 0px 14px; color: rgb(0, 0, 0); font-family: Verdana; font-style: normal; font-variant: normal; letter-spacing: normal; orphans: auto; text-align: start; text-indent: 0px; text-transform: none; white-space: normal; widows: auto; word-spacing: 0px; -webkit-text-stroke-width: 0px; background-color: rgb(255, 255, 255);"><span style="color: rgb(7, 48, 171);">MIDI Tutorial Part 8 - Pitch Bend</span></h2>
+      <p style="color: rgb(0, 0, 0); font-family: Verdana; font-size: small; font-style: normal; font-variant: normal; font-weight: normal; letter-spacing: normal; line-height: 16.8999996185303px; orphans: auto; text-align: start; text-indent: 0px; text-transform: none; white-space: normal; widows: auto; word-spacing: 0px; -webkit-text-stroke-width: 0px; background-color: rgb(255, 255, 255);">The
+        Pitch Bend message is used to vary the pitch of the notes that are
+        playing on the current MIDI channel. The message is the following:</p>
+      <ul style="list-style-type: disc; margin: 0px 0px 8px 10px; padding-left: 40px; color: rgb(0, 0, 0); font-family: Verdana; font-size: small; font-style: normal; font-variant: normal; font-weight: normal; letter-spacing: normal; line-height: 16.8999996185303px; orphans: auto; text-align: start; text-indent: 0px; text-transform: none; white-space: normal; widows: auto; word-spacing: 0px; -webkit-text-stroke-width: 0px; background-color: rgb(255, 255, 255);">
+        <li style="margin: 0px 0px 8px 5px;">Status byte : 1110 CCCC</li>
+        <li style="margin: 0px 0px 8px 5px;">Data byte 1 : 0LLL LLLL</li>
+        <li style="margin: 0px 0px 8px 5px;">Data byte 2 : 0MMM MMMM</li>
+      </ul>
+      <p style="color: rgb(0, 0, 0); font-family: Verdana; font-size: small; font-style: normal; font-variant: normal; font-weight: normal; letter-spacing: normal; line-height: 16.8999996185303px; orphans: auto; text-align: start; text-indent: 0px; text-transform: none; white-space: normal; widows: auto; word-spacing: 0px; -webkit-text-stroke-width: 0px; background-color: rgb(255, 255, 255);">where
+        CCCC is the MIDI channel, LLLLLLL is the LSB of the pitch bend value and
+        MMMMMMM is the MSB. The 14 bit value of the pitch bend is defined so
+        that a value of 0x2000 is the center corresponding to the normal pitch
+        of the note (no pitch change). Using numbers above 0x2000 (up to 0x3FFF)
+        will increase the pitch and using numbers below (down to 0x0000) will
+        decrease the pitch. The range of pitch change is symmetric (up and down)
+        and can often be adjusted in the synthesizer itself. The most common
+        range value is +/- 2 semitones around the standard note pitch.</p>
+      <p style="color: rgb(0, 0, 0); font-family: Verdana; font-size: small; font-style: normal; font-variant: normal; font-weight: normal; letter-spacing: normal; line-height: 16.8999996185303px; orphans: auto; text-align: start; text-indent: 0px; text-transform: none; white-space: normal; widows: auto; word-spacing: 0px; -webkit-text-stroke-width: 0px; background-color: rgb(255, 255, 255);">Pitch
+        bend is often used to create glissando and guitar bend effects. To
+        achieve this, you must send a continuous sequence of pitch bend
+        messages, to vary the pitch in real time, often enough so that the ear
+        does not hear too much steps in the curve.</p>
+      <p style="color: rgb(0, 0, 0); font-family: Verdana; font-size: small; font-style: normal; font-variant: normal; font-weight: normal; letter-spacing: normal; line-height: 16.8999996185303px; orphans: auto; text-align: start; text-indent: 0px; text-transform: none; white-space: normal; widows: auto; word-spacing: 0px; -webkit-text-stroke-width: 0px; background-color: rgb(255, 255, 255);">For
+        instance, to "bend" a note of a semitone higher, you must send a value
+        of 0x3000, which will be sent as:</p>
+      <ul style="list-style-type: disc; margin: 0px 0px 8px 10px; padding-left: 40px; color: rgb(0, 0, 0); font-family: Verdana; font-size: small; font-style: normal; font-variant: normal; font-weight: normal; letter-spacing: normal; line-height: 16.8999996185303px; orphans: auto; text-align: start; text-indent: 0px; text-transform: none; white-space: normal; widows: auto; word-spacing: 0px; -webkit-text-stroke-width: 0px; background-color: rgb(255, 255, 255);">
+        <li style="margin: 0px 0px 8px 5px;"><b>0xE0 - 0x00 - 0x60</b></li>
+      </ul>
+      <p style="color: rgb(0, 0, 0); font-family: Verdana; font-size: small; font-style: normal; font-variant: normal; font-weight: normal; letter-spacing: normal; line-height: 16.8999996185303px; orphans: auto; text-align: start; text-indent: 0px; text-transform: none; white-space: normal; widows: auto; word-spacing: 0px; -webkit-text-stroke-width: 0px; background-color: rgb(255, 255, 255);">Indeed,
+        the value 0x3000 must be split into two 7-bit values, giving 0x60 and
+        0x00 for the MSB and LSB parts.</p>
+      <h2 style=" font-size: 18.2000007629395px; margin: 8px 0px 14px; color: rgb(0, 0, 0); font-family: Verdana; font-style: normal; font-variant: normal; letter-spacing: normal; orphans: auto; text-align: start; text-indent: 0px; text-transform: none; white-space: normal; widows: auto; word-spacing: 0px; -webkit-text-stroke-width: 0px; background-color: rgb(255, 255, 255);"><span style="color: rgb(7, 48, 171);">MIDI Tutorial Part 9 - Resetting notes</span></h2>
+      <p style="color: rgb(0, 0, 0); font-family: Verdana; font-size: small; font-style: normal; font-variant: normal; font-weight: normal; letter-spacing: normal; line-height: 16.8999996185303px; orphans: auto; text-align: start; text-indent: 0px; text-transform: none; white-space: normal; widows: auto; word-spacing: 0px; -webkit-text-stroke-width: 0px; background-color: rgb(255, 255, 255);">As
+        we have seen, all<span class="Apple-converted-space">&nbsp;</span><b>NOTE
+          ON</b><span class="Apple-converted-space">&nbsp;</span>message should
+        have its corresponding<b>NOTE OFF</b><span class="Apple-converted-space">&nbsp;</span>message,
+        otherwise the note will continue to sound forever.</p>
+      <p style="color: rgb(0, 0, 0); font-family: Verdana; font-size: small; font-style: normal; font-variant: normal; font-weight: normal; letter-spacing: normal; line-height: 16.8999996185303px; orphans: auto; text-align: start; text-indent: 0px; text-transform: none; white-space: normal; widows: auto; word-spacing: 0px; -webkit-text-stroke-width: 0px; background-color: rgb(255, 255, 255);">There
+        are cases where you want to reset whatever notes are playing. There are
+        basically 4 ways to do this. Some synthesizer do not accept them all, so
+        it is interesting to offer the different possibilities.</p>
+      <p style="color: rgb(0, 0, 0); font-family: Verdana; font-size: small; font-style: normal; font-variant: normal; font-weight: normal; letter-spacing: normal; line-height: 16.8999996185303px; orphans: auto; text-align: start; text-indent: 0px; text-transform: none; white-space: normal; widows: auto; word-spacing: 0px; -webkit-text-stroke-width: 0px; background-color: rgb(255, 255, 255);"><b>1
+          - Using MIDI controller 123</b></p>
+      <p style="color: rgb(0, 0, 0); font-family: Verdana; font-size: small; font-style: normal; font-variant: normal; font-weight: normal; letter-spacing: normal; line-height: 16.8999996185303px; orphans: auto; text-align: start; text-indent: 0px; text-transform: none; white-space: normal; widows: auto; word-spacing: 0px; -webkit-text-stroke-width: 0px; background-color: rgb(255, 255, 255);">If
+        you send a MIDI controller 123 on one MIDI channel, the synthesizer will
+        stop all notes playing on that channel. To reset all MIDI channels, send
+        that message for each channel. Please note that some synthesizer do not
+        respond to this message.</p>
+      <p style="color: rgb(0, 0, 0); font-family: Verdana; font-size: small; font-style: normal; font-variant: normal; font-weight: normal; letter-spacing: normal; line-height: 16.8999996185303px; orphans: auto; text-align: start; text-indent: 0px; text-transform: none; white-space: normal; widows: auto; word-spacing: 0px; -webkit-text-stroke-width: 0px; background-color: rgb(255, 255, 255);"><b>2
+          -MIDI Reset message</b></p>
+      <p style="color: rgb(0, 0, 0); font-family: Verdana; font-size: small; font-style: normal; font-variant: normal; font-weight: normal; letter-spacing: normal; line-height: 16.8999996185303px; orphans: auto; text-align: start; text-indent: 0px; text-transform: none; white-space: normal; widows: auto; word-spacing: 0px; -webkit-text-stroke-width: 0px; background-color: rgb(255, 255, 255);">This
+        is a one status byte message<span class="Apple-converted-space">&nbsp;</span><b>0xFF</b>,
+        without data bytes. It should reset the synthesizer to its power-on
+        default, so it also stops all notes playing. Use this message sparingly,
+        as it reset the full synthesizer, not only the notes playing.</p>
+      <p style="color: rgb(0, 0, 0); font-family: Verdana; font-size: small; font-style: normal; font-variant: normal; font-weight: normal; letter-spacing: normal; line-height: 16.8999996185303px; orphans: auto; text-align: start; text-indent: 0px; text-transform: none; white-space: normal; widows: auto; word-spacing: 0px; -webkit-text-stroke-width: 0px; background-color: rgb(255, 255, 255);"><b>3
+          - MIDI NOTE OFF</b></p>
+      <p style="color: rgb(0, 0, 0); font-family: Verdana; font-size: small; font-style: normal; font-variant: normal; font-weight: normal; letter-spacing: normal; line-height: 16.8999996185303px; orphans: auto; text-align: start; text-indent: 0px; text-transform: none; white-space: normal; widows: auto; word-spacing: 0px; -webkit-text-stroke-width: 0px; background-color: rgb(255, 255, 255);">You
+        can also send, for each channel (0 to 15) and each note pitch (0 to 127)
+        one MIDI NOTE OFF message. This is the total solution, but requires a
+        lot of MIDI messages to be sent, which may have some reaction time
+        according to the MIDI hardware system you use.</p>
+      <p style="color: rgb(0, 0, 0); font-family: Verdana; font-size: small; font-style: normal; font-variant: normal; font-weight: normal; letter-spacing: normal; line-height: 16.8999996185303px; orphans: auto; text-align: start; text-indent: 0px; text-transform: none; white-space: normal; widows: auto; word-spacing: 0px; -webkit-text-stroke-width: 0px; background-color: rgb(255, 255, 255);"><b>4
+          - MIDI NOTE OFF - Optimized</b></p>
+      <p style="color: rgb(0, 0, 0); font-family: Verdana; font-size: small; font-style: normal; font-variant: normal; font-weight: normal; letter-spacing: normal; line-height: 16.8999996185303px; orphans: auto; text-align: start; text-indent: 0px; text-transform: none; white-space: normal; widows: auto; word-spacing: 0px; -webkit-text-stroke-width: 0px; background-color: rgb(255, 255, 255);">In
+        this case, use a table to keep track of the NOTE ON and OFF messages you
+        send for each channel. A buffer of 128 bytes for each channel,
+        representing the number of NOTE ON messages sent to that note,should be
+        incremented by a NOTE ON and decremented by a NOTE OFF. Then, when you
+        want to reset every note, simply go through that table and send a NOTE
+        OFF to each note that is still playing.</p>
+      <h2 style=" font-size: 18.2000007629395px; margin: 8px 0px 14px; color: rgb(0, 0, 0); font-family: Verdana; font-style: normal; font-variant: normal; letter-spacing: normal; orphans: auto; text-align: start; text-indent: 0px; text-transform: none; white-space: normal; widows: auto; word-spacing: 0px; -webkit-text-stroke-width: 0px; background-color: rgb(255, 255, 255);"><span style="color: rgb(7, 48, 171);">MIDI Tutorial - Going further...</span></h2>
+      <p style="color: rgb(0, 0, 0); font-family: Verdana; font-size: small; font-style: normal; font-variant: normal; font-weight: normal; letter-spacing: normal; line-height: 16.8999996185303px; orphans: auto; text-align: start; text-indent: 0px; text-transform: none; white-space: normal; widows: auto; word-spacing: 0px; -webkit-text-stroke-width: 0px; background-color: rgb(255, 255, 255);">The
+        above information covers the basic use of MIDI for many playback
+        situations. To find all information about the more advanced MIDI
+        messages and conventions, you can go on the site of the<span class="Apple-converted-space">&nbsp;</span><em>MIDI
+          Manufacturers Association</em>, that you can easily find with Google.</p>
+      <p style="color: rgb(0, 0, 0); font-family: Verdana; font-size: small; font-style: normal; font-variant: normal; font-weight: normal; letter-spacing: normal; line-height: 16.8999996185303px; orphans: auto; text-align: start; text-indent: 0px; text-transform: none; white-space: normal; widows: auto; word-spacing: 0px; -webkit-text-stroke-width: 0px; background-color: rgb(255, 255, 255);">If
+        you have any question, feel free to contact me at :</p>
+      <p style="color: rgb(0, 0, 0); font-family: Verdana; font-size: small; font-style: normal; font-variant: normal; font-weight: normal; letter-spacing: normal; line-height: 16.8999996185303px; orphans: auto; text-indent: 0px; text-transform: none; white-space: normal; widows: auto; word-spacing: 0px; -webkit-text-stroke-width: 0px; text-align: center; background-color: rgb(255, 255, 255);"><span style="text-align: center;">info@arpegemusic.com</span></p>
+      <p style="color: rgb(0, 0, 0); font-family: Verdana; font-size: small; font-style: normal; font-variant: normal; font-weight: normal; letter-spacing: normal; line-height: 16.8999996185303px; orphans: auto; text-align: start; text-indent: 0px; text-transform: none; white-space: normal; widows: auto; word-spacing: 0px; -webkit-text-stroke-width: 0px; background-color: rgb(255, 255, 255);">Musically
+        yours,</p>
+      <p style="color: rgb(0, 0, 0); font-family: Verdana; font-size: small; font-style: normal; font-variant: normal; font-weight: normal; letter-spacing: normal; line-height: 16.8999996185303px; orphans: auto; text-align: start; text-indent: 0px; text-transform: none; white-space: normal; widows: auto; word-spacing: 0px; -webkit-text-stroke-width: 0px; background-color: rgb(255, 255, 255);">Dominique
+        Vandenneucker<br>
+        Music Software Designer<span class="Apple-converted-space">&nbsp;</span><br>
+        since 1992 at Arpege Music</p>
+      <hr style="border-style: solid; width: 500px; clear: both; color: rgb(0, 0, 0); font-family: Verdana; font-size: small; font-style: normal; font-variant: normal; font-weight: normal; letter-spacing: normal; line-height: 16.8999996185303px; orphans: auto; text-align: start; text-indent: 0px; text-transform: none; white-space: normal; widows: auto; word-spacing: 0px; -webkit-text-stroke-width: 0px; height: 1px; margin-left: 0px; background-color: rgb(255, 255, 255);"><br>
+      <p style="color: rgb(0, 0, 0); font-family: Verdana; font-size: small; font-style: normal; font-variant: normal; font-weight: normal; letter-spacing: normal; line-height: 16.8999996185303px; orphans: auto; text-align: start; text-indent: 0px; text-transform: none; white-space: normal; widows: auto; word-spacing: 0px; -webkit-text-stroke-width: 0px; background-color: rgb(255, 255, 255);"><a href="http://www.music-software-development.com/index.html">Back from
+          "MIDI Tutorial" page to "Music Software Development" page</a></p>
+      <p style="color: rgb(0, 0, 0); font-family: Verdana; font-size: small; font-style: normal; font-variant: normal; font-weight: normal; letter-spacing: normal; line-height: 16.8999996185303px; orphans: auto; text-align: start; text-indent: 0px; text-transform: none; white-space: normal; widows: auto; word-spacing: 0px; -webkit-text-stroke-width: 0px; background-color: rgb(255, 255, 255);"><a href="http://www.music-software-development.com/index.html"><br>
+        </a></p>
+    </font></font></font></font></font></font></div><font style="color: rgb(0, 0, 0); font-family: Verdana; font-size: small; font-style: normal; font-variant: normal; font-weight: normal; letter-spacing: normal; line-height: 16.8999996185303px; orphans: auto; text-align: start; text-indent: 0px; text-transform: none; white-space: normal; widows: auto; word-spacing: 0px; -webkit-text-stroke-width: 0px; background-color: rgb(255, 255, 255);" size="2" face="Verdana"><font size="2" face="Verdana"><font size="2" face="Verdana"><font size="2" face="Verdana">
+</font></font></font></font></div><font style="color: rgb(0, 0, 0); font-family: Verdana; font-size: small; font-style: normal; font-variant: normal; font-weight: normal; letter-spacing: normal; line-height: 16.8999996185303px; orphans: auto; text-align: start; text-indent: 0px; text-transform: none; white-space: normal; widows: auto; word-spacing: 0px; -webkit-text-stroke-width: 0px; background-color: rgb(255, 255, 255);" size="2" face="Verdana"><font size="2" face="Verdana"><font size="2" face="Verdana"><font size="2" face="Verdana">
+        </font></font></font></font></div><font style="color: rgb(0, 0, 0); font-family: Verdana; font-size: small; font-style: normal; font-variant: normal; font-weight: normal; letter-spacing: normal; line-height: 16.8999996185303px; orphans: auto; text-align: start; text-indent: 0px; text-transform: none; white-space: normal; widows: auto; word-spacing: 0px; -webkit-text-stroke-width: 0px; background-color: rgb(255, 255, 255);" size="2" face="Verdana"><font size="2" face="Verdana"><font size="2" face="Verdana"><font size="2" face="Verdana">
+        <div id="area-column-33">
+          <div id="area-column-content"></div>
+        </div>
+      </font></font></font></font></div><font style="color: rgb(0, 0, 0); font-family: Verdana; font-size: small; font-style: normal; font-variant: normal; font-weight: normal; letter-spacing: normal; line-height: 16.8999996185303px; orphans: auto; text-align: start; text-indent: 0px; text-transform: none; white-space: normal; widows: auto; word-spacing: 0px; -webkit-text-stroke-width: 0px; background-color: rgb(255, 255, 255);" size="2" face="Verdana"><font size="2" face="Verdana"><font size="2" face="Verdana"><font size="2" face="Verdana">
+      <div id="bar3d"> </div>
+      <div id="area-bottom" bgcolor="#FFFFFF">
+    <div style="text-align: center;"><em><br>
+        <br>
+        <span style="color: #3333ff;">Copyright 2012 - Arpege Music - Dominique
+          Vandenneucker</span></em></div>
+  </div>
+      <div id="bar3d"> </div>
+    </font></font></font></font></div><font style="color: rgb(0, 0, 0); font-family: Verdana; font-size: small; font-style: normal; font-variant: normal; font-weight: normal; letter-spacing: normal; line-height: 16.8999996185303px; orphans: auto; text-align: start; text-indent: 0px; text-transform: none; white-space: normal; widows: auto; word-spacing: 0px; -webkit-text-stroke-width: 0px; background-color: rgb(255, 255, 255);" size="2" face="Verdana"><font size="2" face="Verdana"><font size="2" face="Verdana"><font size="2" face="Verdana">
+    
+  
+</font></font></font></font></body></html>

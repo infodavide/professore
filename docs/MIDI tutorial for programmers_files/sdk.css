@@ -1,0 +1,318 @@
+  body {
+	background-image: url("images/backcolor-3.jpg");
+	background-attachment: fixed;
+	background-position: center top;
+	background-repeat: no-repeat;
+	margin: 0 0 0 0;
+	font-family: Arial, Helvetica, sans-serif;
+	font-size: 13px;
+	color: #707070;
+  }
+  h1 {
+	font-family: book antiqua,palatino,times new roman,times,serif;
+	text-align: left;
+	margin-right: 20px;
+  }
+  h2 {
+	font-family: book antiqua,palatino,times new roman,times,serif;
+	color: #FFFFFF;
+	background-color: #808080; 
+	margin: 10px 0 0 0; 
+	padding: 2px 6px 2px 6px;
+	border: 0 0 0 0;
+	text-align: left;
+  }
+  div#conteneur-level-0   {
+	width: 1000px;
+	margin: 0 auto;
+  }
+  div#area-top   {
+	width: 1000px;
+	margin: 0 0 0 0;
+	height: 50px;
+	background-color: #000000;
+  }
+  div#bar3d   {
+	background-image: url("images/bar3d.png");
+	width: 1000px;
+	margin: 0 0 0 0;
+	height: 11px;
+  }
+  div#area-menu   {
+	width: 1000px;
+	margin: 0 0 0 0;
+	height: 40px;
+	background-color: #FFFFFF;
+  }
+  div#area-header   {
+	width: 1000px;
+	margin: 0 0 0 0;
+	text-align: left;
+	height: 300px;
+	background-color: #FFFFFF;
+  }
+  div#area-header-small   {
+	width: 1000px;
+	margin: 0 0 0 0;
+	height: 216px;
+	background-color: #FFFFFF;
+	display: table;
+  }
+  div#area-current-address   {
+	width: 1000px;
+	margin: 0 0 0 0;
+	height: 40px;
+	background-color: #FFFFFF;
+  }
+  div#area-main   {
+	width: 1000px;
+	margin: 0 0 0 0;
+	padding: 0 0 15px 0;
+	background-color: #FFFFFF;
+	display: table;
+  }
+  div#area-column-20   {
+	width: 20%;
+	margin: 0 0 0 0;
+	padding: 0 0 0 0;
+	background-color: #FFFFFF;
+	display: table-cell;
+	vertical-align: top;
+	align: center;
+  }
+  div#area-column-745px   {
+	width: 745px;
+	height: 216px;
+	margin: 0 0 0 0;
+	padding: 0 0 0 0;
+	background-color: #FFFFFF;
+	display: table-cell;
+	vertical-align: top;
+  }
+  div#area-column-255px   {
+	width: 255px;
+	height: 216px;
+	margin: 0 0 0 0;
+	padding: 0 0 0 0;
+	background-color: #FFFFFF;
+	color: #000000;
+	display: table-cell;
+	vertical-align: top;
+  }
+  div#area-column-33   {
+	width: 33%;
+	margin: 0 0 0 0;
+	padding: 0 0 0 0;
+	background-color: #FFFFFF;
+	display: table-cell;
+	vertical-align: top;
+  }
+  div#area-column-66   {
+    width: 66%;
+    margin: 0 0 0 0;
+    padding: 0 0 0 0;
+    background-color: #FFFFFF;
+    display: table-cell;
+	vertical-align: top;
+  }
+  div#area-column-60   {
+    width: 60%;
+    margin: 0 0 0 0;
+    padding: 0 0 0 0;
+    background-color: #FFFFFF;
+    display: table-cell;
+	vertical-align: top;
+  }
+  div#area-column-content   {
+	margin: 0 0 0 0;
+	padding: 0 0 0 0;
+	text-align: justify;
+	vertical-align: top;
+  }
+  div#area-extended-menu   {
+	width: 1000px;
+	margin: 0 0 0 0;
+	height: 150px;
+	background-image: url("images/back-ext-menu.png");
+  }
+  div#area-bottom   {
+	width: 1000px;
+	margin: 0 0 0 0;
+	text-align: left;
+	height: 80px;
+	background-color: #808080;
+  }
+  div#block-text   {
+	color: #606060;
+	padding: 1px 35px 1px 35px;
+	margin: 0 0 0 0;
+  }
+  h1#header-1A    {
+	color: #0092D4;
+	padding-left: 20px;
+	font-weight: bold;
+  }
+  h1#header-1B    {
+	color: #DE4223;
+	padding-left: 20px;
+	font-weight: bold;
+  }
+  h1#header-1C    {
+	color: #5EB536;
+	padding-left: 20px;
+	font-weight: bold;
+  }
+  h2#header-2A    {
+	background-color: #0092D4;
+  }
+  h2#header-2B    {
+	background-color: #DE4223;
+  }
+  h2#header-2C    {
+	background-color: #5EB536;
+  }
+  
+  h1#header-1PRO   {
+	color: #000000;
+	padding-left: 20px;
+	font-weight: bold;
+  }
+  h2#header-2PRO    {
+	background-color: #000000;
+	color: #FFFFFF;
+  }
+  h1#header-1ECR   {
+	color: #0093DD;
+	padding-left: 20px;
+	font-weight: bold;
+  }
+  h2#header-2ECR    {
+	background-color: #0093DD;
+	color: #FFFFFF;
+  }
+  h1#header-1DEB   {
+	color: #70C3E5;
+	padding-left: 20px;
+	font-weight: bold;
+  }
+  h2#header-2DEB    {
+	background-color: #70C3E5;
+	color: #FFFFFF;
+  }
+  h1#header-1CLA   {
+	color: #F0A30A;
+	padding-left: 20px;
+	font-weight: bold;
+  }
+  h2#header-2CLA    {
+	background-color: #F0A30A;
+	color: #FFFFFF;
+  }
+  h1#header-1CHO   {
+	color: #3AAC37;
+	padding-left: 20px;
+	font-weight: bold;
+  }
+  h2#header-2CHO    {
+	background-color: #3AAC37;
+	color: #FFFFFF;
+  }
+  h1#header-1GUI   {
+	color: #329690;
+	padding-left: 20px;
+	font-weight: bold;
+  }
+  h2#header-2GUI    {
+	background-color: #329690;
+	color: #FFFFFF;
+  }
+  h1#header-1PER   {
+	color: #FFF500;
+	padding-left: 20px;
+	font-weight: bold;
+  }
+  h2#header-2PER    {
+	background-color: #FFF500;
+	color: #000000;
+  }
+  h1#header-1SOL  {
+	color: #9FCE1A;
+	padding-left: 20px;
+	font-weight: bold;
+  }
+  h2#header-2SOL    {
+	background-color: #9FCE1A;
+	color: #FFFFFF;
+  }
+  h1#header-1CPL  {
+	color: #E67126;
+	padding-left: 20px;
+	font-weight: bold;
+  }
+  h2#header-2CPL    {
+	background-color: #E67126;
+	color: #FFFFFF;
+  }
+  h1#header-1CPP  {
+	color: #DC3326;
+	padding-left: 20px;
+	font-weight: bold;
+  }
+  h2#header-2CPP    {
+	background-color: #DC3326;
+	color: #FFFFFF;
+  }
+  h1#header-1LOI {
+	color: #96759F;
+	padding-left: 20px;
+	font-weight: bold;
+  }
+  h2#header-2LOI    {
+	background-color: #96759F;
+	color: #FFFFFF;
+  }
+  
+  div#block-shadow-20    {
+	background-image: url("images/back-right-shadow-20.png");
+  }
+  div#block-top-shadow-20    {
+	background-image: url("images/back-top-shadow-20.png");
+	height: 7px;
+  }
+  div#block-bottom-shadow-20    {
+	background-image: url("images/back-bottom-shadow-20.png");
+	height: 13px;
+  }
+  div#block-shadow-33    {
+	background-image: url("images/back-right-shadow-33.png");
+  }
+  div#block-top-shadow-33    {
+	background-image: url("images/back-top-shadow-33.png");
+	height: 7px;
+  }
+  div#block-bottom-shadow-33    {
+	background-image: url("images/back-bottom-shadow-33.png");
+	height: 13px;
+  }
+  div#block-shadow-60    {
+	background-image: url("images/back-right-shadow-60.png");
+  }
+  div#block-top-shadow-60    {
+	background-image: url("images/back-top-shadow-60.png");
+	height: 7px;
+  }
+  div#block-bottom-shadow-60    {
+	background-image: url("images/back-bottom-shadow-60.png");
+	height: 13px;
+  }
+  div#block-shadow-66    {
+	background-image: url("images/back-right-shadow-66.png");
+  }
+  div#block-top-shadow-66    {
+	background-image: url("images/back-top-shadow-66.png");
+	height: 7px;
+  }
+  div#block-bottom-shadow-66    {
+	background-image: url("images/back-bottom-shadow-66.png");
+	height: 13px;
+  }
