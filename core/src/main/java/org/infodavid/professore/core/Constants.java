@@ -9,14 +9,10 @@ public final class Constants {
     public static final String MID_EXTENSION = ".mid";
 
     /** The Constant NOTE_NAMES_EN. */
-    public static final String[] NOTE_NAMES_EN = {
-            NoteEnum.DO.getEnglishName(), NoteEnum.DO_DIESIS.getEnglishName(), NoteEnum.RE.getEnglishName(), NoteEnum.RE_DIESIS.getEnglishName(), NoteEnum.MI.getEnglishName(), NoteEnum.FA.getEnglishName(), NoteEnum.FA_DIESIS.getEnglishName(), NoteEnum.SOL.getEnglishName(), NoteEnum.SOL_DIESIS.getEnglishName(), NoteEnum.LA.getEnglishName(), NoteEnum.LA_DIESIS.getEnglishName(), NoteEnum.SI.getEnglishName()
-    };
+    public static final String[] NOTE_NAMES_EN = { NoteEnum.DO.getEnglishName(), NoteEnum.DO_DIESIS.getEnglishName(), NoteEnum.RE.getEnglishName(), NoteEnum.RE_DIESIS.getEnglishName(), NoteEnum.MI.getEnglishName(), NoteEnum.FA.getEnglishName(), NoteEnum.FA_DIESIS.getEnglishName(), NoteEnum.SOL.getEnglishName(), NoteEnum.SOL_DIESIS.getEnglishName(), NoteEnum.LA.getEnglishName(), NoteEnum.LA_DIESIS.getEnglishName(), NoteEnum.SI.getEnglishName() }; //NOSONAR Keep public
 
     /** The Constant NOTE_NAMES_IT. */
-    public static final String[] NOTE_NAMES_IT = {
-            NoteEnum.DO.getItalianName(), NoteEnum.DO_DIESIS.getItalianName(), NoteEnum.RE.getItalianName(), NoteEnum.RE_DIESIS.getItalianName(), NoteEnum.MI.getItalianName(), NoteEnum.FA.getItalianName(), NoteEnum.FA_DIESIS.getItalianName(), NoteEnum.SOL.getItalianName(), NoteEnum.SOL_DIESIS.getItalianName(), NoteEnum.LA.getItalianName(), NoteEnum.LA_DIESIS.getItalianName(), NoteEnum.SI.getItalianName()
-    };
+    public static final String[] NOTE_NAMES_IT = { NoteEnum.DO.getItalianName(), NoteEnum.DO_DIESIS.getItalianName(), NoteEnum.RE.getItalianName(), NoteEnum.RE_DIESIS.getItalianName(), NoteEnum.MI.getItalianName(), NoteEnum.FA.getItalianName(), NoteEnum.FA_DIESIS.getItalianName(), NoteEnum.SOL.getItalianName(), NoteEnum.SOL_DIESIS.getItalianName(), NoteEnum.LA.getItalianName(), NoteEnum.LA_DIESIS.getItalianName(), NoteEnum.SI.getItalianName() }; //NOSONAR Keep public
 
     /** The Constant PITCH_CONTROL_CHANGE. */
     public static final byte PITCH_CONTROL_CHANGE = 5;

@@ -6,7 +6,7 @@ import java.util.concurrent.locks.ReentrantLock;
 import javax.sound.midi.ShortMessage;
 
 import org.apache.commons.pool2.impl.SoftReferenceObjectPool;
-import org.infodavid.util.exception.PoolException;
+import org.infodavid.professore.core.exception.PoolException;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 
@@ -22,7 +22,7 @@ public class NotePool extends SoftReferenceObjectPool<Note> {
     private static final Logger LOGGER = LoggerFactory.getLogger(NotePool.class);
 
     static {
-        INSTANCE = new NotePool((short)64);
+        INSTANCE = new NotePool((short) 64);
     }
 
     /**
@@ -48,9 +48,7 @@ public class NotePool extends SoftReferenceObjectPool<Note> {
      */
     private NotePool(final short prefillCount) {
         super(new NoteFactory());
-
         this.prefillCount = prefillCount;
-
         addObjects(prefillCount);
     }
 
@@ -62,8 +60,7 @@ public class NotePool extends SoftReferenceObjectPool<Note> {
     public void addObjects(final int count) {
         try {
             super.addObjects(count);
-        }
-        catch (final Exception e) {
+        } catch (final Exception e) {
             throw new PoolException(e);
         }
     }
@@ -76,36 +73,32 @@ public class NotePool extends SoftReferenceObjectPool<Note> {
     public synchronized Note borrowObject() {
         try {
             return super.borrowObject();
-        }
-        catch (final Exception e) {
+        } catch (final Exception e) {
             throw new PoolException(e);
-        }
-        finally {
+        } finally {
             prefill();
         }
     }
 
     /**
      * Borrow object.
-     * @param channel the channel
-     * @param key the key
-     * @param pressed the pressed
+     * @param channel  the channel
+     * @param key      the key
+     * @param pressed  the pressed
      * @param velocity the velocity
      * @return the note
      */
     public Note borrowObject(final byte channel, final byte key, final boolean pressed, final short velocity) {
         final Note result = borrowObject();
-
         result.setChannel(channel);
         result.setKey(key);
         result.setPressed(velocity > 0 && pressed);
 
         if (key <= 0) {
-            result.setOctave((byte)0);
+            result.setOctave((byte) 0);
             result.setBaseNote(null);
-        }
-        else {
-            result.setOctave((byte)(key / 12 - 1));
+        } else {
+            result.setOctave((byte) (key / 12 - 1));
             result.setBaseNote(NoteEnum.values()[key % 12]);
         }
 
@@ -119,10 +112,9 @@ public class NotePool extends SoftReferenceObjectPool<Note> {
      */
     public Note borrowObject(final ShortMessage message) {
         if (message.getCommand() == ShortMessage.NOTE_ON) {
-            return borrowObject((byte)message.getChannel(), (byte)message.getData1(), true, (short)message.getData2());
-        }
-        else if (message.getCommand() == ShortMessage.NOTE_OFF) {
-            return borrowObject((byte)message.getChannel(), (byte)message.getData1(), false, (short)message.getData2());
+            return borrowObject((byte) message.getChannel(), (byte) message.getData1(), true, (short) message.getData2());
+        } else if (message.getCommand() == ShortMessage.NOTE_OFF) {
+            return borrowObject((byte) message.getChannel(), (byte) message.getData1(), false, (short) message.getData2());
         }
 
         if (LOGGER.isDebugEnabled()) {
@@ -168,7 +160,7 @@ public class NotePool extends SoftReferenceObjectPool<Note> {
      * Prefill.
      */
     private void prefill() {
-        final float value = getNumIdle() / (float)prefillCount;
+        final float value = getNumIdle() / (float) prefillCount;
 
         if (LOGGER.isDebugEnabled()) {
             LOGGER.debug("Available objects: {}%", String.valueOf(value * 100));
@@ -192,8 +184,7 @@ public class NotePool extends SoftReferenceObjectPool<Note> {
 
                         addObjects(count);
                     }
-                }
-                finally {
+                } finally {
                     checkLock.unlock();
 
                     if (LOGGER.isDebugEnabled()) {

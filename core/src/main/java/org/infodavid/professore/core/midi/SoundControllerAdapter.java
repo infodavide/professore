@@ -43,12 +43,10 @@ public class SoundControllerAdapter implements SoundController {
     @Override
     public void controlChange(final ShortMessage message) {
         LOGGER.debug("controlChange invoked with message: {}", message);
-
         final Note note = NotePool.getInstance().borrowObject(message);
 
         if (filter != null && !filter.accept(note)) {
             LOGGER.info("Filtered note: {}", note);
-
             return;
         }
 
@@ -60,12 +58,10 @@ public class SoundControllerAdapter implements SoundController {
 
                 pressed.clear();
             }
-        }
-        else {
+        } else {
             if (note.isPressed()) {
                 pressed.put(note.getKey(), message);
-            }
-            else {
+            } else {
                 pressed.remove(note.getKey());
             }
 

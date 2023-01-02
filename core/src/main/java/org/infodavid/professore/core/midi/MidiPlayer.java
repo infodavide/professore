@@ -8,6 +8,7 @@ import java.nio.file.Files;
 import java.nio.file.Path;
 import java.util.ArrayList;
 import java.util.List;
+import java.util.concurrent.Executors;
 import java.util.concurrent.ThreadPoolExecutor;
 
 import javax.sound.midi.InvalidMidiDataException;
@@ -21,7 +22,6 @@ import javax.sound.midi.Track;
 import org.apache.commons.lang3.tuple.ImmutablePair;
 import org.infodavid.professore.core.Note;
 import org.infodavid.professore.core.NotePool;
-import org.infodavid.util.concurrency.Executors;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 
@@ -45,12 +45,9 @@ public class MidiPlayer implements Closeable {
      */
     public MidiPlayer(final SoundController controller) {
         super();
-
         runnable = new MidiPlayerRunnable(this, controller);
-
         LOGGER.debug("Creating thread");
-
-        executor = Executors.newThreadPoolExecutor(getClass(), LOGGER, 1, 1);
+        executor = (ThreadPoolExecutor) Executors.newSingleThreadExecutor();
     }
 
     /*
@@ -60,7 +57,10 @@ public class MidiPlayer implements Closeable {
     @Override
     public void close() throws IOException {
         stop();
-        Executors.shutdown(executor);
+
+        if (executor != null) {
+            executor.shutdownNow();
+        }
     }
 
     /**
@@ -125,16 +125,6 @@ public class MidiPlayer implements Closeable {
     }
 
     /**
-     * Join.
-     * @throws InterruptedException the interrupted exception
-     */
-    public void join() throws InterruptedException {
-        synchronized (this) {
-            thread.join();
-        }
-    }
-
-    /**
      * Pause.
      */
     public void pause() {
@@ -144,12 +134,11 @@ public class MidiPlayer implements Closeable {
     /**
      * Play.
      * @param file the file
-     * @throws IOException Signals that an I/O exception has occurred.
+     * @throws IOException              Signals that an I/O exception has occurred.
      * @throws InvalidMidiDataException the invalid midi data exception
      */
     public void play(final Path file) throws IOException, InvalidMidiDataException {
         LOGGER.info("Reading file: {}", file.toAbsolutePath());
-
         Sequence sequence;
 
         try (InputStream in = Files.newInputStream(file)) {
@@ -168,13 +157,12 @@ public class MidiPlayer implements Closeable {
      * Read.
      * @param file the file
      * @return the list
-     * @throws IOException Signals that an I/O exception has occurred.
+     * @throws IOException              Signals that an I/O exception has occurred.
      * @throws InvalidMidiDataException the invalid midi data exception
      */
     @SuppressWarnings("resource")
     public List<Note> read(final Path file) throws IOException, InvalidMidiDataException {
         LOGGER.info("Reading file: {}", file.toAbsolutePath());
-
         final List<Note> results = new ArrayList<>();
         Sequence sequence;
 
@@ -187,7 +175,6 @@ public class MidiPlayer implements Closeable {
         }
 
         LOGGER.info("Extracting notes from file: {}", file.toAbsolutePath());
-
         final Track[] tracks = sequence.getTracks();
         byte trackNumber = 0;
 
@@ -203,22 +190,19 @@ public class MidiPlayer implements Closeable {
                 final MidiMessage message = event.getMessage();
 
                 if (message instanceof ShortMessage) {
-                    final Note note = NotePool.getInstance().borrowObject((ShortMessage)message);
+                    final Note note = NotePool.getInstance().borrowObject((ShortMessage) message);
 
                     if (note != null) {
                         LOGGER.debug("Adding note: {}", note);
-
                         results.add(note);
                     }
-                }
-                else {
+                } else {
                     LOGGER.debug("Not a short message: {}", message);
                 }
             }
         }
 
         LOGGER.info("Completed");
-
         return results;
     }
 
@@ -243,8 +227,7 @@ public class MidiPlayer implements Closeable {
     public void setBpm(final short value) {
         if (value <= 0) {
             runnable.setBpm(MidiPlayerRunnable.DEFAULT_BPM);
-        }
-        else {
+        } else {
             runnable.setBpm(value);
         }
     }
@@ -271,8 +254,7 @@ public class MidiPlayer implements Closeable {
         synchronized (this) {
             if (executor.getActiveCount() == 0) {
                 executor.submit(runnable);
-            }
-            else {
+            } else {
                 LOGGER.debug("Using existing thread");
             }
         }

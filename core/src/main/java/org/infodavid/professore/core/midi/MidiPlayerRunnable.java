@@ -35,7 +35,7 @@ class MidiPlayerRunnable implements Runnable {
     private final AtomicBoolean connectDevice = new AtomicBoolean(true);
 
     /** The current. */
-    private Pair<String,Sequence> current;
+    private Pair<String, Sequence> current;
 
     /** The listener. */
     private MidiPlayerListener listener;
@@ -47,7 +47,7 @@ class MidiPlayerRunnable implements Runnable {
     private final MidiPlayer player;
 
     /** The play list. */
-    private final BlockingQueue<Pair<String,Sequence>> playList = new LinkedBlockingQueue<>(Byte.MAX_VALUE);
+    private final BlockingQueue<Pair<String, Sequence>> playList = new LinkedBlockingQueue<>(Byte.MAX_VALUE);
 
     /** The sequencer. */
     private Sequencer sequencer;
@@ -57,12 +57,11 @@ class MidiPlayerRunnable implements Runnable {
 
     /**
      * Instantiates a new midi player runnable.
-     * @param player the player
+     * @param player     the player
      * @param controller the controller
      */
     public MidiPlayerRunnable(final MidiPlayer player, final SoundController controller) {
         super();
-
         this.player = player;
         soundController = controller;
     }
@@ -87,7 +86,7 @@ class MidiPlayerRunnable implements Runnable {
      * Gets the play list.
      * @return the play list
      */
-    public BlockingQueue<Pair<String,Sequence>> getPlayList() {
+    public BlockingQueue<Pair<String, Sequence>> getPlayList() {
         return playList;
     }
 
@@ -158,10 +157,8 @@ class MidiPlayerRunnable implements Runnable {
             pause();
 
             if (current != null) {
-                final List<Pair<String,Sequence>> entries = new ArrayList<>(playList);
-
+                final List<Pair<String, Sequence>> entries = new ArrayList<>(playList);
                 entries.add(0, current);
-
                 playList.clear();
                 playList.addAll(entries);
             }
@@ -202,7 +199,6 @@ class MidiPlayerRunnable implements Runnable {
 
                 sequencer.getTransmitter().setReceiver(new ReceiverBridge(soundController, sequencer.getTransmitter().getReceiver()));
                 sequencer.addMetaEventListener(soundController::meta);
-
                 final int[] controllerTypes = new int[128];
 
                 for (int i = 0; i < controllerTypes.length; i++) {
@@ -240,14 +236,7 @@ class MidiPlayerRunnable implements Runnable {
                 sequencer.start();
 
                 while (sequencer.isRunning() || paused.get()) {
-                    try {
-                        Thread.sleep(500);
-                    }
-                    catch (final InterruptedException e) {
-                        LOGGER.debug("Thread interrupted", e);
-
-                        Thread.currentThread().interrupt();
-                    }
+                    Thread.sleep(500);
                 }
 
                 sequencer.stop();
@@ -256,14 +245,11 @@ class MidiPlayerRunnable implements Runnable {
                     break;
                 }
             }
-        }
-        catch (final MidiUnavailableException e) {
+        } catch (final MidiUnavailableException e) {
             LOGGER.error("Cannot open sequencer", e);
-        }
-        catch (final InvalidMidiDataException e) {
+        } catch (final InvalidMidiDataException e) {
             LOGGER.error("Cannot play sequence", e);
-        }
-        catch (final InterruptedException e) {
+        } catch (@SuppressWarnings("unused") final InterruptedException e) {
             LOGGER.warn("Thread interruped");
 
             if (sequencer != null) {
@@ -271,8 +257,7 @@ class MidiPlayerRunnable implements Runnable {
             }
 
             Thread.currentThread().interrupt();
-        }
-        finally {
+        } finally {
             paused.set(false);
 
             if (sequencer != null && sequencer.isOpen()) {

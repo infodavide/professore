@@ -44,10 +44,10 @@ public class VoicePlayer implements Closeable, Runnable {
     private final AtomicBoolean opened = new AtomicBoolean(false);
 
     /** The queue. */
-    private final BlockingQueue<Pair<NoteEnum,byte[]>> queue = new LinkedBlockingQueue<>();
+    private final BlockingQueue<Pair<NoteEnum, byte[]>> queue = new LinkedBlockingQueue<>();
 
     /** The sounds. */
-    private final EnumMap<NoteEnum,byte[]> sounds = new EnumMap<>(NoteEnum.class);
+    private final EnumMap<NoteEnum, byte[]> sounds = new EnumMap<>(NoteEnum.class);
 
     /** The thread. */
     private Thread thread;
@@ -72,7 +72,6 @@ public class VoicePlayer implements Closeable, Runnable {
             try (InputStream in = getClass().getResourceAsStream(RESOURCES_PATH + note.getItalianName().toLowerCase() + ".wav")) {
                 if (in == null) {
                     LOGGER.info("No sound found for note: {}", note);
-
                     continue;
                 }
 
@@ -81,8 +80,7 @@ public class VoicePlayer implements Closeable, Runnable {
                 if (format == null) {
                     try (AudioInputStream ain = AudioSystem.getAudioInputStream(new ByteArrayInputStream(sounds.get(note)))) {
                         format = ain.getFormat();
-                    }
-                    catch (final UnsupportedAudioFileException e) {
+                    } catch (final UnsupportedAudioFileException e) {
                         throw new IOException(e);
                     }
                 }
@@ -150,7 +148,6 @@ public class VoicePlayer implements Closeable, Runnable {
             }
 
             thread = new Thread(this, getClass().getName());
-
             thread.setPriority(Thread.MAX_PRIORITY);
             thread.start();
         }
@@ -181,12 +178,10 @@ public class VoicePlayer implements Closeable, Runnable {
 
         if (data == null) {
             LOGGER.info("No sound to play for note: {}", note);
-
             return;
         }
 
         LOGGER.debug("Adding note: {}", note);
-
         queue.add(new ImmutablePair<>(note, data));
     }
 
@@ -198,18 +193,16 @@ public class VoicePlayer implements Closeable, Runnable {
     @Override
     public void run() {
         opened.set(true);
-
         final byte[] buffer = new byte[4096 * 4];
         final DataLine.Info info = new DataLine.Info(SourceDataLine.class, format, buffer.length);
 
-        try (SourceDataLine line = (SourceDataLine)AudioSystem.getLine(info)) {
+        try (SourceDataLine line = (SourceDataLine) AudioSystem.getLine(info)) {
             line.open(format);
             line.start();
-
             LOGGER.debug("Ready");
 
             while (isOpen()) { // NOSONAR break and continue
-                Pair<NoteEnum,byte[]> entry = queue.poll(1000, TimeUnit.MILLISECONDS);
+                Pair<NoteEnum, byte[]> entry = queue.poll(1000, TimeUnit.MILLISECONDS);
 
                 if (!stacked.get()) {
                     while (queue.size() > 1) {
@@ -231,7 +224,6 @@ public class VoicePlayer implements Closeable, Runnable {
                 }
 
                 LOGGER.debug("Playing: {}", entry.getKey());
-
                 int read = 0;
 
                 try (final ByteArrayInputStream bais = new ByteArrayInputStream(entry.getValue()); AudioInputStream ais = AudioSystem.getAudioInputStream(bais)) {
@@ -240,16 +232,13 @@ public class VoicePlayer implements Closeable, Runnable {
                     }
                 }
             }
-        }
-        catch (IOException | LineUnavailableException | UnsupportedAudioFileException | NullPointerException e) {
+        } catch (IOException | LineUnavailableException | UnsupportedAudioFileException | NullPointerException e) {
             LOGGER.warn("Cannot play sound", e);
-        }
-        catch (final InterruptedException e) {
+        } catch (@SuppressWarnings("unused") final InterruptedException e) {
             LOGGER.warn("Thread interrupted");
 
             Thread.currentThread().interrupt();
-        }
-        finally {
+        } finally {
             opened.set(false);
         }
 
@@ -271,25 +260,24 @@ public class VoicePlayer implements Closeable, Runnable {
 
     /**
      * Apply volume.
-     * @param line the line
-     * @param volume the volume
+     * @param line  the line
+     * @param value the volume
      */
-    private void applyVolume(final SourceDataLine line, final byte volume) {
+    @SuppressWarnings("static-method")
+    private void applyVolume(final SourceDataLine line, final byte value) {
         if (line.isControlSupported(FloatControl.Type.VOLUME)) {
-            final FloatControl control = (FloatControl)line.getControl(FloatControl.Type.VOLUME);
-            final float v = (float)(volume / 100.0);
+            final FloatControl control = (FloatControl) line.getControl(FloatControl.Type.VOLUME);
+            final float v = (float) (value / 100.0);
 
             if (LOGGER.isDebugEnabled()) {
                 LOGGER.debug("Using volume value: {}", String.valueOf(v));
             }
 
             control.setValue(v);
-        }
-        else {
+        } else {
             LOGGER.debug("Volume control is not available");
-
-            final FloatControl control = (FloatControl)line.getControl(FloatControl.Type.MASTER_GAIN);
-            final float v = (float)(Math.log(volume / 100.0) / Math.log(10.0) * 20.0);
+            final FloatControl control = (FloatControl) line.getControl(FloatControl.Type.MASTER_GAIN);
+            final float v = (float) (Math.log(value / 100.0) / Math.log(10.0) * 20.0);
 
             if (LOGGER.isDebugEnabled()) {
                 LOGGER.debug("Using gain value: {}", String.valueOf(v));
@@ -299,9 +287,7 @@ public class VoicePlayer implements Closeable, Runnable {
         }
 
         if (line.isControlSupported(BooleanControl.Type.MUTE)) {
-            final BooleanControl control = (BooleanControl)line.getControl(BooleanControl.Type.MUTE);
-
-            control.setValue(volume <= 0);
+            ((BooleanControl) line.getControl(BooleanControl.Type.MUTE)).setValue(value <= 0);
         }
     }
 }

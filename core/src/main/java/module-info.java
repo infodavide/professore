@@ -4,10 +4,12 @@ module org.infodavid.professore.core {
 
     opens org.infodavid.professore.core;
 
-    requires transitive java.desktop;
     requires transitive org.apache.commons.pool2;
-    requires transitive org.infodavid.professore.utils;
     requires com.github.benmanes.caffeine;
     requires gs.collections.api;
     requires gs.collections;
+    requires transitive org.apache.commons.lang3;
+    requires transitive java.desktop;
+    requires transitive org.slf4j;
+    requires org.apache.commons.io;
 }

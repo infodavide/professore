@@ -34,11 +34,10 @@ public class NoteFactory extends BasePooledObjectFactory<Note> {
     @Override
     public void passivateObject(final PooledObject<Note> pooledObject) {
         final Note obj = pooledObject.getObject();
-
-        obj.setChannel((byte)0);
-        obj.setKey((byte)0);
-        obj.setOctave((byte)0);
+        obj.setChannel((byte) 0);
+        obj.setKey((byte) 0);
+        obj.setOctave((byte) 0);
         obj.setBaseNote(null);
-        obj.setTrack((byte)0);
+        obj.setTrack((byte) 0);
     }
 }

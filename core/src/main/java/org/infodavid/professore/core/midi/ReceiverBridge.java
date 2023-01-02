@@ -18,11 +18,10 @@ public class ReceiverBridge implements Receiver {
     /**
      * Instantiates a new delegate bridge.
      * @param controller the controller
-     * @param delegate the delegate
+     * @param delegate   the delegate
      */
     public ReceiverBridge(final SoundController controller, final Receiver delegate) {
         super();
-
         this.controller = controller;
         this.delegate = delegate;
     }
@@ -47,11 +46,11 @@ public class ReceiverBridge implements Receiver {
     @Override
     public void send(final MidiMessage message, final long timeStamp) {
         if (delegate != null) {
-          //  delegate.send(message, timeStamp);
+            // delegate.send(message, timeStamp);
         }
 
         if (message instanceof ShortMessage) {
-            controller.controlChange((ShortMessage)message);
+            controller.controlChange((ShortMessage) message);
         }
     }
 }

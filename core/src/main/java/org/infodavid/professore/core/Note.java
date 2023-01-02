@@ -71,7 +71,7 @@ public class Note implements Serializable {
             return false;
         }
 
-        final Note other = (Note)obj;
+        final Note other = (Note) obj;
 
         if (baseNote != other.baseNote) {
             return false;
