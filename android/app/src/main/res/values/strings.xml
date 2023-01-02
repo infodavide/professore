@@ -1,0 +1,7 @@
+<resources>
+    <string name="app_name">My piano teacher</string>
+    <string name="action_settings">Settings</string>
+    <!-- Strings used for fragments for navigation -->
+    <string name="keyboard_fragment_label">Keyboard</string>
+    <string name="settings_fragment_label">Settings</string>
+</resources>
